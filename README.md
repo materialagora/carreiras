@@ -1,3 +1,7 @@
+# A empresa
+
+A Material Agora nasceu para descomplicar o dia a dia de todos que estão realizando obras através de uma forma simples de comprar sem ter que gastar tempo com deslocamento e transporte.
+
 # carreiras
 Nossa equipe de engenharia é 100% remoto e usamos as seguintes tecnologias:
 - Golang, PostgreSQL, MongoDB, RabbitAMQP
@@ -9,7 +13,7 @@ Nossa equipe de engenharia é 100% remoto e usamos as seguintes tecnologias:
     - Assunto: developer
     - Corpo: Github / LinkedIn / Curriculo / breve texto sobre sua experiência profissional
 2. Faça um fork (ou clone) esse repositório
-3. Complete o desafio abaixo no seu tempo
+3. Complete o desafio abaixo no seu tempo, mas **idealmente deve levar uma semana**.
 4. Nos envie o desafio da forma que lhe for conveniente - email ou pull request.
 
 # Desafio
@@ -18,12 +22,12 @@ Para o desafio gostaríamos que você crie uma API e um frontend basico inspirad
 
 ## Requisitos
 
-A API deve ser escrita em **Golang** e utilizar **PostgreSQL** como armazenamento de dados. O frontend deve ser feito com **React** ou VueJS e deve mostrar os heróis cadastrados no formato de loja (ex: americanas.com).
+A API deve ser escrita em **Golang** e utilizar **PostgreSQL** como armazenamento de dados (somente para vaga backend). O **frontend** deve ser feito com **React** ou VueJS e deve mostrar os heróis cadastrados **no formato de loja** (ex: americanas.com).
 
-### Gerais API
-- Integrar com a https://superheroapi.com
+### Requisitos gerais
+- Consumir os dados dos heróis da https://superheroapi.com
 
-Através da API deve ser possível:
+(backend somente) Através da API deve ser possível:
 - Cadastrar um Super/Vilão
 - Listar todos os Super's cadastrados
 - Listar apenas os Super Heróis
@@ -31,6 +35,11 @@ Através da API deve ser possível:
 - Buscar por nome
 - Buscar por 'uuid'
 - Remover o Super
+
+(frontend) Através do frontend deve ser possível:
+- Visualizar todos os heróis disponíveis
+- Visualizar cada herói individualmente e suas respectivas características
+- Criar e visualizar grupos de heróis
 
 ### Específicos
 - API deve seguir a arquitetura [REST](https://restfulapi.net/)
