@@ -1,0 +1,44 @@
+.App{
+    display: flex;
+    flex-direction: column;
+    background-color: #fdfdfd;;
+}
+.App header{
+    position: fixed;    
+    width: 100%;
+    height: 10vh;
+    top: 0;
+
+    background-color: rgb(92, 199, 178);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 10px 0 rgba(92, 199, 178,0.5);    
+}
+.App .content{
+    margin-top: 14vh;
+}
+.App .content .heroes-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 240px));
+    grid-gap: 3rem;
+    text-align: center;
+    padding: 0;
+    justify-content: center;
+}
+.App .content .heroes-list li{
+    border: 1px solid rgb(210,210,210);
+    border-radius: 15px;
+    box-shadow: 0 0 15px 0 rgb(200,200,200);
+    overflow: hidden;
+}
+.App .content .heroes-list img{
+    width: 100%;
+}
+h3{
+    font-size: 1.5em;
+    padding: 0 0 10px 0;
+    margin: 0;
+    color: rgb(100,100,100)
+}
