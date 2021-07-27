@@ -1,71 +1,17 @@
 import './App.css'
-import axios from 'axios'
-import { useEffect, useState } from 'react'
-
+import Cards from './Components/Cards'
+import Header from './Components/Header'
+import Banner from './Components/Banner'
 
 function App() {
-  const [heroes, setHeroes] = useState({})
-  const heroesApi = `https://www.superheroapi.com/api/${process.env.REACT_APP_TOKEN_HEROESAPI}`
-
-  const getHero = async (id) => {
-    await axios.get(`${heroesApi}/${id}`)
-    .then((response)=> {
-      setHeroes(response.data)
-    })
-    .catch((error)=>{
-      console.log(error)
-    })
-  }
-
-   
-  useEffect(()=>{
-    getHero(346)
-    // eslint-disable-next-line
-  }, [])
-
+  
   return (
       <div className="App">
-          <header> 
-            <h1>SUPER HERÓIS</h1>
-          </header>
-
+          <Header/>
+          <Banner/>
           <div className="content">
-          {heroes && (
-            <ul className="heroes-list">
-              <li key={heroes.id}>
-                {heroes.image && (
-                  <img src={heroes.image.url} alt={`${heroes.name}_img`}/>
-                )}
-                <h3>{heroes.name}</h3>
-              </li>
-              <li>
-                {heroes.image && (
-                  <img src={heroes.image.url} alt={`${heroes.name}_img`}/>
-                )}
-                <h3>{heroes.name}</h3>
-              </li>
-              <li>
-                {heroes.image && (
-                  <img src={heroes.image.url} alt={`${heroes.name}_img`}/>
-                )}
-                <h3>{heroes.name}</h3>
-              </li>
-              <li>
-                {heroes.image && (
-                  <img src={heroes.image.url} alt={`${heroes.name}_img`}/>
-                )}
-                <h3>{heroes.name}</h3>
-              </li>
-              <li>
-                {heroes.image && (
-                  <img src={heroes.image.url} alt={`${heroes.name}_img`}/>
-                )}
-                <h3>{heroes.name}</h3>
-              </li>
-            </ul>
-            )
-          }
-          </div>
+            <Cards/>
+          </div>        
       </div>
     )
 }

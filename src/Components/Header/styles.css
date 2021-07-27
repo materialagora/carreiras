@@ -1,0 +1,66 @@
+.navbar{
+    position: fixed;    
+    width: 100%;
+    height: 15vh;
+    top: 0;
+    z-index: 1;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);    
+}
+.navbar .header_upper{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.navbar .header_upper input{
+    width: 400px;
+    height: 30px;
+    padding-left: 20px;
+    border-radius: 15px;
+    border: 0;
+}
+.navbar .header_upper input:hover, .header_upper input:focus{
+    outline: 0;
+}
+.navbar .header_upper a{
+    color: white;
+    font-size: 1.5em;
+    background-color: rgb(41 132 52);
+    padding: 0.0rem 0.6rem 0.3rem 0.6rem;
+    border-radius: 0.5rem;
+}
+.navbar h1{
+    font-size: 2em;
+    font-family: myriad-pro, sans-serif;
+    font-weight: 800;
+    font-style: normal;
+}
+.navbar ul{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    font-size: 1.2em;
+    margin-top: 1rem;
+}
+.navbar ul li{
+    min-width: 250px;
+    text-align: center;
+}
+.navbar ul li:nth-child(1n + 2){
+    border-left: 1px solid white;
+}
+.navbar ul li a{
+    text-align: center;
+    text-decoration: none;
+    color: white;
+}
+.navbar ul li a:hover{
+    color: rgb(41 132 52);
+    text-decoration: underline rgb(41 132 52);
+}
