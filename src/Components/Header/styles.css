@@ -18,6 +18,9 @@
     align-items: center;
     justify-content: space-between;
 }
+.header_upper h1{
+    color: white;
+}
 .header_upper input{
     width: 400px;
     height: 30px;
@@ -28,16 +31,21 @@
 .header_upper input:hover, .header_upper input:focus{
     outline: 0;
 }
-.login a{
+.login button{
+    background: none;
     color: white;
     font-size: 1.1em;
     padding: 0.0rem 0.6rem 0.3rem 0.6rem;
-    border-radius: 0.5rem;
+    border-radius: 0.6rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    border: 2px solid rgba(255, 255, 255, 0.6);
 }
-.login a img{
+.login button:hover{
+    cursor: pointer;
+}
+.login button img{
     filter: invert(100%) brightness(119%) grayscale(1);
     height: 1.5rem;
 }
@@ -64,12 +72,17 @@
 .navbar ul li:nth-child(1n + 2){
     border-left: 1px solid white;
 }
-.navbar ul li a{
+.navbar ul li button{
     text-align: center;
     text-decoration: none;
     color: white;
+    background: none;
+    border: none;
+    font-size: 1em;
+    font-weight: normal;
 }
-.navbar ul li a:hover{
-    color: rgb(41 132 52);
-    text-decoration: underline rgb(41 132 52);
+.navbar ul li button:hover{
+    color: #ffbc42;
+    text-decoration: underline #ffbc42;
+    cursor: pointer;
 }

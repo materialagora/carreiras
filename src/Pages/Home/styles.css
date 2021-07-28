@@ -1,6 +1,6 @@
 @import url("https://use.typekit.net/lvk3fsy.css");
-.App{
+.content{
     display: flex;
     flex-direction: column;
-    background-color: #fdfdfd;;
+    background-color: #fdfdfd;
 }
