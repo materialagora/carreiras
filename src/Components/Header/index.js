@@ -6,7 +6,12 @@ export default function Header (){
             <div className="header_upper">
               <h1>geeklouco.com</h1>
               <input type="text" placeholder="Herói? Vilão? O que você imaginar aqui..."/>
-              <a href="#" className="login">Login<img src={user_icon} alt="user"/></a>
+              <div className="login">
+                <a href="#">
+                  <h3>Login</h3>
+                  <img src={user_icon} alt="user"/>
+                </a>
+              </div>
             </div>
             <ul>
               <li><a href="">Universo Marvel</a></li>

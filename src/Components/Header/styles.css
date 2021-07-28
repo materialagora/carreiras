@@ -12,23 +12,23 @@
     align-items: center;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);    
 }
-.navbar .header_upper{
+.header_upper{
     width: 80%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.navbar .header_upper input{
+.header_upper input{
     width: 400px;
     height: 30px;
     padding-left: 20px;
     border-radius: 15px;
     border: 0;
 }
-.navbar .header_upper input:hover, .header_upper input:focus{
+.header_upper input:hover, .header_upper input:focus{
     outline: 0;
 }
-.navbar .header_upper a{
+.login a{
     color: white;
     font-size: 1.1em;
     padding: 0.0rem 0.6rem 0.3rem 0.6rem;
@@ -37,11 +37,14 @@
     align-items: center;
     gap: 0.5rem;
 }
-.navbar .header_upper a img{
+.login a img{
     filter: invert(100%) brightness(119%) grayscale(1);
     height: 1.5rem;
 }
-.navbar h1{
+.login h3{
+    font-weight: 400;
+}
+.header_upper h1{
     font-size: 2em;
     font-family: myriad-pro, sans-serif;
     font-weight: 800;
@@ -66,7 +69,7 @@
     text-decoration: none;
     color: white;
 }
-.navbar a:hover{
+.navbar ul li a:hover{
     color: rgb(41 132 52);
     text-decoration: underline rgb(41 132 52);
 }

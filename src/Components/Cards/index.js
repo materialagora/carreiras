@@ -1,13 +1,13 @@
 import './styles.css'
-import axios from 'axios'
 import { useEffect, useState } from 'react'
+import api from '../../Services/api'
 
 export default function Cards(){
-    const [heroes, setHeroes] = useState({})
-    const heroesApi = `https://www.superheroapi.com/api/${process.env.REACT_APP_TOKEN_HEROESAPI}`
 
-    const getHero = async (id) => {
-        await axios.get(`${heroesApi}/${id}`)
+    const [heroes, setHeroes] = useState({})
+
+    const getHero = async () => {
+        await api.get(`search/spider`)
             .then((response)=> {
                 setHeroes(response.data)
             })
@@ -16,41 +16,24 @@ export default function Cards(){
             })
     }
     useEffect(()=>{
-        getHero(70)
-        // eslint-disable-next-line
+        getHero()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
     return(
         <ul className="heroes-list">
-            <li key={heroes.id}>
-                {heroes.image && (
-                    <img src={heroes.image.url} alt={`${heroes.name}_img`}/>
-                )}
-                <h3>{heroes.name}</h3>
-            </li>
-            <li>
-                {heroes.image && (
-                    <img src={heroes.image.url} alt={`${heroes.name}_img`}/>
-                )}
-                <h3>{heroes.name}</h3>
-            </li>
-            <li>
-                {heroes.image && (
-                    <img src={heroes.image.url} alt={`${heroes.name}_img`}/>
-                )}
-                <h3>{heroes.name}</h3>
-            </li>
-            <li>
-                {heroes.image && (
-                    <img src={heroes.image.url} alt={`${heroes.name}_img`}/>
-                )}
-                <h3>{heroes.name}</h3>
-            </li>
-            <li>
-                {heroes.image && (
-                    <img src={heroes.image.url} alt={`${heroes.name}_img`}/>
-                )}
-                <h3>{heroes.name}</h3>
-            </li>
+            {heroes.results && 
+                heroes.results.map(hero => {
+                    return(
+                        <li key={hero.id}>
+                            {hero.image && 
+                                (<img src={hero.image.url} alt={`${hero.name}_img`}/>)
+                            }
+                            <h3>{hero.name}</h3>
+                        </li>
+                    )
+                })
+            }
         </ul>
     )
 } 
