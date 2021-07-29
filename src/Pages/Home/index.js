@@ -9,6 +9,7 @@ export default function Home(){
 
     const marvel = ['107','226','346','579','620','697']
     const dc = ['644','298','263','720']
+    
     return(
         <div className="content">
             <Header/>
