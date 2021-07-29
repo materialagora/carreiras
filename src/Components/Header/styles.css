@@ -44,6 +44,8 @@
 }
 .login button:hover{
     cursor: pointer;
+    border-color: #ffbc42;
+    box-shadow: 0 0 6px 1px #ffbd427c;
 }
 .login button img{
     filter: invert(100%) brightness(119%) grayscale(1);

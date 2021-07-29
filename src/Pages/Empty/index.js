@@ -1,9 +1,10 @@
-import deadpool from '../../Assets/deadpool.png'
-import Header from '../../Components/Header'
 import './styles.css'
+import Header from '../../Components/Header'
+import deadpool from '../../Assets/deadpool.png'
+
 export default function PageEmpty(){
     return(
-        <div className="content">
+        <div className="empty">
             <Header/>
             <div className="page-empty">
                 <img src={deadpool} alt="deadpool triste"/>

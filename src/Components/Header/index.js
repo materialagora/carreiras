@@ -1,6 +1,7 @@
 import './styles.css'
-import user_icon from '../../Assets/user-icon.svg'
 import { Link } from 'react-router-dom'
+import user_icon from '../../Assets/user-icon.svg'
+
 export default function Header (){
     return(
         <nav className="navbar"> 
@@ -23,7 +24,7 @@ export default function Header (){
               
               <li><button>Star Wars</button></li>
               
-              <li><button>Harry Potter</button></li>
+              <li><button>Vilões</button></li>
             </ul>
           </nav>
     )

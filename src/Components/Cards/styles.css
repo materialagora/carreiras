@@ -1,19 +1,44 @@
-.heroes-list{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 240px));
-    grid-gap: 3.5rem;
-    text-align: center;
-    padding: 0;
-    margin: 3rem 0;
+.cards{
+    width: 100%;
+    margin-top: 2.5rem;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    flex-direction: column;
+}
+.cards h1{
+    font-size: 2em;
+    width: 85%;
+}
+.cards > div{
+    width: 85%;
+    border-top: 2px solid rgb(100,100,100);
+}
+.heroes-list{
+    min-height: 40vh;
+    display: flex;
+    gap: 3.5rem;
+    text-align: center;
+    padding: 1rem;
+    justify-content: flex-start;
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+.heroes-list::-webkit-scrollbar{
+    display: none;
 }
 .heroes-list li{
-    min-height: 300px;
-    max-height: 360px;
-    border: 1px solid rgb(210,210,210);
+    object-fit: contain;
+    min-width: 220px;
+    min-height: 280px;
     border-radius: 15px;
-    box-shadow: 0 0 10px 0 rgb(150,150,150);
+    box-shadow: 0 0 5px 0 rgb(150,150,150);
     overflow: hidden;
+    background-color: white;
+}
+.heroes-list li:hover{
+    transform: scale(1.04);
+    box-shadow: 0 0 10px 1px rgb(150,150,150);
 }
 .heroes-list img{
     width: 100%;
@@ -23,5 +48,6 @@
     font-size: 1.5em;
     padding: 0 0 10px 0;
     margin: 0;
-    color: rgb(100,100,100)
+    color: rgb(100,100,100);
+    text-align: center;
 }

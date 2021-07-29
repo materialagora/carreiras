@@ -2,5 +2,7 @@
 .content{
     display: flex;
     flex-direction: column;
-    background-color: #fdfdfd;
+    background-color: rgb(240, 240, 240);
+    min-height: 170vh;
+    overflow-y: hidden;
 }
