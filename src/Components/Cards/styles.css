@@ -1,6 +1,7 @@
 .cards{
     width: 100%;
-    margin-top: 2.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -37,7 +38,7 @@
     background-color: white;
 }
 .heroes-list li:hover{
-    transform: scale(1.04);
+    transform: scale(1.05);
     box-shadow: 0 0 10px 1px rgb(150,150,150);
 }
 .heroes-list img{
