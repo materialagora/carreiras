@@ -7,8 +7,10 @@ export default function PageEmpty(){
         <div className="empty">
             <Header/>
             <div className="page-empty">
-                <img src={deadpool} alt="deadpool triste"/>
-                <h1>Desculpe, essa pagina ainda não existe!</h1>
+                <div class="page-empty-content">
+                    <img src={deadpool} alt="deadpool triste"/>
+                    <h1>Desculpe, essa pagina ainda não existe!</h1>
+                </div>
             </div>
         </div>
     )

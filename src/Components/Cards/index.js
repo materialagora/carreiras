@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import Popup from '../Popup'
 
 export default function Cards(props){
-    const [heroes, setHeroes] = useState([])
+    const [heroes, setHeroes] = useState([''])
     const [modal, setModal] = useState(false)
     const [heroPopup, setHeroPopup] = useState({})
 
@@ -35,8 +35,8 @@ export default function Cards(props){
     
     return(
         <div className="cards">
-            <h1 style={{color: props.cor}}>{props.title}</h1>
-            <div className="" style={{borderTopColor: props.cor}}>
+            <h1>{props.title}</h1>
+            <div>
                 <ul className="heroes-list">
                     {heroes.length === 0 && (
                         props.listheros.map(id => {

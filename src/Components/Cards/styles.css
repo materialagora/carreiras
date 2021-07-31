@@ -13,14 +13,14 @@
 }
 .cards > div{
     width: 85%;
-    border-top: 2px solid rgb(100,100,100);
+    border-top: 1px solid rgb(100,100,100);
 }
 .heroes-list{
     min-height: 40vh;
     display: flex;
     gap: 3.5rem;
     text-align: center;
-    padding: 1rem;
+    padding: 1rem ;
     justify-content: flex-start;
     overflow-y: hidden;
     overflow-x: auto;
@@ -31,10 +31,11 @@
 .heroes-list li{
     min-width: 220px;
     min-height: 300px;
-    border-radius: 15px;
+    border-radius: 5px;
     box-shadow: 0 0 5px 0 rgb(150,150,150);
     overflow: hidden;
     background-color: white;
+    text-overflow: ellipsis;
 }
 .heroes-list li:hover{
     transform: scale(1.05);
@@ -46,9 +47,10 @@
 }
 .heroes-list h3{
     font-size: 1.5em;
+    font-weight: 500;
     padding: 0 0 10px 0;
     margin: 0;
-    color: rgb(100,100,100);
+    color: rgb(50,50,50);
     text-align: center;
 }
 @media(max-width: 500px){
