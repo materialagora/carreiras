@@ -9,14 +9,12 @@ export default function Header (){
             <div className="header_upper">
               <Link to="/"><h1>geeklouco.com</h1></Link>
               <input type="text" placeholder="Herói? Vilão? O que você imaginar aqui..."/>
-              <div className="login">
-                <Link to="/login">
-                  <button>
-                    <h3>Login</h3>
-                    <img src={user_icon} alt="user"/>
-                  </button>
-                </Link>
-              </div>
+              <Link className="login" to="/login">
+                <button>
+                  <h3>Login</h3>
+                  <img src={user_icon} alt="user"/>
+                </button>
+              </Link>
             </div>
             <ul>
               <li><button>Universo Marvel</button></li>

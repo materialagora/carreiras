@@ -29,9 +29,8 @@
     display: none;
 }
 .heroes-list li{
-    object-fit: contain;
     min-width: 220px;
-    min-height: 280px;
+    min-height: 300px;
     border-radius: 15px;
     box-shadow: 0 0 5px 0 rgb(150,150,150);
     overflow: hidden;
@@ -51,4 +50,31 @@
     margin: 0;
     color: rgb(100,100,100);
     text-align: center;
+}
+@media(max-width: 500px){
+    .cards{
+        margin-top: 2rem;
+        margin-bottom: 0rem;
+    }
+    .cards > div{
+        width: 95%;
+    }
+    .cards h1{
+        width: 95%;
+        font-size: 1.5em;
+    }
+    .heroes-list{
+        gap: 1rem;
+        min-height: 10vh;
+    }
+    .heroes-list li{
+        min-width: 150px;
+        min-height: 200px;
+    }
+    .heroes-list h3{
+        font-size: 1.2em;
+    }
+    .heroes-list li:hover{
+        transform: scale(1);
+    }
 }

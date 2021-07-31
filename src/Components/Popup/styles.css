@@ -17,9 +17,9 @@
 }
 .popup-content {
     width: 75vw;
-    height: 65vh;
+    max-height: 65vh;
     padding: 14px;
-    margin-top: 13vh;
+    margin-top: 16vh;
     border-radius: 1rem;
     background: white;
     position: absolute;
@@ -28,14 +28,27 @@
     grid-template-columns: 1fr 26vw 1fr;
     box-shadow: 0 0 10px 1px black;
 }
-.popup-content img{
-    height: 65vh;
-    width: auto;
+.popup-content .hero-profile{
+    min-height: 30vh;;
+    max-height: 65vh;
+    max-width: 30vw;
     border-radius: 0.5rem;
     margin-right: 2rem;
 }
+.popup-content .exit-popup{
+    width: calc(3rem+3vw);
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+.popup-content .exit-popup img{
+    width: 100%;
+    height: auto;
+}
 .main-info{
-    min-width: 15vw;
     max-width: 26vw;
     overflow: hidden;
     border-right: 2px solid rgb(170,170,170);
@@ -44,7 +57,7 @@
     justify-content: flex-start;
 }
 .main-info h1{
-    font-size: 5em;
+    font-size: clamp(1em, 4.5vw, 5em);
     height: fit-content;
     margin: 0;
     font-weight: 500;
@@ -53,29 +66,78 @@
 }
 .main-info h2{
     color: rgba(47, 79, 79, 0.9);
-    font-size: 1.4em;
+    font-size: clamp(1em, 1.8vw, 2em);
     width: 90%;
+    margin: 0;
 }
 .power-stats{
     width: 90%;
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
+    margin-top: calc(0.5rem + 0.5vh);
+    padding-top: calc(0.5rem + 0.5vh);
     border-top: 1px solid rgb(170,170,170);
 }
 .popup-content h3{
     color: rgb(30, 30, 30);
-    font-size: 1.4em;
+    font-size: clamp(1.3em, 1.8vw, 2em);
     width: fit-content;
     margin-bottom: 0.3rem;
 }
 .popup-content h4{
     color: rgba(47, 79, 79, 1);
-    font-size: 1em;
+    font-size: clamp(0.8em, 1.3vw, 1.3em);
+    margin-bottom: 0.1rem;
 }
 .popup-content h5{
     color: rgba(47, 79, 79, 0.8);
-    font-size: 1em;
+    font-size: clamp(0.8em, 1.3vw, 1.3em);
 }
 .biography{
-    padding: 1rem;
+    padding: calc(0.5rem + 0.5vw);
+    padding-top: 0;
+}
+@media(max-width: 640px){
+    .popup-content {
+        width: 85vw;
+        height: 75vh;
+        display: grid;
+        grid-template-columns: 1fr 40vw;
+        overflow: scroll;
+    }
+    .popup-content .hero-profile{
+        height: 30vh;
+        border: 2px solid gray;
+        grid-row: 1;
+    }
+    .main-info{
+        grid-row: 2;
+        max-width: 50vw;
+        border-right: 0px;
+    }
+    .biography{
+        grid-row: 1/3;
+        min-width: 30vw;
+        border-left: 1px solid rgb(170,170,170);
+    }
+    .main-info h1{
+        font-size: 2em;
+    }
+    .main-info h2{
+        font-size: 1em;
+        padding-left: 0;
+    }
+    .popup-content h4{
+        font-size: 0.9em;
+    }
+    .popup-content h5{
+        font-size: 0.8em;
+    }
+    .popup-content .exit-popup{
+        top: 0.5rem;
+        right: 0rem;
+    }
+}
+@media(max-height: 500px){
+    .popup-content{
+        margin-top: 24vh;
+    }
 }

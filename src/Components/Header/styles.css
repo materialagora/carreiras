@@ -1,7 +1,7 @@
 .navbar{
     position: fixed;    
     width: 100%;
-    height: 17vh;
+    min-height: 15vh;
     top: 0;
     z-index: 1;
     background-color: rgb(0, 0, 0);
@@ -17,16 +17,19 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 3rem;
+    margin-top: 0.5rem;
 }
 .header_upper h1{
     color: white;
 }
 .header_upper input{
     width: 400px;
-    height: 30px;
+    height: 1.8rem;
     padding-left: 20px;
-    border-radius: 15px;
+    border-radius: 1rem;
     border: 0;
+    text-overflow: ellipsis;
 }
 .header_upper input:hover, .header_upper input:focus{
     outline: 0;
@@ -35,12 +38,12 @@
     background: none;
     color: white;
     font-size: 1.1em;
-    padding: 0.0rem 0.6rem 0.3rem 0.6rem;
+    padding: 0.1rem 0.6rem 0.2rem 0.6rem;
     border-radius: 0.6rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    border: 2px solid rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.6);
 }
 .login button:hover{
     cursor: pointer;
@@ -48,8 +51,8 @@
     box-shadow: 0 0 6px 1px #ffbd427c;
 }
 .login button img{
-    filter: invert(100%) brightness(119%) grayscale(1);
-    height: 1.5rem;
+    filter: invert(100%) brightness(100%);
+    height: 2rem;
 }
 .login h3{
     font-weight: 400;
@@ -63,16 +66,14 @@
 .navbar ul{
     width: 80%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     font-size: 1.2em;
-    margin-top: 1rem;
+    margin: 1rem 0rem 0.5rem 0;
 }
 .navbar ul li{
-    min-width: 250px;
+
+    max-width: 250px;
     text-align: center;
-}
-.navbar ul li:nth-child(1n + 2){
-    border-left: 1px solid white;
 }
 .navbar ul li button{
     text-align: center;
@@ -87,4 +88,64 @@
     color: #ffbc42;
     text-decoration: underline #ffbc42;
     cursor: pointer;
+}
+@media(max-width: 900px){
+    .header_upper{
+        width: 90%;
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+}
+@media(max-width: 750px){
+    .header_upper{
+        width: 85%;
+        gap: 0.5rem;
+        padding: 0 0rem;
+        margin-top: 0.3rem;
+    }
+    .login button{
+        border: 0;
+        padding: 0;
+    }
+    .login button h3{
+        display: none;
+    }
+    .navbar ul{
+        width: 90%;
+    }
+}
+@media(max-width: 500px){
+
+    .header_upper{
+        display: grid;
+        grid-template-columns: 10fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 0.5rem;
+    }
+    .header_upper input{
+        width: calc(100% - 20px);
+        grid-column: 1/3;
+        grid-row: 2;
+        height: 2rem;
+        border-radius: 1.5rem;
+    }
+    .header_upper h1{
+        font-size: 2em; 
+    }
+    .login button img{
+        height: 2.5rem;
+    }
+    .navbar ul{
+        display: none;
+    }
+}
+@media(max-width: 300px){
+    .header_upper h1{
+        font-size: 1.8rem;
+    }
+}
+@media(max-height: 500px){
+    .navbar{
+        position: relative;
+    }
 }

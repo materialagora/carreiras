@@ -39,3 +39,21 @@
     text-shadow: -8px 6px 0px black;
     color: white;
 }
+@media(max-width: 700px){
+    .banner h1{
+        max-width: 90%;
+        font-size: 2.5em;
+        color: #eed48b;
+    }
+}
+@media(max-height: 500px){
+    .banner{
+        margin-top: 0vh;
+    }
+    .banner h1{
+        max-width: 80%;
+        font-size: 2em;
+        color: #eed48b;
+        margin-bottom: 0rem;
+    }
+}

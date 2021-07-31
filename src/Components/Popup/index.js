@@ -1,4 +1,6 @@
 import './styles.css'
+import icon_close from '../../Assets/outline_close.png'
+
 export default function Popup (props){
     const hero = props.hero
 
@@ -6,12 +8,11 @@ export default function Popup (props){
         <section className="popup">
             <div onClick={props.onClose} className="overlay"/>
             <div className="popup-content">
-                <img src={hero.image.url} alt={`${hero.name}_img`}/>
+                <button className="exit-popup"onClick={props.onClose}> <img src={icon_close} alt="close button"/> </button>
+                <img className="hero-profile"src={hero.image.url} alt={`${hero.name}_img`}/>
                 <div className="main-info">
-                    <div className="hero-name">
-                        <h1>{hero.name}</h1>
-                        <h2>{hero.biography['full-name']}</h2>
-                    </div>
+                    <h1>{hero.name}</h1>
+                    <h2>{hero.biography['full-name']}</h2>
                     <div className="power-stats">
                         <h3>Estatísticas </h3>
                         <h4>Inteligência: {hero.powerstats['intelligence']}</h4>
