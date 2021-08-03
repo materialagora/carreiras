@@ -1,11 +1,42 @@
-# A empresa
+# GEEKLOUCO.COM
+#### Esse site, tem como objetivo apresentar os seus heróis favoritos no formato de um marketplace.
+live preview: https://geeklouco.vercel.app
 
-A Material Agora nasceu para descomplicar o dia a dia de todos que estão realizando obras através de uma forma simples de comprar sem ter que gastar tempo com deslocamento e transporte.
+## CORS POLICY
 
-# carreiras
-Nossa equipe de engenharia é 100% remoto e usamos as seguintes tecnologias:
-- Golang, PostgreSQL, MongoDB, RabbitAMQP
-- Containers, Continuous Delivery, TDD
+Para utilizar a aplicação é necessario que tenha o extensor de cors chamado "Moesif CORS:
+https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc
+[![Moesif CORS](https://user-images.githubusercontent.com/62522817/89653164-867dd200-d8be-11ea-8c30-8188ea6513f9.png)](https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc)
+
+## O SITE
+![geek louco front page](https://uploaddeimagens.com.br/images/003/364/274/full/_-_1.png?1627958181)
+
+#### A aplicação foi feita usando ReactJs, com auxilio do axios para realizar as requisições para a api de heróis https://www.superheroapi.com/api
+
+### OS CARDS 
+![Cards de heróis](https://uploaddeimagens.com.br/images/003/364/275/full/Captura_de_tela_de_2021-08-02_10-53-33.png?1627958432)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Como faço para trabalhar como desenvolvedor?
 
