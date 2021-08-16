@@ -1,0 +1,18 @@
+@use "../../style/theme" as *
+
+.card
+    width: 9rem
+    height: 9rem
+    .container
+        border-radius: $radius
+        box-shadow: $medium-shadow
+        width: 9rem
+        height: 9rem
+        overflow: hidden
+        transition: .3s transform
+        &:hover
+            transform: translateY(-.5rem)
+    span
+        display: block
+        text-align: center
+        font-size: 1.4rem

@@ -1,0 +1,32 @@
+@use "../../style/theme" as *
+
+.search-bar
+    background-color: primary
+    position: relative
+    .icon
+        background-image: url("../../assets/icons/search.svg")
+    input
+        bottom: -2rem
+        position: absolute
+        right: 104%
+        background-color: transparent
+        border: none
+        border-bottom: 3px solid #333
+        border-color: $primary
+        font-size: 1rem
+        padding: .25rem
+        transition: 1s width 
+        width: 0
+        visibility: hidden
+    @media ( max-width: $medium - 1 )
+        &.active input
+            visibility: visible
+            width: 70vw
+    @media ( min-width: $medium )
+        input
+            visibility: visible
+            bottom: .25rem
+            width: 0
+        &:hover input,
+        &.active input
+            width: 18rem

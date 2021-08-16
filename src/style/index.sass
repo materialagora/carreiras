@@ -1,0 +1,42 @@
+@use "./theme" as *
+@use "./keyframes"
+@use "./fonts"
+
+*
+    margin: 0
+    padding: 0
+    outline: none
+    box-sizing: border-box
+
+body
+    background-color: $background
+    color: $onBackgound
+    font-family: secular
+
+html
+    @media ( max-width: $x-small - 1)
+        font-size: 13px
+    @media ( min-width: $x-small)
+        font-size: 14px
+    @media ( min-width: $x-medium)
+        font-size: 15px
+    @media ( min-width: $medium)
+        font-size: 16px
+
+img
+    width: 100%
+
+.icon
+    display: block
+    width: 2.5rem
+    height: 2.5rem
+    min-width: 2.5rem
+    min-height: 2.5rem
+    background-repeat: no-repeat
+    background-size: 100% 100%
+    cursor: pointer
+    @media ( min-width: $medium )
+        width: 3rem
+        height: 3rem
+        min-width: 3rem
+        min-height: 3rem
