@@ -36,7 +36,7 @@
     margin-right: 2rem;
 }
 .popup-content .exit-popup{
-    width: calc(3rem+3vw);
+    /*width: calc(3rem+3vw);*/
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
@@ -45,7 +45,6 @@
     cursor: pointer;
 }
 .popup-content .exit-popup img{
-    width: 100%;
     height: auto;
 }
 .main-info{
