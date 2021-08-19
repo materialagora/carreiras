@@ -1,0 +1,35 @@
+@use "../../style/theme" as *
+
+.biography
+    font-size: .9rem
+    h3
+        text-align: center
+        color: $primary
+        font-size: 1.3rem
+        margin-bottom: .5rem
+    span
+        display: grid
+        margin-bottom: .5rem
+    b
+        color: $primary
+        margin-right: 1rem
+    .biography-chart,
+    .stats-chart,
+    .appearence-chart
+        background-color: $surface
+        color: $onSurface
+        border-radius: $radius
+        box-shadow: $medium-shadow
+        padding: .5rem 1rem
+        margin-bottom: 1rem
+    .stats-chart,
+    .appearence-chart
+        text-align: center
+        span
+            display: block
+    @media ( min-width: $medium )
+        display: grid
+        grid-template-columns: 7fr 3fr
+        column-gap: 1rem
+        .biography-chart
+            grid-row: span 2

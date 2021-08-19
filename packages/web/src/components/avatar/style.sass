@@ -1,0 +1,23 @@
+@use "../../style/theme" as *    
+
+.avatar
+    display: grid
+    grid-template-columns: 1fr 5fr
+    align-items: flex-start
+    text-align: left
+    max-width: 30rem
+    margin-bottom: .5rem
+    .container
+        box-shadow: $low-shadow
+        width: 7.5rem
+        height: 7.5rem
+        border-radius: $radius
+        overflow: hidden
+    h3
+        text-align: left
+        font-size: 1.2rem
+    b
+        opacity: 0.6
+    .data
+        display: grid
+        padding: 0 1rem

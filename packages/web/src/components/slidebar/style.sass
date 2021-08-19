@@ -1,0 +1,31 @@
+@use "../../style/theme" as *
+
+.slide-bar
+    background-color: $primary
+    color: $onPrimary
+    border-radius: $radius $radius 0 0
+    box-shadow: 0 -2px 4px #2228
+    padding: .5rem
+    user-select: none
+    position: fixed
+    width: 100%
+    top: 100%
+    transition: .8s height
+    @media ( max-width: $medium - 1 )
+        height: 92vh
+        &.active
+            top: 8vh
+            overflow-y: auto
+    @media ( min-width: $medium )
+        position: fixed
+        bottom: 0
+        left: 50%
+        transform: translateX(-50%)
+        top: unset
+        max-width: 60rem
+        height: 9rem
+        .row
+            display: grid
+            grid-template-columns: 1fr 1fr
+        &.active
+            height: 88vh

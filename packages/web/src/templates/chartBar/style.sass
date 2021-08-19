@@ -1,0 +1,25 @@
+@use "../../style/theme" as *
+
+.chart-bar
+    width: 2.5rem
+    text-align: center
+    text-transform: uppercase
+    height: 80%
+    letter-spacing: 0
+    .bar
+        height: 100%
+        display: flex
+        flex-direction: column
+        justify-content: flex-end
+    .fill
+        background-color: $primary-variant
+        color: $onPrimary
+        box-shadow: $medium-shadow
+        width: 100%
+        padding: .5rem
+        font-size: .7rem
+        line-height: .75rem
+        border-radius: 8px 8px 0 0
+        transition: .6s background-color
+        &:hover
+            background-color: #222

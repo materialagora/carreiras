@@ -1,0 +1,24 @@
+@use "../../style/theme" as *
+
+.flat-buttons
+    display: none
+    position: absolute
+    bottom: 100%
+    left: 50%
+    transform: translateX(-50%)
+    color: $onBackgound
+    span
+        display: inline-block
+        font-size: .8rem
+        margin: 0 .5rem
+    .icon
+        margin: 0 auto
+    //.biography
+    @media ( min-width: $medium )
+        display: block
+        .icon-filter
+            background-image: url("../../assets/icons/funnel.svg")
+        .icon-biography
+            background-image: url("../../assets/icons/resume.svg")
+        .icon-compare
+            background-image: url("../../assets/icons/compare.svg")
