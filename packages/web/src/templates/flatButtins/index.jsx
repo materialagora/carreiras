@@ -2,20 +2,16 @@ import React from "react";
 
 import "./style.sass";
 
-/** @param {{bioClick: function, filterClick: function, compareClick: function }} props */
+/** @param {{bioClick: function, groupClick: function}} props */
 const flatButtons = (props) => (
   <div className="flat-buttons">
     <span onClick={props.filterClick}>
-      <i className="icon icon-filter sm" />
-      Filter
+      <i className="icon sm icon-filter" />
+      Agrupar
     </span>
     <span onClick={props.bioClick}>
-      <i className="icon icon-biography sm" />
+      <i className="icon sm icon-biography" />
       Biografia
-    </span>
-    <span onClick={props.compareClick}>
-      <i className="icon icon-compare sm" />
-      Comparar
     </span>
   </div>
 );

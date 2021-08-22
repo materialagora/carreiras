@@ -3,10 +3,12 @@
 .dashboard
     max-width: 64rem
     padding: 1rem 0
-    margin: 0 auto 3rem
+    margin: 0 auto 8rem
     display: grid
     grid-template-columns: auto auto auto
     justify-items: center
+    align-items: flex-start
+    transition: 1s
     .cards
         display: grid
         grid-template-columns: repeat(2, 1fr)
@@ -18,7 +20,6 @@
         background-image: url("../../assets/icons/forward.svg")
         transform: rotate(180deg)
     @media (min-width: $x-medium)
-        align-items: center
         .cards
             grid-template-columns: repeat(4, 1fr)
     @media (min-width: $medium)

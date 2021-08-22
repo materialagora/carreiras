@@ -1,62 +1,64 @@
 import React from "react";
+import { Observer } from "mobx-react-lite";
 
 import Card from "../../templates/card/index";
 
 import "./style.sass";
-import { getHeroes } from "./model";
+import { getList, getStoreCache } from "./model";
+import store from "./store";
 
-getHeroes()
+class Dashboard extends React.PureComponent {
+  componentDidMount() {
+    getStoreCache()
+    getList();
+  }
 
-const Dashboard = () => {
-  return (
-    <div className="dashboard">
-      <i className="icon arrow-left" />
-      <div className="cards">
-        <Card
-          img="https://www.superherodb.com/pictures2/portraits/10/100/85.jpg"
-          name="Iron Man"
-        />
-        <Card
-          img="https://www.superherodb.com/pictures2/portraits/10/100/85.jpg"
-          name="Iron Man"
-        />
-        <Card
-          img="https://www.superherodb.com/pictures2/portraits/10/100/85.jpg"
-          name="Iron Man"
-        />
-        <Card
-          img="https://www.superherodb.com/pictures2/portraits/10/100/85.jpg"
-          name="Iron Man"
-        />
-        <Card
-          img="https://www.superherodb.com/pictures2/portraits/10/100/85.jpg"
-          name="Iron Man"
-        />
+  handleCardClick(hero) {
+    store.setCurrent(hero);
+  }
 
-        <Card
-          img="https://www.superherodb.com/pictures2/portraits/10/100/85.jpg"
-          name="Iron Man"
-        />
-        <Card
-          img="https://www.superherodb.com/pictures2/portraits/10/100/85.jpg"
-          name="Iron Man"
-        />
-        <Card
-          img="https://www.superherodb.com/pictures2/portraits/10/100/85.jpg"
-          name="Iron Man"
-        />
-        <Card
-          img="https://www.superherodb.com/pictures2/portraits/10/100/85.jpg"
-          name="Iron Man"
-        />
-        <Card
-          img="https://www.superherodb.com/pictures2/portraits/10/100/85.jpg"
-          name="Iron Man"
-        />
-      </div>
-      <i className="icon arrow-right" />
-    </div>
-  );
-};
+  handleNextBtn() {
+    store.nextList();
+    getList();
+  }
+
+  handlePrevBtn() {
+    store.prevList();
+  }
+
+  renderCards() {
+    return store.heroesList.map((hero) => (
+      <Card
+        active={
+          hero.name === store.current.name && hero.id === store.current.id
+        }
+        key={hero.id}
+        name={hero.name}
+        img={hero.image.url}
+        onClick={() => this.handleCardClick(hero)}
+      />
+    ));
+  }
+
+  render() {
+    return (
+      <Observer>
+        {() => (
+          <div className="dashboard">
+            <i
+              className="icon arrow-left"
+              onClick={() => this.handlePrevBtn()}
+            />
+            <div className="cards">{this.renderCards()}</div>
+            <i
+              className="icon arrow-right"
+              onClick={() => this.handleNextBtn()}
+            />
+          </div>
+        )}
+      </Observer>
+    );
+  }
+}
 
 export default Dashboard;

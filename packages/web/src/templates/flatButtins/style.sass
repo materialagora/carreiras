@@ -1,24 +1,27 @@
 @use "../../style/theme" as *
 
 .flat-buttons
-    display: none
     position: absolute
     bottom: 100%
     left: 50%
     transform: translateX(-50%)
-    color: $onBackgound
+    background-color: $surface
+    color: $onSurface
+    border-radius: $radius
+    box-shadow: $low-shadow
+    padding: .5rem .5rem 0
+    margin-bottom: .5rem
+    width: 10rem
+    text-align: center
     span
         display: inline-block
         font-size: .8rem
         margin: 0 .5rem
     .icon
         margin: 0 auto
-    //.biography
-    @media ( min-width: $medium )
-        display: block
-        .icon-filter
-            background-image: url("../../assets/icons/funnel.svg")
-        .icon-biography
-            background-image: url("../../assets/icons/resume.svg")
-        .icon-compare
-            background-image: url("../../assets/icons/compare.svg")
+    .icon-filter
+        background-image: url("../../assets/icons/funnel.svg")
+    .icon-biography
+        background-image: url("../../assets/icons/resume.svg")
+    .icon-compare
+        background-image: url("../../assets/icons/compare.svg")

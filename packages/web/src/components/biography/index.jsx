@@ -2,11 +2,11 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 
 import "./style.sass";
-import dashboard from "../../store/dashboard";
+import dashboardStore from "../dashboard/store";
 
 const Biography = () => {
   const { biography, appearance, work, connections, powerstats } =
-    dashboard.current;
+    dashboardStore.current;
   return (
     <div className="biography">
       <div className="biography-chart">
@@ -17,11 +17,11 @@ const Biography = () => {
         </span>
         <span>
           <b>Local de Nascimento</b>
-          {biography.placeOfBirth}
+          {biography["place-of-birth"]}
         </span>
         <span>
           <b>Primeira Aparição</b>
-          {biography.firstAppearance}
+          {biography["first-appearance"]}
         </span>
         <span>
           <b>Base</b>
@@ -33,7 +33,7 @@ const Biography = () => {
         </span>
         <span>
           <b>Afiliações</b>
-          {connections.groupAffiliation}
+          {connections["group-affiliation"]}
         </span>
       </div>
       <div className="stats-chart">
@@ -75,11 +75,11 @@ const Biography = () => {
         </span>
         <span>
           <b>Cor dos olhos</b>
-          {appearance.eyeColor}
+          {appearance["eye-color"]}
         </span>
         <span>
           <b>Cor do cabelo</b>
-          {appearance.hairColor}
+          {appearance["hair-color"]}
         </span>
       </div>
     </div>

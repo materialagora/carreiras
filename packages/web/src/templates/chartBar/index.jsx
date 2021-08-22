@@ -6,12 +6,13 @@ import "./style.sass";
 const Bar = (props) => {
   const style = {
     minHeight: `${props.value}%`,
+    display: `${props.value !== "null" ? "" : "none"}`,
   };
 
   return (
     <div className="chart-bar">
       <div className="bar">
-        <b>{props.value}</b>
+        <b>{props.value !== "null" ? props.value : ""}</b>
         <div className="fill" style={style} title={props.name}>
           {props.name.slice(0, 3)}
         </div>

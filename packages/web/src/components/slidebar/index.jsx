@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { observer } from "mobx-react-lite";
 
 import Avatar from "../avatar/index";
 import Chart from "../../templates/chart/index";
@@ -6,41 +7,36 @@ import Biography from "../biography/index";
 import FlatButtons from "../../templates/flatButtins/index";
 
 import "./style.sass";
+import dashboardStore from "../dashboard/store";
 
-function stopScrolling(stop = false) {
+function stopScroll(stop = false) {
   if (stop) {
     document.body.style.height = "100vh";
     document.body.style.overflow = "hidden";
   } else {
-    document.body.style.height = "unset";
+    document.body.style.height = "auto";
     document.body.style.overflow = "visible";
   }
 }
 
 const SlideBar = () => {
   const [toggle, setToggle] = useState(false);
-  const [compare, setCompare] = useState(false);
+  const { powerstats } = dashboardStore.current;
 
-  stopScrolling(toggle);
+  stopScroll(toggle);
+
   return (
-    <div className={"slide-bar scrollbar" + (toggle ? " active" : "")}>
+    <div className={"slide-bar" + (toggle ? " active" : "")}>
       <FlatButtons bioClick={() => setToggle(!toggle)} />
-      <div className="row">
-        <Avatar />
-        <Chart
-          data={{
-            intelligence: "100",
-            strength: "85",
-            speed: "58",
-            durability: "85",
-            power: "100",
-            combat: "64",
-          }}
-        />
+      <div className="scrollbar">
+        <div className="row">
+          <Avatar />
+          <Chart data={powerstats} />
+        </div>
+        <Biography />
       </div>
-      <Biography />
     </div>
   );
 };
 
-export default SlideBar;
+export default observer(SlideBar);

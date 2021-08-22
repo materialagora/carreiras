@@ -11,8 +11,13 @@
         overflow: hidden
         transition: .3s transform
         &:hover
-            transform: translateY(-.5rem)
+            transform: translateY(-.25rem)
     span
         display: block
         text-align: center
-        font-size: 1.4rem
+        font-size: 1.2rem
+        height: 2rem
+    &.active
+        color: $primary-variant
+        .container
+            box-shadow: 0 0 2px 2px $primary-variant

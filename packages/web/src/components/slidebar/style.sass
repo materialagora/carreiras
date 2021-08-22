@@ -8,16 +8,19 @@
     padding: .5rem
     user-select: none
     position: fixed
+    bottom: -.5rem
+    height: 0
     width: 100%
-    top: 100%
-    transition: .8s height
-    @media ( max-width: $medium - 1 )
-        height: 92vh
-        &.active
-            top: 8vh
+    transition: .6s height
+    padding-top: .5rem
+    .scrollbar
+        padding-right: .25rem
+        height: 100%
+    &.active
+        height: 85vh
+        .scrollbar
             overflow-y: auto
     @media ( min-width: $medium )
-        position: fixed
         bottom: 0
         left: 50%
         transform: translateX(-50%)
@@ -29,3 +32,5 @@
             grid-template-columns: 1fr 1fr
         &.active
             height: 88vh
+            .scrollbar
+                overflow: unset
