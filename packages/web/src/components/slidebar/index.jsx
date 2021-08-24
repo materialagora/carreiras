@@ -14,8 +14,8 @@ function stopScroll(stop = false) {
     document.body.style.height = "100vh";
     document.body.style.overflow = "hidden";
   } else {
-    document.body.style.height = "auto";
-    document.body.style.overflow = "visible";
+    document.body.style.height = "";
+    document.body.style.overflow = "";
   }
 }
 
