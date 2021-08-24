@@ -1,7 +1,8 @@
+require("./config/env")
 const express = require("express");
 
 const routes = require("./routes");
-const cors = require("./config/cors");
+const cors = require("./middlewares/cors");
 
 const app = express();
 const port = 3003;

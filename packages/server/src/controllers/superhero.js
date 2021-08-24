@@ -1,6 +1,8 @@
 const axios = require("axios");
 
-baseUrl = "http://superheroapi.com/api/1932044400289905";
+const apiToken = process.env.SUPERHEROAPI_TOKEN
+
+const baseUrl = "http://superheroapi.com/api/" + apiToken;
 
 function gethero(req, res) {
   axios.default
