@@ -6,7 +6,7 @@ import dashboardStore from "../dashboard/store";
 
 const Biography = () => {
   const { biography, appearance, work, connections, powerstats } =
-    dashboardStore.current;
+    dashboardStore.selected;
   return (
     <div className="biography">
       <div className="biography-chart">

@@ -3,20 +3,21 @@
 .card
     width: 9rem
     height: 9rem
+    position: relative
+    transition: .3s transform
+    span
+        display: block
+        text-align: center
+        font-size: 1.2rem
+        height: 1.75rem
     .container
         border-radius: $radius
         box-shadow: $medium-shadow
         width: 9rem
         height: 9rem
         overflow: hidden
-        transition: .3s transform
-        &:hover
-            transform: translateY(-.25rem)
-    span
-        display: block
-        text-align: center
-        font-size: 1.2rem
-        height: 2rem
+    &:hover
+        transform: translateY(-.25rem)
     &.active
         color: $primary-variant
         .container

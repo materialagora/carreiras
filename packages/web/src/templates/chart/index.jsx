@@ -11,7 +11,10 @@ function gerateBars(data) {
   return Bars;
 }
 
-/** @param {{data: {name: string, value: string}}} props */
+/** @param {{ data: {
+ * name: string, 
+ * value: string
+ * }}} props */
 const Chart = (props) => <div className="chart">{gerateBars(props.data)}</div>;
 
 export default Chart;

@@ -2,6 +2,7 @@ import React from "react";
 import { Observer } from "mobx-react-lite";
 
 import Card from "../../templates/card/index";
+import If from "../../templates/if/index";
 
 import "./style.sass";
 import { getList, getStoreCache } from "./model";
@@ -9,28 +10,28 @@ import store from "./store";
 
 class Dashboard extends React.PureComponent {
   componentDidMount() {
-    getStoreCache()
+    getStoreCache();
     getList();
   }
 
   handleCardClick(hero) {
-    store.setCurrent(hero);
+    store.setSelected(hero);
   }
 
-  handleNextBtn() {
+  handleNext() {
     store.nextList();
     getList();
   }
 
-  handlePrevBtn() {
-    store.prevList();
-  }
-
   renderCards() {
-    return store.heroesList.map((hero) => (
+    let list = [];
+    if (store.listType === "heroes") list = store.heroesList;
+    else if (store.listType === "collection") list = store.collection;
+
+    return list.map((hero) => (
       <Card
         active={
-          hero.name === store.current.name && hero.id === store.current.id
+          hero.name === store.selected.name && hero.id === store.selected.id
         }
         key={hero.id}
         name={hero.name}
@@ -45,15 +46,19 @@ class Dashboard extends React.PureComponent {
       <Observer>
         {() => (
           <div className="dashboard">
-            <i
-              className="icon arrow-left"
-              onClick={() => this.handlePrevBtn()}
-            />
+            <h2>{store.listType}</h2>
+            <If test={store.listType === "heroes"}>
+              <i className="icon lg arrow-left" onClick={() => store.prevList()} />
+            </If>
+
             <div className="cards">{this.renderCards()}</div>
-            <i
-              className="icon arrow-right"
-              onClick={() => this.handleNextBtn()}
-            />
+
+            <If test={store.listType === "heroes"}>
+              <i
+                className="icon lg arrow-right"
+                onClick={() => this.handleNext()}
+              />
+            </If>
           </div>
         )}
       </Observer>

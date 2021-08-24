@@ -36,7 +36,7 @@ export function getStoreCache() {
   const storeCached = JSON.parse(localStorage.getItem("list"));
   if (storeCached) {
     store.listStore = storeCached;
-    store.setCurrent(storeCached[0][0]);
+    store.setSelected(storeCached[0][0]);
     store.setHeroesList(storeCached[0]);
   }
 }

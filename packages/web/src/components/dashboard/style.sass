@@ -2,18 +2,24 @@
 
 .dashboard
     max-width: 64rem
-    padding: 1rem 0
     margin: 0 auto 8rem
     display: grid
     grid-template-columns: auto auto auto
-    justify-items: center
-    align-items: flex-start
-    transition: 1s
+    justify-content: center
+    h2
+        grid-column: span 3
+        text-align: center
+        color: $primary
+        margin-bottom: .5rem
     .cards
         display: grid
         grid-template-columns: repeat(2, 1fr)
-        row-gap: 3rem
+        row-gap: 2.5rem
         column-gap: 1rem
+        justify-items: center
+    .arrow-left,
+    .arrow-right
+        margin: 1.5rem
     .arrow-left
         background-image: url("../../assets/icons/forward.svg")
     .arrow-right

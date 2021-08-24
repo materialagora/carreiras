@@ -5,7 +5,7 @@ import DashboadStore from "../dashboard/store";
 import "./style.sass";
 
 const Avatar = () => {
-  const { name, image, biography, appearance } = DashboadStore.current;
+  const { name, image, biography, appearance } = DashboadStore.selected;
 
   return (
     <div className="avatar">
