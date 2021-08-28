@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import DashboardStore from "../dashboard/store";
 
 import "./style.sass";
+
+function handleSearch(str) {
+  DashboardStore.search(str);
+}
 
 const Search = () => {
   const [toggle, setToggle] = useState(false);
@@ -14,7 +19,7 @@ const Search = () => {
         type="text"
         value={searchIpt}
         onChange={(ev) => setSearchIpt(ev.target.value)}
-        onKeyUp={(ev) => ev.key === "Enter"}
+        onKeyUp={(ev) => ev.key === "Enter" && handleSearch(searchIpt)}
       />
     </div>
   );

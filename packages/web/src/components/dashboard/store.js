@@ -1,7 +1,8 @@
 import { action, computed, makeObservable, observable, autorun } from "mobx";
 import axios from "axios";
 
-const baseUrl = "http://192.168.0.103:3003/api/superhero";
+const LAN = "192.168.0.103";
+const baseUrl = `http://${LAN || "localhost"}:3003/api/superhero`;
 
 const INITIAL_STATE = {
   response: "",
@@ -72,6 +73,7 @@ class Store {
       getCache: action,
       nextPage: action,
       prevPage: action,
+      search: action,
       addToCollection: action,
       removeToCollection: action,
       setListType: action,
@@ -89,6 +91,20 @@ class Store {
   addHero(hero) {
     this.heroStore.heroes.list.push(hero);
     this.setCache();
+  }
+
+  search(searchStr) {
+    axios
+      .get(`${baseUrl}/search/${searchStr}`)
+      .then((res) => {
+        if (res.data.response === "success") {
+          this.heroStore.search.list = res.data.results;
+          this.listType = "search";
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   addToCollection() {
