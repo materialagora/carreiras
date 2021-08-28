@@ -1,21 +1,24 @@
-import { action, computed, makeObservable, observable } from "mobx";
+import { action, computed, makeObservable, observable, autorun } from "mobx";
+import axios from "axios";
+
+const baseUrl = "http://192.168.0.103:3003/api/superhero";
 
 const INITIAL_STATE = {
   response: "",
-  id: "",
+  id: 0,
   name: "",
   powerstats: {
-    intelligence: "",
-    strength: "",
-    speed: "",
-    durability: "",
-    power: "",
-    combat: "",
+    intelligence: 0,
+    strength: 0,
+    speed: 0,
+    durability: 0,
+    power: 0,
+    combat: 0,
   },
   biography: {
     fullName: "",
     alterEgos: "",
-    aliases: [""],
+    aliases: [],
     placeOfBirth: "",
     firstAppearance: "",
     publisher: "",
@@ -24,129 +27,137 @@ const INITIAL_STATE = {
   appearance: {
     gender: "",
     race: "",
-    height: [""],
-    weight: [""],
+    height: [],
+    weight: [],
     eyeColor: "",
     hairColor: "",
   },
-  work: {
-    occupation: "",
-    base: "",
-  },
-  connections: {
-    groupAffiliation: "",
-    relatives: "",
-  },
-  image: {
-    url: "",
-  },
+  work: { occupation: "", base: "" },
+  connections: { groupAffiliation: "", relatives: "" },
+  image: { url: "" },
 };
 
 class Store {
   /** @type {hero} */
   selected = INITIAL_STATE;
-  /** @type {hero[]} */
-  heroesList = [];
-  /** @type {hero[][]} */
-  listStore = [];
-  /** @type {hero[]} */
-  collection = [];
-  /** @type {"collection" | "heroes" | "search"} */
+
+  /** @type {listType} */
   listType = "heroes";
+
+  /** @type {heroStore} */
+  heroStore = {
+    heroes: {
+      index: 0,
+      list: [],
+    },
+    collection: {
+      index: 0,
+      list: [],
+    },
+    search: {
+      index: 0,
+      list: [],
+    },
+  };
 
   constructor() {
     makeObservable(this, {
       selected: observable,
-      heroesList: observable,
-      collection: observable,
+      heroStore: observable,
       listType: observable,
-      lastHero: computed,
-      lastStoreHero: computed,
-      referenceListID: computed,
-      selectedToCollection: action,
       addHero: action,
+      start: action,
       setSelected: action,
-      prevList: action,
-      nextList: action,
-      setHeroesList: action,
+      requestHeroList: action,
+      getCache: action,
+      nextPage: action,
+      prevPage: action,
+      addToCollection: action,
+      removeToCollection: action,
       setListType: action,
+      currentStore: computed,
+      lastHero: computed,
+      page: computed,
     });
   }
 
-  get lastHero() {
-    return this.heroesList[this.heroesList.length - 1];
-  }
-
-  get lastStoreHero() {
-    const lastList = this.listStore[this.listStore.length - 1];
-    return lastList[lastList.length - 1];
-  }
-
-  get referenceListID() {
-    return this.heroesList[0].id;
+  start() {
+    this.getCache();
+    this.page.length < 10 && this.requestHeroList();
   }
 
   addHero(hero) {
-    this.heroesList.push(hero);
+    this.heroStore.heroes.list.push(hero);
+    this.setCache();
+  }
+
+  addToCollection() {
+    const collectionList = this.heroStore.collection.list;
+    if (collectionList.indexOf(this.selected) < 0)
+      collectionList.push(this.selected);
+    this.setCache();
+  }
+
+  removeToCollection() {
+    const collectionList = this.heroStore.collection.list;
+    const seletionIndex = collectionList.indexOf(this.selected);
+    seletionIndex >= 0 && collectionList.splice(seletionIndex, 1);
+    this.setCache();
   }
 
   setSelected(hero) {
     this.selected = hero;
   }
 
-  setHeroesList(heroesList) {
-    this.heroesList = heroesList;
-  }
-
-  /** @param {"collection" | "heroes" | "search"} type */
+  /** @param {listType} type */
   setListType(type) {
-    if (type === "collection" && !this.collection.length) return undefined;
-    if (type === "collection") this.setSelected(this.collection[0]);
+    if (type === "collection" && !this.heroStore.collection.list.length)
+      return undefined;
     this.listType = type;
   }
 
-  selectedToCollection() {
-    if (this.collection.length < 10) {
-      const isSelectedOnCollection = this.collection.filter(
-        (hero) => hero.id === this.selected.id
-      ).length;
-
-      !isSelectedOnCollection && this.collection.push(this.selected);
-    }
+  nextPage() {
+    if (this.page.length === 10) this.currentStore.index += 10;
+    if (this.listType === "heroes" && this.page.length === 0)
+      this.requestHeroList();
   }
 
-  removeToColletion() {
-    this.collection = this.collection.filter(
-      (hero) => hero.id !== this.selected.id
-    );
-    if (this.collection.length) this.setSelected(this.collection[0]);
+  prevPage() {
+    if (this.currentStore.index !== 0) this.currentStore.index -= 10;
   }
 
-  listToStore() {
-    const selectedOnStore = this.listStore.filter(
-      (heroesList) => heroesList[0].id === this.referenceListID
-    )[0];
-
-    !selectedOnStore && this.listStore.push(this.heroesList);
+  requestHeroList() {
+    axios
+      .get(`${baseUrl}/${this.lastHero + 1}`)
+      .then((res) => {
+        this.addHero(res.data);
+        if (this.heroStore.heroes.list.length % 10 !== 0)
+          this.requestHeroList();
+      })
+      .catch((err) => console.log(err));
   }
 
-  nextList() {
-    const nextList = this.listStore.filter(
-      (heroesList) => heroesList[0].id - 10 === this.referenceListID
-    )[0];
-
-    if (nextList) this.heroesList = nextList;
-    else {
-      this.heroesList = [];
-    }
+  getCache() {
+    const cache = JSON.parse(localStorage.getItem("heroStore"));
+    if (cache) this.heroStore = cache;
   }
 
-  prevList() {
-    const prevList = this.listStore.filter(
-      (heroesList) => heroesList[0].id + 10 === this.referenceListID
-    )[0];
+  setCache() {
+    localStorage.setItem("heroStore", JSON.stringify(this.heroStore));
+  }
 
-    prevList && (this.heroesList = prevList);
+  get currentStore() {
+    return this.heroStore[this.listType];
+  }
+
+  get page() {
+    const store = this.currentStore;
+    return store.list.slice(store.index, store.index + 10);
+  }
+
+  get lastHero() {
+    const lastHero = this.heroStore.heroes.list.slice(-1)[0];
+    return lastHero ? Number(lastHero.id) : 0;
   }
 }
 
@@ -185,3 +196,11 @@ export default new Store();
   connections: { groupAffiliation: string, relatives: string},
   image: { url: string }
  }} hero */
+
+/** @typedef {{
+ * heroes: { index: number, list: hero[] };
+ * collection: { index: number, list: hero[] };
+ * search: { index: number, list: hero[] }
+ * }} heroStore */
+
+/** @typedef {"collection" | "heroes" | "search" } listType */
