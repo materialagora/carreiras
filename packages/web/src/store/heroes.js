@@ -1,4 +1,4 @@
-import { action, computed, makeObservable, observable, autorun } from "mobx";
+import { action, computed, makeObservable, observable } from "mobx";
 import axios from "axios";
 
 const LAN = "192.168.0.105";

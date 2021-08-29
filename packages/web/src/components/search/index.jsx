@@ -1,10 +1,10 @@
-import React, { useRef, useState } from "react";
-import DashboardStore from "../dashboard/store";
+import React, { useState } from "react";
+import heroesStore from "../../store/heroes";
 
 import "./style.sass";
 
 function handleSearch(str) {
-  DashboardStore.search(str);
+  heroesStore.search(str);
 }
 
 const Search = () => {

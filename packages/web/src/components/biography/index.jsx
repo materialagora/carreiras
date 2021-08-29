@@ -2,11 +2,11 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 
 import "./style.sass";
-import dashboardStore from "../dashboard/store";
+import heroesStore from "../../store/heroes";
 
 const Biography = () => {
   const { biography, appearance, work, connections, powerstats } =
-    dashboardStore.selected;
+    heroesStore.selected;
   return (
     <div className="biography">
       <div className="biography-chart">

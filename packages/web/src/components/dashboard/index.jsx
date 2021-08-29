@@ -1,6 +1,6 @@
 import React from "react";
 import { Observer } from "mobx-react-lite";
-import store from "./store";
+import heroesStore from "../../store/heroes";
 
 import Card from "../../templates/card/index";
 import If from "../../templates/if/index"
@@ -10,19 +10,19 @@ import "./style.sass";
 
 class Dashboard extends React.PureComponent {
   componentDidMount() {
-    store.start();
+    heroesStore.start();
   }
 
   renderCards() {
-    return store.page.map((hero) => (
+    return heroesStore.page.map((hero) => (
       <Card
         active={
-          hero.name === store.selected.name && hero.id === store.selected.id
+          hero.name === heroesStore.selected.name && hero.id === heroesStore.selected.id
         }
         key={hero.id}
         name={hero.name}
         img={hero.image ? hero.image.url : ""}
-        onClick={() => store.setSelected(hero)}
+        onClick={() => heroesStore.setSelected(hero)}
       />
     ));
   }
@@ -32,20 +32,20 @@ class Dashboard extends React.PureComponent {
       <Observer>
         {() => (
           <div className="dashboard">
-            <h2>{store.listType}</h2>
+            <h2>{heroesStore.listType}</h2>
             <i
               className="icon lg arrow-left"
-              onClick={() => store.prevPage()}
+              onClick={() => heroesStore.prevPage()}
             />
             <div className="cards">
               {this.renderCards()}
-              <If test={store.listType === "heroes" && store.page.length < 10}>
+              <If test={heroesStore.listType === "heroes" && heroesStore.page.length < 10}>
                 <Card name="Carragando" img={loadingImg} />
               </If>
             </div>
             <i
               className="icon lg arrow-right"
-              onClick={() => store.nextPage()}
+              onClick={() => heroesStore.nextPage()}
             />
           </div>
         )}
