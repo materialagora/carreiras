@@ -1,10 +1,12 @@
 import React from "react";
 import { Observer } from "mobx-react-lite";
+import store from "./store";
 
 import Card from "../../templates/card/index";
+import If from "../../templates/if/index"
+import loadingImg from "../../assets/animation/loading.gif";
 
 import "./style.sass";
-import store from "./store";
 
 class Dashboard extends React.PureComponent {
   componentDidMount() {
@@ -35,7 +37,12 @@ class Dashboard extends React.PureComponent {
               className="icon lg arrow-left"
               onClick={() => store.prevPage()}
             />
-            <div className="cards">{this.renderCards()}</div>
+            <div className="cards">
+              {this.renderCards()}
+              <If test={store.listType === "heroes" && store.page.length < 10}>
+                <Card name="Carragando" img={loadingImg} />
+              </If>
+            </div>
             <i
               className="icon lg arrow-right"
               onClick={() => store.nextPage()}

@@ -1,7 +1,7 @@
 import { action, computed, makeObservable, observable, autorun } from "mobx";
 import axios from "axios";
 
-const LAN = "192.168.0.103";
+const LAN = "192.168.0.105";
 const baseUrl = `http://${LAN || "localhost"}:3003/api/superhero`;
 
 const INITIAL_STATE = {
