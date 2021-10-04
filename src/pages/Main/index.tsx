@@ -2,7 +2,11 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import { Link, useHistory } from "react-router-dom";
+
 import { api } from "../../utils/api";
+import Hero from '../../types/hero'
+
+import { useFavorites } from '../../hooks/useFavorites';
 
 import {
   Container,
@@ -12,14 +16,6 @@ import {
   Button,
 } from "./styles";
 
-type Hero = {
-  id: string;
-  name: string;
-  image: {
-    url: string;
-  };
-};
-
 interface HeroSearchRequest {
   results: Hero[];
 }
@@ -28,6 +24,8 @@ export const Main: React.FC = () => {
   const [searchValue, setSearchValue] = useState("");
   const [heroes, setHeroes] = useState<Hero[] | null>(null);
   const history = useHistory();
+
+  const { favorites, addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
 
   useEffect(() => {
     const getHeroes = async () => {
@@ -70,7 +68,8 @@ export const Main: React.FC = () => {
                 <Button onClick={() => handleShowHero(hero.id)}>
                   Visualizar
                 </Button>
-                <Button color="#449179">Salvar</Button>
+                <Button color="#449179" onClick={() => addToFavorites(hero)}>
+                  {isFavorite(hero.id) ? 'Salvar nos Favoritos' : 'Excluir dos Favoritos' }</Button>
               </HeroItem>
             ))}
         </ul>

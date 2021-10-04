@@ -66,7 +66,7 @@ export const Hero: React.FC = () => {
     };
 
     getHero();
-  }, [setHero, setLoading]);
+  }, [id, setHero, setLoading]);
 
   return (
     <Container>
