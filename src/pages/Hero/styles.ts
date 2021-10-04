@@ -44,6 +44,9 @@ export const PowerBar = styled.div<PowerBarProps>`
   background-color: red;
   display: flex;
   align-items: center;
+  -webkit-transform: skew(-10deg);
+      -ms-transform: skew(-10deg);
+      transform: skew(-10deg); 
 
   span {
     font-size: 15px;
