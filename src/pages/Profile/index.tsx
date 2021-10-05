@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Tab, TabList, Tabs, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
+import '../../tabStyle.css';
+
 
 import { superHeroAPI } from '../../utils/superHeroAPI';
 import Hero from '../../types/hero';
