@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
@@ -7,6 +7,8 @@ import makeAnimated from 'react-select/animated';
 import { Modal } from '../../components/Modal';
 import { superHeroAPI } from '../../utils/superHeroAPI';
 import { localAPI } from '../../utils/localAPI';
+import { addHeroToGroup } from '../../utils/addHeroToGroup';
+
 import Hero from '../../types/hero';
 
 import {
@@ -34,17 +36,20 @@ const animatedComponents = makeAnimated();
 export const Main: React.FC = () => {
   const [searchValue, setSearchValue] = useState('');
   const [heroes, setHeroes] = useState<Hero[] | null>(null);
+  const [selectedHero, setSelectedHero] = useState<Hero>({} as Hero);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [groups, setGroups] = useState<Group[]>([]);
-  const [selectedGroupId, setSelectedGroupId] = useState('');
+  const [selectedGroups, setSelectedGroups] = useState<Group[]>([]);
 
   const history = useHistory();
 
-  function handleOpenModal() {
+  function handleOpenModal(hero: Hero) {
+    setSelectedHero(hero);
     setModalIsOpen(true);
   }
 
   function handleCloseModal() {
+    setSelectedHero({} as Hero);
     setModalIsOpen(false);
   }
 
@@ -73,13 +78,32 @@ export const Main: React.FC = () => {
     getGroups();
   }, [searchValue, setHeroes, setGroups]);
 
-  const handleShowHero = (id: string) => history.push(`/profile/${id}`);
+  const handleShowHero = useCallback(
+    (id: string) => history.push(`/profile/${id}`),
+    [history]
+  );
+
+  const handleSelectGroups = useCallback(
+    async (values) => {
+      const selected = values.map((value: any) => value.value);
+      setSelectedGroups(selected);
+    },
+    [setSelectedGroups]
+  );
+
+  const handleSaveGroupSelection = useCallback(async () => {
+    await addHeroToGroup({ hero: selectedHero, groups: selectedGroups });
+
+    const { data } = await localAPI.get<Group[]>(`/groups`);
+    setGroups(data);
+  }, [selectedHero, selectedGroups, setGroups]);
 
   const options = useMemo(() => {
     const groupOptions = groups.map((group) => ({
-      value: group.id,
+      value: group,
       label: group.name,
     }));
+
     return groupOptions;
   }, [groups]);
 
@@ -104,7 +128,7 @@ export const Main: React.FC = () => {
                 <Button onClick={() => handleShowHero(hero.id)}>
                   Visualizar
                 </Button>
-                <Button color="#449179" onClick={handleOpenModal}>
+                <Button color="#449179" onClick={() => handleOpenModal(hero)}>
                   Add to a group
                 </Button>
               </HeroItem>
@@ -119,10 +143,11 @@ export const Main: React.FC = () => {
             components={animatedComponents}
             isMulti
             maxMenuHeight={115}
+            onChange={handleSelectGroups}
           />
           <AddToGroupButtonsContainer>
             <Button color="#449179">Create new Group</Button>
-            <Button>Save</Button>
+            <Button onClick={() => handleSaveGroupSelection()}>Save</Button>
           </AddToGroupButtonsContainer>
         </AddToGroupContainer>
       </Modal>
