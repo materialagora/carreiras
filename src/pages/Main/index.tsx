@@ -10,6 +10,7 @@ import { localAPI } from '../../utils/localAPI';
 import { addHeroToGroup } from '../../utils/addHeroToGroup';
 
 import Hero from '../../types/hero';
+import Group from '../../types/group';
 
 import {
   Container,
@@ -19,16 +20,11 @@ import {
   Button,
   AddToGroupContainer,
   AddToGroupButtonsContainer,
+  HeaderButtonsContainer,
 } from './styles';
 
 interface HeroSearchRequest {
   results: Hero[];
-}
-
-interface Group {
-  id: string;
-  name: string;
-  members: Hero[];
 }
 
 const animatedComponents = makeAnimated();
@@ -83,6 +79,11 @@ export const Main: React.FC = () => {
     [history]
   );
 
+  const handleNewGroup = useCallback(
+    () => history.push(`/group-list`, { creationReady: true }),
+    [history]
+  );
+
   const handleSelectGroups = useCallback(
     async (values) => {
       const selected = values.map((value: any) => value.value);
@@ -94,9 +95,18 @@ export const Main: React.FC = () => {
   const handleSaveGroupSelection = useCallback(async () => {
     await addHeroToGroup({ hero: selectedHero, groups: selectedGroups });
 
+    setSearchValue('');
+    handleCloseModal();
+
     const { data } = await localAPI.get<Group[]>(`/groups`);
     setGroups(data);
-  }, [selectedHero, selectedGroups, setGroups]);
+  }, [
+    selectedHero,
+    selectedGroups,
+    setGroups,
+    setSearchValue,
+    handleCloseModal,
+  ]);
 
   const options = useMemo(() => {
     const groupOptions = groups.map((group) => ({
@@ -109,9 +119,13 @@ export const Main: React.FC = () => {
 
   return (
     <Container>
+      <HeaderButtonsContainer>
+        <Button onClick={() => history.push('/group-list')}>Groups</Button>
+      </HeaderButtonsContainer>
       <h1>Super Hero Market</h1>
       <SearchContainer>
         <input
+          value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
           placeholder="Search for a character name..."
         />
@@ -125,9 +139,7 @@ export const Main: React.FC = () => {
                   <img src={hero.image.url} alt={hero.name} />
                 </Link>
                 <span>{hero.name}</span>
-                <Button onClick={() => handleShowHero(hero.id)}>
-                  Visualizar
-                </Button>
+                <Button onClick={() => handleShowHero(hero.id)}>Profile</Button>
                 <Button color="#449179" onClick={() => handleOpenModal(hero)}>
                   Add to a group
                 </Button>
@@ -146,7 +158,9 @@ export const Main: React.FC = () => {
             onChange={handleSelectGroups}
           />
           <AddToGroupButtonsContainer>
-            <Button color="#449179">Create new Group</Button>
+            <Button color="#449179" onClick={handleNewGroup}>
+              Create new Group
+            </Button>
             <Button onClick={() => handleSaveGroupSelection()}>Save</Button>
           </AddToGroupButtonsContainer>
         </AddToGroupContainer>
