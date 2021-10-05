@@ -1,5 +1,4 @@
-import styled from "styled-components";
-import defaultAvatar from "../../assets/default_avatar.png";
+import styled from 'styled-components';
 
 interface ButtonProps {
   color?: string;
@@ -20,19 +19,26 @@ export const Container = styled.div`
     max-width: 1200px;
     color: #fff;
     text-align: left;
+    font-size: 48px;
+    font-family: 'Anton', sans-serif;
+    font-style: italic;
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: #000;
   }
 `;
 
 export const SearchContainer = styled.div`
   height: 64px;
   width: 100%;
-  background: #fff;
+  background: #000;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 16px;
-  border-radius: 32px;
   overflow: hidden;
+  -webkit-transform: skew(-10deg);
+  -ms-transform: skew(-10deg);
+  transform: skew(-10deg);
 
   input {
     font-size: 20px;
@@ -40,6 +46,11 @@ export const SearchContainer = styled.div`
     padding: 8px 24px;
     height: 100%;
     flex: 1;
+    color: #fff;
+
+    &::placeholder {
+      color: #c2c2c2;
+    }
   }
 
   button {
@@ -67,28 +78,43 @@ export const HeroItem = styled.li`
   flex-direction: column;
   align-items: center;
   color: #fff;
-  border-radius: 12px;
   margin: 48px 64px;
   width: 216px;
   height: 400px;
   transition: 0.2s;
   position: relative;
+  -webkit-transform: skew(-10deg);
+  -ms-transform: skew(-10deg);
+  transform: skew(-10deg);
+  transform-origin: bottom left;
 
   a {
     width: 100%;
     height: 75%;
     overflow: hidden;
-    transition: 0.2s;
+    border: 7px solid #fff;
+    outline: 5px solid black;
+    outline-offset: -0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
 
     &:hover {
-      filter: grayscale(60%);
+      border-color: #1064c4;
     }
 
     img {
+      margin-left: 20px solid transparent;
       height: 100%;
       width: 100%;
       object-fit: cover;
-      border-radius: 16px;
+      transition: 0.3s;
+
+      &:hover {
+        height: 110%;
+        width: 110%;
+      }
     }
   }
 
@@ -96,24 +122,34 @@ export const HeroItem = styled.li`
     text-transform: uppercase;
     font-weight: bold;
     text-align: center;
-    font-size: 20px;
+    font-size: 24px;
     margin: 8px 0;
     width: 100%;
+    font-family: 'Anton', sans-serif;
+    font-style: italic;
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: #000;
   }
 `;
 
 export const Button = styled.button<ButtonProps>`
-  background: ${(props) => props.color ?? "#4272a6"};
+  background: ${(props) => props.color ?? '#4272a6'};
   text-transform: uppercase;
   font-weight: bold;
   height: 32px;
   color: #fff;
   width: 100%;
   margin-top: 4px;
-  border-radius: 12px;
   transition: 0.2s;
+  -webkit-transform: skew(-10deg);
+  -ms-transform: skew(-10deg);
+  transform: skew(-10deg);
+  border: 3px solid #000;
+  outline: 2px solid #fff;
+  outline-offset: -0.3rem;
+  transition: 0.3s;
 
   &:hover {
-    opacity: 0.7;
+    outline: 2px solid ${(props) => props.color ?? '#4272a6'};
   }
 `;
