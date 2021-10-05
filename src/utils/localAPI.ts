@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 
-export const baseURL = "http://localhost:4000";
+export const baseURL = 'http://localhost:4000';
 
-export const superHeroAPI = axios.create({
+export const localAPI = axios.create({
   baseURL,
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 });

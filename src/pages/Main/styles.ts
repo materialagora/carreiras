@@ -153,3 +153,25 @@ export const Button = styled.button<ButtonProps>`
     outline: 2px solid ${(props) => props.color ?? '#4272a6'};
   }
 `;
+
+export const AddToGroupContainer = styled.div`
+  padding: 16px;
+  min-height: 300px;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h3 {
+    margin: 8px 0;
+  }
+
+  & > div {
+    width: 100%;
+    margin-top: 16px;
+  }
+`;
+
+export const AddToGroupButtonsContainer = styled.div`
+  margin-top: auto !important;
+`;

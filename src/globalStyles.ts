@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components'
-import background from './assets/background.jpg'
+import { createGlobalStyle } from 'styled-components';
+import background from './assets/background.jpg';
 
 export const GlobalStyles = createGlobalStyle`
   * {
@@ -23,4 +23,8 @@ export const GlobalStyles = createGlobalStyle`
   button {
     cursor: pointer;
   }
-`
+
+  .ReactModal__Body--open {
+  overflow-y: hidden;
+}
+`;
