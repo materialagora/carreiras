@@ -22,10 +22,9 @@ export const Container = styled.div`
     color: #fff;
     text-align: left;
     font-size: 48px;
-    font-family: 'Anton', sans-serif;
     font-style: italic;
-    -webkit-text-stroke-width: 0.5px;
-    -webkit-text-stroke-color: #000;
+    text-shadow: #000 7px 7px;
+    font-style: italic;
   }
 `;
 

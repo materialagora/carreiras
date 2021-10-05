@@ -5,13 +5,13 @@ interface PowerBarProps {
 }
 
 export const Container = styled.div`
+  display: flex;
   color: #ffff;
   width: 80%;
   max-width: 1200px;
   margin: 0 auto;
   margin-top: 24px;
-  display: flex;
-  background: #004276;
+  background: #001526;
   -webkit-transform: skew(-10deg);
       -ms-transform: skew(-10deg);
       transform: skew(-10deg); 
@@ -21,13 +21,12 @@ export const Container = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-  background: #001834;
+  background: #000c16;
   border-right: 5px solid #000;
 
   img {
     width: 300px;
   }
-
 `;
 
 export const InfoContainer = styled.div`
@@ -37,33 +36,21 @@ export const InfoContainer = styled.div`
   h3 {
     font-size: 36px;
     margin: 10px 0;
-    -webkit-text-stroke-width: 1.5px;
-    -webkit-text-stroke-color: #000;
-    text-shadow: #000 5px 5px;
+    text-shadow: #000 7px 7px;
     font-style: italic;
-  }
-
-  h2 {
-    margin: 10px 0;
-    -webkit-text-stroke-width: 1.5px;
-    -webkit-text-stroke-color: #000;
-    font-style: italic;
-    
   }
 
   strong {
-    font-style: italic;
     text-shadow: #000 2px 2px;
+    color: #ffcc01;
+    font-weight: normal;
   }
 
   div {
     margin-top: 16px;
-    font-size: 24px;
+    font-size: 20px;
   }
-
-
 `;
-
 
 export const PowerBar = styled.div<PowerBarProps>`
   width: ${(props) => Number(props.size)}%;
@@ -78,7 +65,6 @@ export const PowerBar = styled.div<PowerBarProps>`
   outline: 2px solid #d7bb02;
   outline-offset: -0.3rem;
 
-
   &:hover {
     outline: 2px solid ${(props) => props.color ?? '#000'};
   }
@@ -90,5 +76,4 @@ export const PowerBar = styled.div<PowerBarProps>`
     font-weight: 700;
     color: #ffcc01;
   }
-
 `;

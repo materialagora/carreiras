@@ -20,11 +20,10 @@ export const Container = styled.div`
     max-width: 1200px;
     color: #fff;
     text-align: left;
-    font-size: 48px;
-    font-family: 'Anton', sans-serif;
+    font-size: 96px;
+    text-align: center;
     font-style: italic;
-    -webkit-text-stroke-width: 0.5px;
-    -webkit-text-stroke-color: #000;
+    text-shadow: #000 10px 10px;
   }
 `;
 
@@ -84,18 +83,11 @@ export const SearchContainer = styled.div`
     padding: 8px 24px;
     height: 100%;
     flex: 1;
-    color: #fff;
+    color: #ffcc01;
 
     &::placeholder {
-      color: #c2c2c2;
+      color: #ffcc01;
     }
-  }
-
-  button {
-    width: 72px;
-    height: 100%;
-    background: #fff;
-    color: #fff;
   }
 `;
 
@@ -158,15 +150,12 @@ export const HeroItem = styled.li`
 
   span {
     text-transform: uppercase;
-    font-weight: bold;
     text-align: center;
     font-size: 24px;
     margin: 8px 0;
     width: 100%;
-    font-family: 'Anton', sans-serif;
     font-style: italic;
-    -webkit-text-stroke-width: 0.5px;
-    -webkit-text-stroke-color: #000;
+    text-shadow: #000 8px 8px;
   }
 `;
 
@@ -177,6 +166,7 @@ export const AddToGroupContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 
   h3 {
     margin: 8px 0;

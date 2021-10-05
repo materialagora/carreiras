@@ -140,7 +140,7 @@ export const Main: React.FC = () => {
                 </Link>
                 <span>{hero.name}</span>
                 <Button onClick={() => handleShowHero(hero.id)}>Profile</Button>
-                <Button color="#449179" onClick={() => handleOpenModal(hero)}>
+                <Button color="#ffcc01" onClick={() => handleOpenModal(hero)}>
                   Add to a group
                 </Button>
               </HeroItem>
@@ -158,7 +158,7 @@ export const Main: React.FC = () => {
             onChange={handleSelectGroups}
           />
           <AddToGroupButtonsContainer>
-            <Button color="#449179" onClick={handleNewGroup}>
+            <Button color="#ffcc01" onClick={handleNewGroup}>
               Create new Group
             </Button>
             <Button onClick={() => handleSaveGroupSelection()}>Save</Button>

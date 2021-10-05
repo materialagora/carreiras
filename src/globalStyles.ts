@@ -15,7 +15,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    font-family: Roboto, sans-serif;
+    font-family: 'Anton', sans-serif;
     background: url(${background}) fixed;
     background-size: cover;
   }
