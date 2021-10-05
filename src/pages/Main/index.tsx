@@ -150,7 +150,7 @@ export const Main: React.FC = () => {
                 </Link>
                 <span>{hero.name}</span>
                 <Button onClick={() => handleShowHero(hero.id)}>Profile</Button>
-                <Button color="#ffcc01" onClick={() => handleOpenModal(hero)}>
+                <Button color="#4cb7a5" onClick={() => handleOpenModal(hero)}>
                   Add to a group
                 </Button>
               </HeroItem>

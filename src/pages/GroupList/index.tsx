@@ -61,17 +61,16 @@ export const GroupList: React.FC = () => {
     } catch {
       toast.error('Error while saving new group');
     }
-
-    toast.success('New group added!');
-
+    
     getGroups();
     setNewGroup('');
     handleCloseModal();
   }
-
+  
   async function handleDeleteGroup(id: string) {
     try {
       await localAPI.delete(`/groups/${id}`);
+      toast.success('New group added!');
     } catch {
       toast.error('Error while deleting group');
     }
