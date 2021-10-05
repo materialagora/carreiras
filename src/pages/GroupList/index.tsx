@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useHistory } from 'react-router-dom';
+import { FaTrash } from 'react-icons/fa';
 
 import { Modal } from '../../components/Modal';
 import { localAPI } from '../../utils/localAPI';
@@ -61,6 +62,15 @@ export const GroupList: React.FC = () => {
     handleCloseModal();
   }
 
+  async function handleDeleteGroup(id: string) {
+    await localAPI.delete(`/groups/${id}`);
+
+    const filteredGroups = groups.filter(
+      (group) => Number(group.id) !== Number(id)
+    );
+    setGroups(filteredGroups);
+  }
+
   return (
     <Container>
       <HeaderButtonsContainer>
@@ -73,6 +83,9 @@ export const GroupList: React.FC = () => {
           {groups.map((group) => (
             <li key={group.id}>
               <Link to={`/groups/${group.id}`}>{group.name}</Link>
+              <button onClick={() => handleDeleteGroup(group.id)}>
+                <FaTrash color="#8f0000" size={20} />
+              </button>
             </li>
           ))}
         </ul>
@@ -84,9 +97,8 @@ export const GroupList: React.FC = () => {
             value={newGroup}
             placeholder="Insert the name...."
             onChange={(e) => setNewGroup(e.target.value)}
-            name="group-name"
           />
-          <Button onClick={handleSaveGroup}>Save</Button>
+          <Button onClick={() => handleSaveGroup()}>Save</Button>
         </CreateGroupFormContainer>
       </Modal>
     </Container>
