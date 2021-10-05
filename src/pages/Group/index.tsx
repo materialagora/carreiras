@@ -39,7 +39,7 @@ const Group: React.FC = () => {
       (hero) => String(hero.id) === String(id)
     );
 
-    const membersCopy = group.members;
+    const membersCopy = group.members.slice();
     membersCopy.splice(heroIndex);
 
     const updatedGroup = { ...group, membersCopy };

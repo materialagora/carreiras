@@ -83,6 +83,7 @@ export const GroupsContainer = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
 
       a {
         background-color: rgba(0, 0, 0, 0.7);
@@ -115,11 +116,24 @@ export const GroupsContainer = styled.div`
           height: 110px;
         }
       }
+
+      button {
+        position: absolute;
+        top: -10px;
+        right: -30px;
+        background: rgba(0, 0, 0, 0.9);
+        border-radius: 50%;
+        height: 34px;
+        width: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
   }
 `;
 
-export const CreateGroupFormContainer = styled.form`
+export const CreateGroupFormContainer = styled.div`
   input {
     height: 64px;
     width: 100%;
