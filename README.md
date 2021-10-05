@@ -2,7 +2,7 @@
 
 To run this project locally, you must follow this steps:
 
-### 0: `Install the CORS Unblock extention`
+### 0: `Install the CORS Unblock extension`
 
 This is required due to how browsers deal with different domains requests.\
 Without this, the connection with the Super Hero API won't be possible.\
