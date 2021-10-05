@@ -11,6 +11,7 @@ import {
   HeroesListContainer,
   HeroItem,
 } from './styles';
+import { toast } from 'react-toastify';
 
 interface GroupRouteParams {
   id: string;
@@ -28,24 +29,29 @@ const Group: React.FC = () => {
         const { data } = await localAPI.get<IGroup>(`/groups/${id}`);
         setGroup(data);
       } catch {
-        console.log('Error on request');
+        toast.error('Error while getting groups data!');
       }
     };
     getGroup();
   }, [id, setGroup]);
 
   const handleRemoveFromGroup = async (id: string) => {
-    const heroIndex = group.members?.findIndex(
-      (hero) => String(hero.id) === String(id)
+    const members = group.members.filter(
+      (hero) => String(hero.id) !== String(id)
     );
 
-    const membersCopy = group.members.slice();
-    membersCopy.splice(heroIndex);
+    const updatedGroup = { ...group, members };
 
-    const updatedGroup = { ...group, membersCopy };
-    setGroup(updatedGroup);
-
-    await localAPI.put<IGroup>(`/groups/${group.id}`, updatedGroup);
+    try {
+      const { data } = await localAPI.put<IGroup>(
+        `/groups/${group.id}`,
+        updatedGroup
+      );
+      setGroup(data);
+      toast.success('Character removed!');
+    } catch {
+      toast.error('Error while updating group data!');
+    }
   };
 
   return (

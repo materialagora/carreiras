@@ -13,6 +13,7 @@ import {
   GroupsContainer,
   CreateGroupFormContainer,
 } from './styles';
+import { toast } from 'react-toastify';
 
 interface LocationStateProps {
   creationReady?: boolean;
@@ -30,10 +31,10 @@ export const GroupList: React.FC = () => {
 
   const getGroups = async () => {
     try {
-      const { data } = await localAPI.get<Group[]>(`/groups`);
+      const { data } = await localAPI.get<Group[]>('/groups');
       setGroups(data);
     } catch {
-      console.log('Error on request');
+      toast.error('Error loading groups data');
     }
   };
 
@@ -52,10 +53,16 @@ export const GroupList: React.FC = () => {
   async function handleSaveGroup() {
     if (!newGroup) return;
 
-    await localAPI.post('/groups', {
-      name: newGroup.trim(),
-      members: [],
-    });
+    try {
+      await localAPI.post('/groups', {
+        name: newGroup.trim(),
+        members: [],
+      });
+    } catch {
+      toast.error('Error while saving new group');
+    }
+
+    toast.success('New group added!');
 
     getGroups();
     setNewGroup('');
@@ -63,8 +70,13 @@ export const GroupList: React.FC = () => {
   }
 
   async function handleDeleteGroup(id: string) {
-    await localAPI.delete(`/groups/${id}`);
+    try {
+      await localAPI.delete(`/groups/${id}`);
+    } catch {
+      toast.error('Error while deleting group');
+    }
 
+    toast.success('Group deleted!');
     const filteredGroups = groups.filter(
       (group) => Number(group.id) !== Number(id)
     );

@@ -23,6 +23,7 @@ import {
   HeaderButtonsContainer,
 } from './styles';
 import { FaSearch } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 interface HeroSearchRequest {
   results: Hero[];
@@ -63,7 +64,7 @@ export const Main: React.FC = () => {
       setHeroes(data.results);
       setLoading(false);
     } catch {
-      console.log('Error on request');
+      toast.error('Error while searching for characters!');
     }
   }, [setLoading, searchValue, setHeroes]);
 
@@ -87,7 +88,7 @@ export const Main: React.FC = () => {
   );
 
   const handleNewGroup = useCallback(
-    () => history.push(`/group-list`, { creationReady: true }),
+    () => history.push('/group-list', { creationReady: true }),
     [history]
   );
 
@@ -100,20 +101,19 @@ export const Main: React.FC = () => {
   );
 
   const handleSaveGroupSelection = useCallback(async () => {
-    await addHeroToGroup({ hero: selectedHero, groups: selectedGroups });
+    try {
+      await addHeroToGroup({ hero: selectedHero, groups: selectedGroups });
+      handleCloseModal();
 
-    setSearchValue('');
-    handleCloseModal();
+      const { data } = await localAPI.get<Group[]>(`/groups`);
+      setGroups(data);
 
-    const { data } = await localAPI.get<Group[]>(`/groups`);
-    setGroups(data);
-  }, [
-    selectedHero,
-    selectedGroups,
-    setGroups,
-    setSearchValue,
-    handleCloseModal,
-  ]);
+      toast.success(`Character addded to group!`);
+      setSelectedGroups([]);
+    } catch {
+      toast.error('Error while adding character to group!');
+    }
+  }, [selectedHero, selectedGroups, setGroups, handleCloseModal]);
 
   const options = useMemo(() => {
     const groupOptions = groups.map((group) => ({

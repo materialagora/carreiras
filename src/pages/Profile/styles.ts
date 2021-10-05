@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface PowerBarProps {
   size: string;
@@ -13,11 +13,26 @@ export const Container = styled.div`
   margin-top: 24px;
   background: #001526;
   -webkit-transform: skew(-10deg);
-      -ms-transform: skew(-10deg);
-      transform: skew(-10deg); 
+  -ms-transform: skew(-10deg);
+  transform: skew(-10deg);
   border: 5px solid #000;
   outline: 3px solid #fff;
-  
+  position: relative;
+`;
+
+export const HeaderButtonsContainer = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  button {
+    width: 200px;
+    height: 40px;
+
+    & + button {
+      margin-left: 16px;
+    }
+  }
 `;
 
 export const ImageContainer = styled.div`
@@ -59,8 +74,8 @@ export const PowerBar = styled.div<PowerBarProps>`
   display: flex;
   align-items: center;
   -webkit-transform: skew(-10deg);
-      -ms-transform: skew(-10deg);
-      transform: skew(-10deg); 
+  -ms-transform: skew(-10deg);
+  transform: skew(-10deg);
   border: 3px solid #000;
   outline: 2px solid #d7bb02;
   outline-offset: -0.3rem;

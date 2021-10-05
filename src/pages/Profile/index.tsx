@@ -1,32 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { Tab, TabList, Tabs, TabPanel } from 'react-tabs';
 import '../../tabStyle.css';
+
+import { Button } from '../../components/Button';
 
 import { superHeroAPI } from '../../utils/superHeroAPI';
 import Hero from '../../types/hero';
 
-import { Container, ImageContainer, InfoContainer, PowerBar } from './styles';
-
-interface Group {
-  id: number;
-  name: string;
-  members: Hero[];
-}
+import {
+  Container,
+  HeaderButtonsContainer,
+  ImageContainer,
+  InfoContainer,
+  PowerBar,
+} from './styles';
+import { toast } from 'react-toastify';
 
 interface RouteParams {
   id: string;
 }
 
 export const Profile: React.FC = () => {
+  const history = useHistory();
   const [hero, setHero] = useState<Hero | null>(null);
 
   const { id } = useParams<RouteParams>();
 
   useEffect(() => {
     const getHero = async () => {
-      const { data } = await superHeroAPI.get(`/${id}`);
-      setHero(data);
+      try {
+        const { data } = await superHeroAPI.get(`/${id}`);
+        setHero(data);
+      } catch {
+        toast.error('Error while loading character profile!');
+      }
     };
 
     getHero();
@@ -34,6 +42,9 @@ export const Profile: React.FC = () => {
 
   return (
     <Container>
+      <HeaderButtonsContainer>
+        <Button onClick={() => history.push('/')}>Home</Button>
+      </HeaderButtonsContainer>
       {hero && (
         <>
           <ImageContainer>
