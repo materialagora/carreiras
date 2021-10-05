@@ -1,0 +1,19 @@
+{
+  "groups": [
+    {
+      "id": 1,
+      "name": "Justice League",
+      "members": []
+    },
+    {
+      "id": 2,
+      "name": "Avengers",
+      "members": []
+    },
+    {
+      "id": 3,
+      "name": "X-Men",
+      "members": []
+    }
+  ]
+}
