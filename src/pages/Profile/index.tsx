@@ -39,10 +39,13 @@ export const Profile: React.FC = () => {
       {hero && (
         <>
           <ImageContainer>
-            <h3>{hero.name} </h3> <img src={hero.image?.url} alt={hero.name} />
+            <img src={hero.image?.url} alt={hero.name} />
           </ImageContainer>
 
           <InfoContainer>
+
+          <h3>{hero.name} </h3> 
+
             <Tabs>
               <TabList>
                 <Tab>Power Stats</Tab>
@@ -53,7 +56,6 @@ export const Profile: React.FC = () => {
               </TabList>
 
               <TabPanel>
-                <h2>Power Stats</h2>
                 <div>
                   <strong>Intelligence</strong>
                   <PowerBar size={hero.powerstats.intelligence}>
@@ -93,7 +95,6 @@ export const Profile: React.FC = () => {
               </TabPanel>
 
               <TabPanel>
-                <h2>Biography</h2>
                 <div>
                   <strong>Full Name: </strong>
                   <span>{hero.biography['full-name']}</span>
@@ -128,7 +129,6 @@ export const Profile: React.FC = () => {
               </TabPanel>
 
               <TabPanel>
-                <h2>Appearance</h2>
                 <div>
                   <strong>Gender: </strong>
                   <span>{hero.appearance.gender}</span>
@@ -156,7 +156,6 @@ export const Profile: React.FC = () => {
               </TabPanel>
 
               <TabPanel>
-                <h2>Work</h2>
                 <div>
                   <strong> Occupation: </strong>
                   <span>{hero.work.occupation}</span>
@@ -168,7 +167,6 @@ export const Profile: React.FC = () => {
               </TabPanel>
 
               <TabPanel>
-                <h2>Connections</h2>
                 <div>
                   <strong>Group Affiliation: </strong>
                   <span>{hero.connections['group-affiliation']}</span>
