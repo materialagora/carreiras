@@ -1,8 +1,5 @@
 import styled from 'styled-components';
 
-interface ButtonProps {
-  color?: string;
-}
 
 export const Container = styled.div`
   position: relative;
@@ -42,28 +39,6 @@ export const HeaderButtonsContainer = styled.div`
   }
 `;
 
-export const Button = styled.button<ButtonProps>`
-  background: ${(props) => props.color ?? '#4272a6'};
-  text-transform: uppercase;
-  font-weight: bold;
-  height: 32px;
-  color: #fff;
-  width: 100%;
-  margin-top: 4px;
-  transition: 0.2s;
-  -webkit-transform: skew(-10deg);
-  -ms-transform: skew(-10deg);
-  transform: skew(-10deg);
-  border: 3px solid #000;
-  outline: 2px solid #fff;
-  outline-offset: -0.3rem;
-  transition: 0.3s;
-
-  &:hover {
-    outline: 2px solid ${(props) => props.color ?? '#4272a6'};
-  }
-`;
-
 export const SearchContainer = styled.div`
   height: 64px;
   width: 100%;
@@ -87,6 +62,17 @@ export const SearchContainer = styled.div`
 
     &::placeholder {
       color: #ffcc01;
+    }
+  }
+
+  button {
+    background: #ffcc01;
+    height: 100%;
+    width: 80px;
+    transition: 0.2s;
+
+    &:hover {
+      background: #a38200;
     }
   }
 `;
@@ -166,7 +152,6 @@ export const AddToGroupContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  
 
   h3 {
     margin: 8px 0;

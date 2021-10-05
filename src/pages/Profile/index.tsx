@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { Tab, TabList, Tabs, TabPanel } from 'react-tabs';
 import '../../tabStyle.css';
 
-
 import { superHeroAPI } from '../../utils/superHeroAPI';
 import Hero from '../../types/hero';
 
@@ -21,7 +20,6 @@ interface RouteParams {
 
 export const Profile: React.FC = () => {
   const [hero, setHero] = useState<Hero | null>(null);
-  const [groups, setGroups] = useState<Group[]>([]);
 
   const { id } = useParams<RouteParams>();
 
@@ -43,8 +41,7 @@ export const Profile: React.FC = () => {
           </ImageContainer>
 
           <InfoContainer>
-
-          <h3>{hero.name} </h3> 
+            <h3>{hero.name} </h3>
 
             <Tabs>
               <TabList>

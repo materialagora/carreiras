@@ -5,6 +5,7 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
 import { Modal } from '../../components/Modal';
+import { Button } from '../../components/Button';
 import { superHeroAPI } from '../../utils/superHeroAPI';
 import { localAPI } from '../../utils/localAPI';
 import { addHeroToGroup } from '../../utils/addHeroToGroup';
@@ -17,11 +18,11 @@ import {
   SearchContainer,
   HeroesListContainer,
   HeroItem,
-  Button,
   AddToGroupContainer,
   AddToGroupButtonsContainer,
   HeaderButtonsContainer,
 } from './styles';
+import { FaSearch } from 'react-icons/fa';
 
 interface HeroSearchRequest {
   results: Hero[];
@@ -36,43 +37,49 @@ export const Main: React.FC = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [groups, setGroups] = useState<Group[]>([]);
   const [selectedGroups, setSelectedGroups] = useState<Group[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const history = useHistory();
 
-  function handleOpenModal(hero: Hero) {
-    setSelectedHero(hero);
-    setModalIsOpen(true);
-  }
+  const handleOpenModal = useCallback(
+    (hero: Hero) => {
+      setSelectedHero(hero);
+      setModalIsOpen(true);
+    },
+    [setSelectedHero, setModalIsOpen]
+  );
 
-  function handleCloseModal() {
+  const handleCloseModal = useCallback(() => {
     setSelectedHero({} as Hero);
     setModalIsOpen(false);
-  }
+  }, [setSelectedHero, setModalIsOpen]);
+
+  const handleGetHeroes = useCallback(async () => {
+    try {
+      setLoading(true);
+      const { data } = await superHeroAPI.get<HeroSearchRequest>(
+        `/search/${searchValue}`
+      );
+      setHeroes(data.results);
+      setLoading(false);
+    } catch {
+      console.log('Error on request');
+    }
+  }, [setLoading, searchValue, setHeroes]);
+
+  const handleGetGroups = useCallback(async () => {
+    try {
+      const { data } = await localAPI.get<Group[]>(`/groups`);
+      setGroups(data);
+    } catch {
+      console.log('Error on request');
+    }
+  }, [setGroups]);
 
   useEffect(() => {
-    const getHeroes = async () => {
-      try {
-        const { data } = await superHeroAPI.get<HeroSearchRequest>(
-          `/search/${searchValue}`
-        );
-        setHeroes(data.results);
-      } catch {
-        console.log('Error on request');
-      }
-    };
-
-    const getGroups = async () => {
-      try {
-        const { data } = await localAPI.get<Group[]>(`/groups`);
-        setGroups(data);
-      } catch {
-        console.log('Error on request');
-      }
-    };
-
-    getHeroes();
-    getGroups();
-  }, [searchValue, setHeroes, setGroups]);
+    handleGetHeroes();
+    handleGetGroups();
+  }, [handleGetHeroes, handleGetGroups]);
 
   const handleShowHero = useCallback(
     (id: string) => history.push(`/profile/${id}`),
@@ -129,6 +136,9 @@ export const Main: React.FC = () => {
           onChange={(e) => setSearchValue(e.target.value)}
           placeholder="Search for a character name..."
         />
+        <button onClick={() => handleGetHeroes()}>
+          <FaSearch size={24} />
+        </button>
       </SearchContainer>
       <HeroesListContainer>
         <ul>

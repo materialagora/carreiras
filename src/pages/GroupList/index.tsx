@@ -3,6 +3,7 @@ import { Link, useLocation, useHistory } from 'react-router-dom';
 import { FaTrash } from 'react-icons/fa';
 
 import { Modal } from '../../components/Modal';
+import { Button } from '../../components/Button';
 import { localAPI } from '../../utils/localAPI';
 import Group from '../../types/group';
 
@@ -11,7 +12,6 @@ import {
   HeaderButtonsContainer,
   GroupsContainer,
   CreateGroupFormContainer,
-  Button,
 } from './styles';
 
 interface LocationStateProps {

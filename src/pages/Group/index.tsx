@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory, Link } from 'react-router-dom';
 
+import { Button } from '../../components/Button';
 import { localAPI } from '../../utils/localAPI';
 import IGroup from '../../types/group';
 
 import {
   Container,
   HeaderButtonsContainer,
-  Button,
   HeroesListContainer,
   HeroItem,
 } from './styles';
