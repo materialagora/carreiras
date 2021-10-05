@@ -14,6 +14,7 @@ export const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 64px;
+  position: relative;
 
   h1 {
     width: 100%;
@@ -62,40 +63,6 @@ export const Button = styled.button<ButtonProps>`
 
   &:hover {
     outline: 2px solid ${(props) => props.color ?? '#4272a6'};
-  }
-`;
-
-export const SearchContainer = styled.div`
-  height: 64px;
-  width: 100%;
-  background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 16px;
-  overflow: hidden;
-  -webkit-transform: skew(-10deg);
-  -ms-transform: skew(-10deg);
-  transform: skew(-10deg);
-
-  input {
-    font-size: 20px;
-    background: transparent;
-    padding: 8px 24px;
-    height: 100%;
-    flex: 1;
-    color: #fff;
-
-    &::placeholder {
-      color: #c2c2c2;
-    }
-  }
-
-  button {
-    width: 72px;
-    height: 100%;
-    background: #fff;
-    color: #fff;
   }
 `;
 
@@ -168,26 +135,4 @@ export const HeroItem = styled.li`
     -webkit-text-stroke-width: 0.5px;
     -webkit-text-stroke-color: #000;
   }
-`;
-
-export const AddToGroupContainer = styled.div`
-  padding: 16px;
-  min-height: 300px;
-  min-width: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  h3 {
-    margin: 8px 0;
-  }
-
-  & > div {
-    width: 100%;
-    margin-top: 16px;
-  }
-`;
-
-export const AddToGroupButtonsContainer = styled.div`
-  margin-top: auto !important;
 `;
