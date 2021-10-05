@@ -1,72 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Tab, TabList, Tabs, TabPanel } from "react-tabs";
-import "react-tabs/style/react-tabs.css";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Tab, TabList, Tabs, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
-import { api } from "../../utils/api";
+import { superHeroAPI } from '../../utils/superHeroAPI';
+import Hero from '../../types/hero';
 
-import { Container, ImageContainer, InfoContainer, PowerBar } from "./styles";
+import { Container, ImageContainer, InfoContainer, PowerBar } from './styles';
 
-type Hero = {
-  id: string;
+interface Group {
+  id: number;
   name: string;
-  powerstats: {
-    intelligence: string;
-    strength: string;
-    speed: string;
-    durability: string;
-    power: string;
-    combat: string;
-  };
-  biography: {
-    "full-name": string;
-    "alter-egos": string;
-    aliases: string[];
-    "place-of-birth": string;
-    "first-appearance": string;
-    publisher: string;
-    alignment: string;
-  };
-  appearance: {
-    gender: string;
-    race: string;
-    height: string[];
-    weight: string[];
-    "eye-color": string;
-    "hair-color": string;
-  };
-  work: {
-    occupation: string;
-    base: string;
-  };
-  connections: {
-    "group-affiliation": string;
-    relatives: string;
-  };
-  image: {
-    url: string;
-  };
-};
+  members: Hero[];
+}
 
 interface RouteParams {
   id: string;
 }
 
-export const Hero: React.FC = () => {
+export const Profile: React.FC = () => {
   const [hero, setHero] = useState<Hero | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [groups, setGroups] = useState<Group[]>([]);
 
   const { id } = useParams<RouteParams>();
 
   useEffect(() => {
     const getHero = async () => {
-      const { data } = await api.get(`/${id}`);
+      const { data } = await superHeroAPI.get(`/${id}`);
       setHero(data);
-      setLoading(false);
     };
 
     getHero();
-  }, [id, setHero, setLoading]);
+  }, [id, setHero]);
 
   return (
     <Container>
@@ -130,11 +95,11 @@ export const Hero: React.FC = () => {
                 <h2>Biography</h2>
                 <div>
                   <strong>Full Name: </strong>
-                  <span>{hero.biography["full-name"]}</span>
+                  <span>{hero.biography['full-name']}</span>
                 </div>
                 <div>
                   <strong>Alter egos: </strong>
-                  <span>{hero.biography["alter-egos"]}</span>
+                  <span>{hero.biography['alter-egos']}</span>
                 </div>
                 <div>
                   <strong>Alias: </strong>
@@ -145,11 +110,11 @@ export const Hero: React.FC = () => {
                 </div>
                 <div>
                   <strong>Place of Birth: </strong>
-                  <span> {hero.biography["place-of-birth"]}</span>
+                  <span> {hero.biography['place-of-birth']}</span>
                 </div>
                 <div>
                   <strong>First Appearance: </strong>
-                  <span> {hero.biography["first-appearance"]}</span>
+                  <span> {hero.biography['first-appearance']}</span>
                 </div>
                 <div>
                   <strong>Publisher: </strong>
@@ -181,11 +146,11 @@ export const Hero: React.FC = () => {
                 </div>
                 <div>
                   <strong>Eye Color: </strong>
-                  <span>{hero.appearance["eye-color"]}</span>
+                  <span>{hero.appearance['eye-color']}</span>
                 </div>
                 <div>
                   <strong>Hair Color: </strong>
-                  <span>{hero.appearance["hair-color"]}</span>
+                  <span>{hero.appearance['hair-color']}</span>
                 </div>
               </TabPanel>
 
@@ -205,7 +170,7 @@ export const Hero: React.FC = () => {
                 <h2>Connections</h2>
                 <div>
                   <strong>Group Affiliation: </strong>
-                  <span>{hero.connections["group-affiliation"]}</span>
+                  <span>{hero.connections['group-affiliation']}</span>
                 </div>
                 <div>
                   <strong>Relatives </strong>
