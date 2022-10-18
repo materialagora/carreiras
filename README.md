@@ -18,7 +18,7 @@ Nossa equipe de engenharia é 100% remoto e usamos as seguintes tecnologias:
 
 # Desafio
 ## Desenvolvedor Frontend
-Para o desafio você precisa criar um app basico inspirado em super heróis e vilões **utilizando** a SuperHeroAPI (https://superheroapi.com/) como fonte de dados. A app deverá conter um CRUD básico dos heróis e o gerenciamento de listas, como descrito abaixo nos requisitos.
+Para o desafio você precisa criar um app basico inspirado em super heróis e vilões **utilizando** a [SuperHeroAPI](https://www.superheroapi.com/) como fonte de dados. A app deverá conter um CRUD básico dos heróis e o gerenciamento de listas, como descrito abaixo nos requisitos.
 
 ## Requisitos
 
@@ -27,7 +27,7 @@ A app deve ser escrita usando o framework **React**, atendendo aos requisitos ab
 ### Requisitos
 
 O app deve:
-- Consumir os dados dos heróis diretamente da https://superheroapi.com ;
+- Consumir os dados dos heróis diretamente da [https://superheroapi.com](https://www.superheroapi.com/);
 - Ser possível visualizar todos os heróis disponíveis;
 - Ser possível pesquisar um herói/vilao pelo nome;
 - Ser possível visualizar cada herói individualmente e suas respectivas características;
