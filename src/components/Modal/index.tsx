@@ -95,24 +95,26 @@ const HeroModal: React.FC<Imodal> = ({
                 {formatType(type)}
               </Typography>
             </Box>
-            <Typography>
-              👊 Combate - <strong>{powerStatus.combat}</strong>
-            </Typography>
-            <Typography>
-              😡 Poder - <strong>{powerStatus.power}</strong>
-            </Typography>
-            <Typography>
-              🤓 Inteligencia - <strong>{powerStatus.intelligence}</strong>
-            </Typography>
-            <Typography>
-              🥶 Durabilidade - <strong>{powerStatus.durability}</strong>
-            </Typography>
-            <Typography>
-              🐇Velocidade - <strong>{powerStatus.speed}</strong>
-            </Typography>
-            <Typography>
-              🔥Força - <strong>{powerStatus.strength}</strong>
-            </Typography>
+            <Box>
+              <Typography>
+                👊 Combate - <strong>{powerStatus.combat}</strong>
+              </Typography>
+              <Typography>
+                😡 Poder - <strong>{powerStatus.power}</strong>
+              </Typography>
+              <Typography>
+                🤓 Inteligencia - <strong>{powerStatus.intelligence}</strong>
+              </Typography>
+              <Typography>
+                🥶 Durabilidade - <strong>{powerStatus.durability}</strong>
+              </Typography>
+              <Typography>
+                🐇Velocidade - <strong>{powerStatus.speed}</strong>
+              </Typography>
+              <Typography>
+                🔥Força - <strong>{powerStatus.strength}</strong>
+              </Typography>
+            </Box>
           </Box>
         </Box>
       </Modal>
