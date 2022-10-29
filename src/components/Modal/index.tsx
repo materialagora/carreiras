@@ -4,6 +4,7 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
 import { formatType, typePerson } from '../Card'
+import { borderRadius } from '@mui/system'
 
 interface Imodal {
   open: boolean
@@ -95,24 +96,80 @@ const HeroModal: React.FC<Imodal> = ({
                 {formatType(type)}
               </Typography>
             </Box>
-            <Box>
-              <Typography>
-                👊 Combate - <strong>{powerStatus.combat}</strong>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                mt: 1,
+                justifyContent: 'center',
+                gap: 0.6
+              }}
+            >
+              <Typography
+                sx={{
+                  display: 'flex',
+                  p: 0.5,
+                  justifyContent: 'center',
+                  backgroundColor: '#c9c8c8',
+                  borderRadius: 8
+                }}
+              >
+                👊 Combate: <strong> {powerStatus.combat}</strong>
               </Typography>
-              <Typography>
-                😡 Poder - <strong>{powerStatus.power}</strong>
+              <Typography
+                sx={{
+                  display: 'flex',
+                  p: 0.5,
+                  justifyContent: 'center',
+                  backgroundColor: '#c9c8c8',
+                  borderRadius: 8
+                }}
+              >
+                😡 Poder: <strong>{powerStatus.power}</strong>
               </Typography>
-              <Typography>
-                🤓 Inteligencia - <strong>{powerStatus.intelligence}</strong>
+              <Typography
+                sx={{
+                  display: 'flex',
+                  p: 0.5,
+                  justifyContent: 'center',
+                  backgroundColor: '#c9c8c8',
+                  borderRadius: 8
+                }}
+              >
+                🤓 Inteligencia: <strong>{powerStatus.intelligence}</strong>
               </Typography>
-              <Typography>
-                🥶 Durabilidade - <strong>{powerStatus.durability}</strong>
+              <Typography
+                sx={{
+                  display: 'flex',
+                  p: 0.5,
+                  justifyContent: 'center',
+                  backgroundColor: '#c9c8c8',
+                  borderRadius: 8
+                }}
+              >
+                🥶 Durabilidade:<strong>{powerStatus.durability}</strong>
               </Typography>
-              <Typography>
-                🐇Velocidade - <strong>{powerStatus.speed}</strong>
+              <Typography
+                sx={{
+                  display: 'flex',
+                  p: 0.5,
+                  justifyContent: 'center',
+                  backgroundColor: '#c9c8c8',
+                  borderRadius: 8
+                }}
+              >
+                🐇 Velocidade: <strong>{powerStatus.speed}</strong>
               </Typography>
-              <Typography>
-                🔥Força - <strong>{powerStatus.strength}</strong>
+              <Typography
+                sx={{
+                  display: 'flex',
+                  p: 0.5,
+                  justifyContent: 'center',
+                  backgroundColor: '#c9c8c8',
+                  borderRadius: 8
+                }}
+              >
+                🔥 Força: <strong>{powerStatus.strength}</strong>
               </Typography>
             </Box>
           </Box>
