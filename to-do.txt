@@ -1,0 +1,7 @@
+[ ]  guardar grupos no local storage
+[ ]  RESOLVER PESQUISA SOZINHA( quebrando herois)
+[ ]  alinhar info dos cards modal
+[ ] botar para adicionar horoi no grupo com botao direito (ContextMenu)
+[ ] editar nome do grupo 
+[ ] remover herois do grupo
+[ ] ver testes
