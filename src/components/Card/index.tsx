@@ -69,8 +69,9 @@ const Card: React.FC<Iprops> = ({ image, name, type, powerStatus }) => {
           }}
           src={image}
         />
-
-        <Typography>{name}</Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Typography>{name}</Typography>
+        </Box>
         <Box
           sx={{
             backgroundColor: typePerson(type),
