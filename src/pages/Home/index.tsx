@@ -12,8 +12,9 @@ import {
 } from '@mui/material'
 import { api, getAllHeroesFromApi } from '../../services/api'
 import Card from '../../components/Card'
-import CategoriesModal from './CategoriesModal'
+import CategoriesModal from './GroupModal'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import GroupModal from './GroupModal'
 
 export interface Iheroes {
   config: {}
@@ -136,11 +137,7 @@ const Home: React.FC = () => {
         <Button onClick={() => getSearchHero()} variant="contained">
           Pesquisar
         </Button>
-        <CategoriesModal
-          open={open}
-          handleClose={handleClose}
-          addGroup={addGroup}
-        />
+        <GroupModal open={open} handleClose={handleClose} addGroup={addGroup} />
         <Button onClick={() => handleOpen()} variant="contained">
           Criar Categoria
         </Button>
