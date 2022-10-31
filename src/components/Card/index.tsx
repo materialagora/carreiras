@@ -1,7 +1,6 @@
 import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import React from 'react'
-import { Iheroes, oneHeroe } from '../../pages/Home'
+import React, { MouseEvent } from 'react'
 import HeroModal from '../Modal'
 
 interface Iprops {
@@ -16,6 +15,8 @@ interface Iprops {
     power: string
     combat: string
   }
+  handleContextMenu: (e: MouseEvent<any>, id: string) => void
+  id: string
 }
 
 export const typePerson = (a: string) => {
@@ -34,7 +35,14 @@ export const formatType = (a: string) => {
   }
 }
 
-const Card: React.FC<Iprops> = ({ image, name, type, powerStatus }) => {
+const Card: React.FC<Iprops> = ({
+  image,
+  name,
+  type,
+  powerStatus,
+  handleContextMenu,
+  id
+}) => {
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
@@ -51,10 +59,11 @@ const Card: React.FC<Iprops> = ({ image, name, type, powerStatus }) => {
       />
 
       <Box
+        onContextMenu={e => handleContextMenu(e, id)}
         onClick={() => handleOpen()}
         sx={{
           p: 1,
-          backgroundColor: '#9c9c9c88',
+          backgroundColor: '#d0d0d087',
           borderRadius: 5,
           '&:hover': {
             backgroundColor: 'grey'
