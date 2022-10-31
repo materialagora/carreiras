@@ -1,6 +1,7 @@
 import React from 'react'
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
-import Caifora from '../pages/Caifora'
+import Aboutme from '../pages/Aboutme'
+import Caifora from '../pages/Aboutme'
 import Home from '../pages/Home'
 
 const MyRoutes = () => {
@@ -12,7 +13,7 @@ const MyRoutes = () => {
         {isLogged ? (
           <Route path="/" element={<Home />} />
         ) : (
-          <Route path="/" element={<Caifora />} />
+          <Route path="/" element={<Aboutme />} />
         )}
       </Routes>
     </BrowserRouter>
