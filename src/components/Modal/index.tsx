@@ -1,10 +1,8 @@
 import * as React from 'react'
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
 import { formatType, typePerson } from '../Card'
-import { borderRadius } from '@mui/system'
 
 interface Imodal {
   open: boolean
