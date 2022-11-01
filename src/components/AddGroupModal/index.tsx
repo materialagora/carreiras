@@ -3,8 +3,9 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
+import { generateId } from '../../pages/Home'
 
-interface IGroups {
+interface IProps {
   open: boolean
   handleClose: () => void
   addGroup: Function
@@ -23,7 +24,7 @@ const style = {
   p: 4
 }
 
-const AddGroupModal: React.FC<IGroups> = ({ open, handleClose, addGroup }) => {
+const AddGroupModal: React.FC<IProps> = ({ open, handleClose, addGroup }) => {
   const getInput = React.useRef<HTMLInputElement>(null)
 
   return (
@@ -47,7 +48,10 @@ const AddGroupModal: React.FC<IGroups> = ({ open, handleClose, addGroup }) => {
             variant="contained"
             color="success"
             onClick={() => {
-              addGroup({ name: getInput.current?.value, list: [] })
+              addGroup({
+                name: getInput.current?.value,
+                list: []
+              })
               handleClose()
             }}
           >
