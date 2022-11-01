@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton'
 interface GroupCardProps {
   id: string
   removeFromGroup: any
-  groupName: string
+  groupId: string
 }
 
 interface Hero {
@@ -19,7 +19,7 @@ interface Hero {
 const GroupCard: React.FC<GroupCardProps> = ({
   id,
   removeFromGroup,
-  groupName
+  groupId: groupId
 }) => {
   const [hero, setHero] = useState<Hero | null>(null)
 
@@ -44,7 +44,8 @@ const GroupCard: React.FC<GroupCardProps> = ({
               justifyContent: 'space-between',
               p: 2,
               borderRadius: 5,
-              background: '#F3F3F3'
+              background: '#F3F3F3',
+              mt: 1
             }}
           >
             <Typography sx={{ display: 'flex', alignItems: 'center' }}>
@@ -52,7 +53,7 @@ const GroupCard: React.FC<GroupCardProps> = ({
             </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'center', gap: 5 }}>
               <IconButton
-                onClick={() => removeFromGroup(groupName, id)}
+                onClick={() => removeFromGroup(groupId, id)}
                 aria-label="delete"
                 size={'small'}
               >
