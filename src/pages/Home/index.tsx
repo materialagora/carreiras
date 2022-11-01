@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, {
+  MouseEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState
+} from 'react'
 import {
   Accordion,
   AccordionDetails,
@@ -7,14 +13,20 @@ import {
   Button,
   Grid,
   ListItem,
-  TextField,
   Typography
 } from '@mui/material'
 import { api, getAllHeroesFromApi } from '../../services/api'
 import Card from '../../components/Card'
-import CategoriesModal from './GroupModal'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import GroupModal from './GroupModal'
+import GroupCard from '../../components/GroupCard'
+import ContextMenu from '../../components/ContextMenu'
+import { useMenuState } from '@szhsin/react-menu'
+import AddGroupModal from '../../components/AddGroupModal'
+import RenameGroupM from '../../components/RenameGroupModal'
+import IconButton from '@mui/material/IconButton'
+import DeleteIcon from '@mui/icons-material/Delete'
+import EventRepeatIcon from '@mui/icons-material/EventRepeat'
+import { group } from 'console'
 
 export interface Iheroes {
   config: {}
@@ -85,26 +97,109 @@ export interface oneHeroe {
   }
 }
 
+export interface Igroup {
+  name: string
+  list: string[]
+  id: string
+}
+
+export interface IanchorProps {
+  x: number
+  y: number
+}
+export const generateId = () => {
+  return `${Math.random() * 100} ${new Date().toISOString()} `
+}
+
 const Home: React.FC = () => {
   const [allHeroes, setAllHeroes] = useState<Iheroes[] | null>([])
   const [oneHeroe, setOneHeroe] = useState([])
+  const [numGetHero, setNumGetHeroes] = useState<number>(19)
   const [isActived, setIsActived] = useState(false)
   const [open, setOpen] = React.useState(false)
-  const [group, setGroup] = useState<any[]>([
-    { name: 'meu primeiro time', list: ['100'] }
-  ])
+  const [openRenameModal, setOpenRenameModal] = React.useState(false)
+  const [groups, setGroups] = useState<Igroup[]>([])
+  const [anchorPoint, setAnchorPoint] = useState<IanchorProps>({ x: 0, y: 0 })
+  const [saveIndexForRenameModal, setSaveIndexRenameModal] = useState<
+    string | null
+  >(null)
+  const [selectedId, setSelectedId] = useState<string | null>(null)
   const getInput = useRef<HTMLInputElement>(null)
+  const [menuProps, toggleMenu] = useMenuState()
   const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
+  const handleClose = () => {
+    setSaveIndexRenameModal(null)
+    setOpen(false)
+  }
 
-  const addToGroup = (index: any, idPerson: any) => {}
+  const handleOpenRenameModal = () => {
+    setOpenRenameModal(true)
+  }
 
-  const addGroup = (group: any) => {
-    setGroup(lastState => [group, ...lastState])
+  const handleCloseRenameModal = () => setOpenRenameModal(false)
+
+  const handleContextMenu = useCallback<
+    (e: MouseEvent<any>, id: string) => void
+  >(
+    (e, id) => {
+      setSelectedId(id)
+      e.preventDefault()
+      setAnchorPoint({ x: e.clientX, y: e.clientY })
+      toggleMenu(true)
+    },
+    [setAnchorPoint, toggleMenu]
+  )
+
+  const addToGroup = (groupIndex: number) => {
+    setGroups(lastState => {
+      if (selectedId) {
+        lastState[groupIndex].list.push(selectedId)
+      }
+      localStorage.setItem('groups', JSON.stringify(groups))
+      return lastState
+    })
+  }
+
+  const removeFromGroup = (groupId: string, id: string) => {
+    setGroups(lastState => {
+      const group = lastState.find(group => group.id == groupId)
+      if (!group) {
+        return lastState
+      }
+      const newList = group.list.filter(currentId => currentId !== id)
+      group.list = newList
+
+      return lastState.map(lastGroup =>
+        lastGroup.id == group.id ? group : lastGroup
+      )
+    })
+  }
+
+  const addGroup = (group: Igroup) => {
+    setGroups(lastState => [group, ...lastState])
+    saveInStorage([...groups, group])
+  }
+
+  const renameGroup = (i: string | null, name: string) => {
+    if (i === null) {
+      return
+    }
+    setGroups(lastState =>
+      lastState.map(group => {
+        return { ...group, name: group.id === i ? name : group.name }
+      })
+    )
+  }
+
+  const deleteGroup = (id: string) => {
+    setGroups(lastState => {
+      const newList = lastState.filter((_, index) => _.id !== id)
+      return [...newList]
+    })
   }
 
   const getData = async () => {
-    const response = await getAllHeroesFromApi(19)
+    const response = await getAllHeroesFromApi(numGetHero)
     setAllHeroes(response)
   }
 
@@ -120,12 +215,33 @@ const Home: React.FC = () => {
     }
   }
 
+  const loadMoreHeroes = async () => {
+    setNumGetHeroes(lastState => lastState + 10)
+  }
+
+  const saveInStorage = (data: Igroup[]) => {
+    localStorage.setItem('groups', JSON.stringify(data))
+  }
+
+  useEffect(() => {
+    const data = localStorage.getItem('groups')
+    const parsedData = JSON.parse(data || '')
+    setGroups(parsedData)
+  }, [])
+
   useEffect(() => {
     getData()
-  }, [])
+  }, [numGetHero])
 
   return (
     <>
+      <ContextMenu
+        groups={groups}
+        menuProps={menuProps}
+        anchorPoint={anchorPoint}
+        toggleMenu={toggleMenu}
+        addToGroup={addToGroup}
+      />
       <Box
         sx={{
           display: 'flex',
@@ -137,9 +253,18 @@ const Home: React.FC = () => {
         <Button onClick={() => getSearchHero()} variant="contained">
           Pesquisar
         </Button>
-        <GroupModal open={open} handleClose={handleClose} addGroup={addGroup} />
+        <RenameGroupM
+          open={openRenameModal}
+          handleClose={handleCloseRenameModal}
+          renameGroup={name => renameGroup(saveIndexForRenameModal, name)}
+        />
+        <AddGroupModal
+          open={open}
+          handleClose={handleClose}
+          addGroup={(group: Igroup) => addGroup({ ...group, id: generateId() })}
+        />
         <Button onClick={() => handleOpen()} variant="contained">
-          Criar Categoria
+          Criar Grupo
         </Button>
       </Box>
 
@@ -147,34 +272,74 @@ const Home: React.FC = () => {
         sx={{
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center',
           mt: 4
         }}
       >
-        <Box sx={{ backgroundColor: 'grey', width: 1800, height: 1500 }}>
+        <Box
+          sx={{
+            backgroundColor: 'grey',
+            height: 1500,
+            borderTopRightRadius: 9,
+            borderTopLeftRadius: 9,
+            boxShadow: 4
+          }}
+        >
           <Box
             sx={{
               p: 2,
               display: 'flex',
               justifyContent: 'center',
               backgroundColor: '#F3F3F3',
-              width: 350
+              width: 350,
+              borderTopRightRadius: 8,
+              borderTopLeftRadius: 8
             }}
           >
             <Typography>Grupos</Typography>
           </Box>
-          {group.map((g, i) => (
+          {groups.map((g, i) => (
             <Accordion key={i} disableGutters elevation={0}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                <Typography>{g.name}</Typography>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 8,
+                    p: 1
+                  }}
+                >
+                  <Typography>{g.name} </Typography>
+                  <IconButton
+                    onClick={e => {
+                      setSaveIndexRenameModal(g.id)
+                      handleOpenRenameModal()
+                    }}
+                    size="small"
+                  >
+                    <EventRepeatIcon fontSize="inherit" />
+                  </IconButton>
+                  <IconButton
+                    onClick={() => deleteGroup(g.id)}
+                    aria-label="delete"
+                    size="small"
+                  >
+                    <DeleteIcon fontSize="inherit" />
+                  </IconButton>
+                </Box>
               </AccordionSummary>
               <AccordionDetails>
-                {g.list.map((hero: any) => (
-                  <Typography>{hero}</Typography>
+                {g.list.map((hero: string) => (
+                  <GroupCard
+                    removeFromGroup={removeFromGroup}
+                    key={hero}
+                    id={hero}
+                    groupId={g.id}
+                  />
                 ))}
               </AccordionDetails>
             </Accordion>
@@ -182,15 +347,17 @@ const Home: React.FC = () => {
         </Box>
         <Box sx={{ ml: 10 }}>
           <Grid
-            spacing={{ xs: 1, md: 1 }}
+            spacing={{ xs: 0.5, md: 1 }}
             container
-            columns={{ xs: 3, sm: 4, md: 13 }}
+            columns={{ xs: 2, sm: 5, md: 13 }}
           >
             {isActived
               ? oneHeroe?.map((oneHeroes: oneHeroe) => (
                   <Grid item xs={2} sm={4} md={4} key={oneHeroes.id}>
                     <ListItem>
                       <Card
+                        id={oneHeroes.id}
+                        handleContextMenu={handleContextMenu}
                         powerStatus={oneHeroes.powerstats}
                         name={oneHeroes.name}
                         image={oneHeroes.image.url}
@@ -203,6 +370,8 @@ const Home: React.FC = () => {
                   <Grid item xs={2} sm={4} md={4} key={heroe.data.id}>
                     <ListItem>
                       <Card
+                        id={heroe.data.id}
+                        handleContextMenu={handleContextMenu}
                         powerStatus={heroe.data.powerstats}
                         name={heroe.data.name}
                         image={heroe.data.image.url}
@@ -212,6 +381,11 @@ const Home: React.FC = () => {
                   </Grid>
                 ))}
           </Grid>
+          <Box sx={{ display: 'flex', flexDirection: 'column', mt: 1 }}>
+            <Button variant="contained" onClick={loadMoreHeroes}>
+              Carregar mais herois
+            </Button>
+          </Box>
         </Box>
       </Box>
     </>
