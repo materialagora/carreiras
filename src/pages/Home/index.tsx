@@ -177,7 +177,6 @@ const Home: React.FC = () => {
 
   const addGroup = (group: Igroup) => {
     setGroups(lastState => [group, ...lastState])
-    saveInStorage([...groups, group])
   }
 
   const renameGroup = (i: string | null, name: string) => {
@@ -219,14 +218,10 @@ const Home: React.FC = () => {
     setNumGetHeroes(lastState => lastState + 10)
   }
 
-  const saveInStorage = (data: Igroup[]) => {
-    localStorage.setItem('groups', JSON.stringify(data))
-  }
-
   useEffect(() => {
-    const data = localStorage.getItem('groups')
-    const parsedData = JSON.parse(data || '')
-    setGroups(parsedData)
+    // const data = localStorage.getItem('groups')
+    // const parsedData = JSON.parse(data || '')
+    // setGroups(parsedData)
   }, [])
 
   useEffect(() => {
