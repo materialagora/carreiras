@@ -1,3 +1,4 @@
+/* eslint-disable import/order */
 import React from "react";
 
 import ReactDOM from "react-dom/client";
@@ -5,13 +6,14 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Routes from "./routes";
+import { RouterProvider } from "react-router-dom";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
 );
 root.render(
   <React.StrictMode>
-    <Routes />
+    <RouterProvider router={Routes} />
   </React.StrictMode>,
 );
 

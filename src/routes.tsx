@@ -1,7 +1,28 @@
 import React from "react";
+import { createBrowserRouter } from "react-router-dom";
 
-function Routes() {
-  return <div>Routes</div>;
-}
+import { Hero, Root } from "./pages";
+import HeroGroup from "./pages/heroGroup";
 
-export default Routes;
+const Routers = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+  },
+  {
+    path: "hero/",
+    element: <Hero />,
+    children: [
+      {
+        path: ":heroId",
+        element: <Hero />,
+      },
+      {
+        path: "group",
+        element: <HeroGroup />,
+      },
+    ],
+  },
+]);
+
+export default Routers;
