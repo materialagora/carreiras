@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const Root = () => {
   return (
     <div>
-      <Link to={"hero/3"}>hero 3</Link>
+      <Link to={"hero/3"}>hero 30</Link>
     </div>
   );
 };

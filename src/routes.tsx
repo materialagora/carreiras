@@ -1,8 +1,7 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 
-import { Hero, Root } from "./pages";
-import HeroGroup from "./pages/heroGroup";
+import { Hero, HeroGroup, Root } from "./pages";
 
 const Routers = createBrowserRouter([
   {

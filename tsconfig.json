@@ -14,16 +14,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
-  },
-  "baseUrl": "./src",
-  "paths": {
-    "@components/*": ["components/*"],
-    "@contexts/*": ["contexts/*"],
-    "@hooks/*": ["hooks/*"],
-    "@interfaces/*": ["interfaces/*"],
-    "@utils/*": ["utils/*"]
-  },
-  "include": ["src"],
-  "exclude": ["node_modules","build"]
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@contexts/*": ["contexts/*"],
+      "@hooks/*": ["hooks/*"],
+      "@interfaces/*": ["interfaces/*"],
+      "@utils/*": ["utils/*"]
+    }
+  }
 }

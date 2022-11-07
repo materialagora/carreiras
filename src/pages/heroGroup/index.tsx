@@ -1,7 +1,5 @@
 import React from "react";
 
-const HeroGroup = () => {
+export const HeroGroup = () => {
   return <div>HeroGroup</div>;
 };
-
-export default HeroGroup;
