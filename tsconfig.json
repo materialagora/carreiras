@@ -17,13 +17,14 @@
     "jsx": "react-jsx",
     "baseUrl": "src",
     "paths": {
-      "@api/*": ["api/*"],
-      "@components/*": ["components/*"],
-      "@contexts/*": ["contexts/*"],
-      "@hooks/*": ["hooks/*"],
-      "@interfaces/*": ["interfaces/*"],
-      "@utils/*": ["utils/*"],
-      "@types/*": ["types/*"]
+      "api/*": ["api/*"],
+      "components/*": ["components/*"],
+      "contexts/*": ["contexts/*"],
+      "hooks/*": ["hooks/*"],
+      "interfaces/*": ["interfaces/*"],
+      "utils/*": ["utils/*"],
+      "types/*": ["types/*"]
     }
-  }
+  },
+  "include": ["src"]
 }

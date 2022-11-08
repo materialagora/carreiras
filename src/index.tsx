@@ -8,6 +8,7 @@ import reportWebVitals from "./reportWebVitals";
 import Routes from "./routes";
 import { RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AppTemplate } from "components/templates";
 
 const queryClient = new QueryClient();
 
@@ -17,7 +18,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={Routes} />
+      <AppTemplate>
+        <RouterProvider router={Routes} />
+      </AppTemplate>
     </QueryClientProvider>
   </React.StrictMode>,
 );
