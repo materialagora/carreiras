@@ -1,9 +1,11 @@
 import React from "react";
 
 import { SearchPersonInput } from "components/molecules";
-import { IPerson } from "interfaces/person";
+
+import { useHeaderState } from "./state";
 
 export const Header = () => {
+  const { handlerSearchPersonInput } = useHeaderState();
   return (
     <div className="flex justify-center bg-primary-1">
       <div className="flex flex-row py-[1.5rem] container">
@@ -14,9 +16,7 @@ export const Header = () => {
         <div className="flex justify-end flex-1">
           <SearchPersonInput
             placeholder="Pesquisar"
-            onChange={function (data?: IPerson[] | undefined): void {
-              console.log("data: ", data);
-            }}
+            onChange={handlerSearchPersonInput}
           />
         </div>
       </div>

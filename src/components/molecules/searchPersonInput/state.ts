@@ -10,7 +10,7 @@ export const useSearchPersonInputState = (
   const finder = useCallback((searchFor: string) => {
     const find = searchFor !== "" && searchFor !== " " ? searchFor : "' '";
     void client.get(`search/${find}`).then(({ data }) => {
-      result?.(data, isPending);
+      result?.(data.results, isPending);
     });
   }, []);
 

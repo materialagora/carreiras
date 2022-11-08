@@ -23,6 +23,7 @@
       "hooks/*": ["hooks/*"],
       "interfaces/*": ["interfaces/*"],
       "utils/*": ["utils/*"],
+      "redux/*": ["redux/*"],
       "types/*": ["types/*"]
     }
   },
