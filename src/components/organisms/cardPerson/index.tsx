@@ -5,7 +5,7 @@ import { IPerson } from "interfaces/person";
 
 export const CardPerson: FC<IPerson> = ({ image, name, id, biography }) => {
   return (
-    <Link to={`hero/${id}`}>
+    <Link to={`${biography.alignment === "good" ? "hero" : "villain"}/${id}`}>
       <div className="border-solid border border-[rgba(0,0,0,.06)] dark:border-[rgba(255,255,255,.06)]">
         <div className="flex flex-col">
           <div className="relative">
@@ -15,7 +15,6 @@ export const CardPerson: FC<IPerson> = ({ image, name, id, biography }) => {
             <span className="flex font-extrabold dark:text-primary-1 text-primary-2">
               {name}
             </span>
-            {/* <span>{biography.alignment}</span> */}
           </div>
         </div>
       </div>
