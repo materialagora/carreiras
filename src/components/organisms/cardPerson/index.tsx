@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 import { IPerson } from "interfaces/person";
 
-export const CardPerson: FC<IPerson> = ({ image, name, id, biography }) => {
+export const CardPerson: FC<IPerson> = ({ image, name, id }) => {
   return (
-    <Link to={`${biography.alignment === "good" ? "hero" : "villain"}/${id}`}>
+    <Link to={`${id}`}>
       <div className="border-solid border border-[rgba(0,0,0,.06)] dark:border-[rgba(255,255,255,.06)]">
         <div className="flex flex-col">
           <div className="relative">
