@@ -7,7 +7,7 @@ import { useHeaderState } from "./state";
 export const Header = () => {
   const { handlerSearchPersonInput } = useHeaderState();
   return (
-    <div className="flex justify-center bg-primary-1">
+    <div className="sticky top-0 flex justify-center bg-primary-1 z-10">
       <div className="flex flex-row py-[1.5rem] container">
         <div className="text-secondary-1 text-[20px]">
           <strong className="italic font-mono">Super</strong>

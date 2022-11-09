@@ -16,7 +16,7 @@ export const AppTemplate: FC<{ children: ReactNode }> = ({ children }) => {
   }, []);
 
   return (
-    <div className="fixed flex flex-col w-full h-full dark:bg-secondary-1 dark:text-white">
+    <div className="fixed flex flex-col w-full h-full overflow-y-scroll dark:bg-secondary-1 dark:text-white">
       <Header />
       <div className="flex items-center">
         <div className="container">{children}</div>
