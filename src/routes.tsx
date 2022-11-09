@@ -1,9 +1,7 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 
-import { FormPerson } from "components/organisms";
-
-import { Hero, Root, Villain } from "./pages";
+import { Person, Root } from "./pages";
 
 const Routers = createBrowserRouter([
   {
@@ -11,24 +9,8 @@ const Routers = createBrowserRouter([
     element: <Root />,
   },
   {
-    path: "hero/",
-    element: <Hero />,
-    children: [
-      {
-        path: ":heroId",
-        element: <FormPerson />,
-      },
-    ],
-  },
-  {
-    path: "villian/",
-    element: <Villain />,
-    children: [
-      {
-        path: ":villianId",
-        element: <FormPerson />,
-      },
-    ],
+    path: ":id",
+    element: <Person />,
   },
 ]);
 
