@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import peopleReducer from "./slices/people";
+import routeReducer from "./slices/route";
 
 export const store = configureStore({
   reducer: {
     people: peopleReducer,
+    route: routeReducer,
   },
 });
 

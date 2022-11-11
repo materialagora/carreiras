@@ -1,6 +1,8 @@
-import { useMemo, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useMatch } from "react-router-dom";
 
+import { addMatch } from "redux/slices";
 import { RootState } from "redux/store";
 
 import { TabShowType } from "./types";
@@ -8,6 +10,8 @@ import { TabShowType } from "./types";
 export const useRootState = () => {
   const people = useSelector((state: RootState) => state.people);
   const [filter, setFilter] = useState<TabShowType>("All");
+  const match = useMatch("/");
+  const dispatch = useDispatch();
 
   const tabShow: TabShowType[] = ["All", "Hero", "Villain"];
 
@@ -35,6 +39,10 @@ export const useRootState = () => {
 
     return "font-bold cursor-pointer uppercase p-[.5rem_1rem] " + styled;
   };
+
+  useEffect(() => {
+    if (match) dispatch(addMatch(match));
+  }, [match]);
 
   return {
     tabShow,

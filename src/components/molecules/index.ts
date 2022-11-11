@@ -1,3 +1,3 @@
 export * from "./searchPersonInput";
-export * from "./cardPerson";
+export * from "../organisms/cardPerson";
 export * from "./cardDinamic";

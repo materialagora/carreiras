@@ -1,3 +1,3 @@
 export * from "./header";
-export * from "../molecules/cardPerson";
+export * from "./cardPerson";
 export * from "./formPerson";
