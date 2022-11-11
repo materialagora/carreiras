@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -6,7 +7,9 @@ import { IPerson } from "interfaces/person";
 
 export const usePersonState = () => {
   const { id } = useParams();
-  const [person, setPerson] = useState<SuperHeroResponseType<IPerson>>();
+  const [person, setPerson] = useState<SuperHeroResponseType<IPerson>>(
+    {} as SuperHeroResponseType<IPerson>,
+  );
   const loadPerson = useCallback(() => {
     void client.get(`${id}`).then(({ data }) => {
       setPerson(data);

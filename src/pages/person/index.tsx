@@ -1,11 +1,15 @@
 import React from "react";
 
+import { FormPerson } from "components/organisms";
+
 import { usePersonState } from "./state";
 
 export const Person = () => {
   const { person } = usePersonState();
 
-  console.log("id:", person);
-
-  return <div>Person</div>;
+  return (
+    <div>
+      <FormPerson data={person} />
+    </div>
+  );
 };
