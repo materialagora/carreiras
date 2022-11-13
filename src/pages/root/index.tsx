@@ -1,5 +1,6 @@
 import React from "react";
 
+import { LinkButton } from "components/atoms";
 import { CardPerson } from "components/organisms";
 
 import { useRootState } from "./state";
@@ -9,6 +10,21 @@ export const Root = () => {
 
   return (
     <div className="py-[30px]">
+      <div className="flex flex-row items-center justify-center py-[30px]">
+        <span className="mr-[1rem]">
+          <LinkButton to={"/superhero"}>
+            <span className="capitalize">create</span>
+            <span className="italic ml-[.5rem]">
+              <strong className="capitalize">super</strong>hero
+            </span>
+          </LinkButton>
+        </span>
+        <span>
+          <LinkButton to={"/group"}>
+            <span className="capitalize">group</span>
+          </LinkButton>
+        </span>
+      </div>
       <div className="mb-[30px] overflow-hidden border-solid border-b border-[rgba(0,0,0,.06)] dark:border-[rgba(255,255,255,.06)]">
         {tabShow.map((item, index) => {
           return (

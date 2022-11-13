@@ -25,7 +25,7 @@ export const Header = () => {
           ) : (
             <div
               onClick={handlerDelete}
-              className="flex cursor-pointer p-[.5rem_1rem] flex-row items-center bg-[orangered]"
+              className="flex cursor-pointer p-[.5rem_1rem] flex-row items-center rounded-[100px] bg-[orangered]"
             >
               <span className="mr-[.5rem]">
                 <IoTrash />
