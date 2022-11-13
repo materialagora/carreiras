@@ -1,11 +1,13 @@
 import React from "react";
 
 import { SearchPersonInput } from "components/molecules";
+import { IoTrash } from "react-icons/io5";
 
 import { useHeaderState } from "./state";
 
 export const Header = () => {
-  const { isSearchble, handlerSearchPersonInput } = useHeaderState();
+  const { isSearchble, handlerSearchPersonInput, handlerDelete } =
+    useHeaderState();
 
   return (
     <div className="sticky top-0 flex justify-center bg-primary-1 z-10">
@@ -21,7 +23,15 @@ export const Header = () => {
               onChange={handlerSearchPersonInput}
             />
           ) : (
-            <div>new aside</div>
+            <div
+              onClick={handlerDelete}
+              className="flex cursor-pointer p-[.5rem_1rem] flex-row items-center bg-[orangered]"
+            >
+              <span className="mr-[.5rem]">
+                <IoTrash />
+              </span>
+              <span>Remove</span>
+            </div>
           )}
         </div>
       </div>

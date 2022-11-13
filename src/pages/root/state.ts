@@ -2,12 +2,14 @@ import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useMatch } from "react-router-dom";
 
+import { useStorage } from "hooks";
 import { addMatch } from "redux/slices";
 import { RootState } from "redux/store";
 
 import { TabShowType } from "./types";
 
 export const useRootState = () => {
+  const storage = useStorage();
   const people = useSelector((state: RootState) => state.people);
   const [filter, setFilter] = useState<TabShowType>("All");
   const match = useMatch("/");
@@ -44,6 +46,14 @@ export const useRootState = () => {
     if (match) dispatch(addMatch(match));
   }, [match]);
 
+  const buildPeopleData = () => {
+    const deletedIDs: number[] = storage.deletedPersons;
+    const data =
+      filter === "All" ? people.data : filter === "Hero" ? hero : villain;
+
+    return data.filter((item) => !deletedIDs.includes(item.id));
+  };
+
   return {
     tabShow,
     people: people.data,
@@ -52,5 +62,6 @@ export const useRootState = () => {
     filter,
     handlerFilter,
     getStyles,
+    buildPeopleData,
   };
 };

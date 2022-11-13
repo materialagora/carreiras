@@ -5,8 +5,7 @@ import { CardPerson } from "components/organisms";
 import { useRootState } from "./state";
 
 export const Root = () => {
-  const { tabShow, people, villain, hero, filter, handlerFilter, getStyles } =
-    useRootState();
+  const { tabShow, handlerFilter, getStyles, buildPeopleData } = useRootState();
 
   return (
     <div className="py-[30px]">
@@ -24,12 +23,9 @@ export const Root = () => {
         })}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 max-xl:grid-cols-8 gap-[20px]">
-        {filter === "All" &&
-          people.map((item, index) => <CardPerson {...item} key={index} />)}
-        {filter === "Hero" &&
-          hero.map((item, index) => <CardPerson {...item} key={index} />)}
-        {filter === "Villain" &&
-          villain.map((item, index) => <CardPerson {...item} key={index} />)}
+        {buildPeopleData().map((item, index) => (
+          <CardPerson {...item} key={index} />
+        ))}
       </div>
     </div>
   );
