@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -21,27 +21,49 @@ export const Form = styled.form`
   border-radius: 0.7rem;
 `;
 
-export const SearchTermInput = styled.div`
+export const SearchHeroInput = styled.div`
   display: flex;
   align-items: center;
   margin: 4rem 5vw;
+  gap: 20px;
 
   strong {
-    font-size: 20px;
-    margin-right: 20px;
+    font-size: 40px;
+    ${({ theme }) => css`
+      color: ${theme.colors.neutral.white};
+    `}
+  }
+`;
+
+export const Title = styled.div`
+  display: flex;
+  align-items: center;
+
+  span {
+    font-size: 40px;
+    font-weight: bold;
+    ${({ theme }) => css`
+      color: ${theme.colors.secondary.red};
+    `}
   }
 `;
 
 export const SearchInput = styled.input`
-  width: 150px;
+  width: 400px;
+  padding: 20px;
   border-radius: 7px;
-  border: 1px solid #ccc;
+
+  background-color: transparent;
   transition: all 0.5s ease;
+  ${({ theme }) => css`
+    border: 2px solid ${theme.colors.secondary.darkBlue};
+  `}
 
   &:focus {
     outline: none;
-    width: 400px;
-    border: 1px solid #000;
+    ${({ theme }) => css`
+      border: 1px solid ${theme.colors.secondary.red};
+    `}
   }
 `;
 

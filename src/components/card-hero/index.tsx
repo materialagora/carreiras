@@ -2,34 +2,32 @@ import React from "react";
 
 import * as S from "./styles";
 
-const CardHero: React.FC = () => {
+type CardHeroProps = {
+  hero: Superhero.GithubHeroType;
+};
+
+const CardHero: React.FC<CardHeroProps> = ({ hero }) => {
   return (
     <S.CardWrapper>
-      <S.CardImage
-        src="https://www.superherodb.com/pictures2/portraits/10/100/639.jpg"
-        alt="user-img-thumb"
-      />
+      <S.CardImage src={hero.images.lg} alt="user-img-thumb" />
       <S.CardOverlay className="card__overlay">
         <S.CardHeader className="card__header">
           <S.CardArc xmlns="http://www.w3.org/2000/svg">
             <path />
           </S.CardArc>
-          <S.CardThumb
-            src="https://www.superherodb.com/pictures2/portraits/10/100/639.jpg"
-            alt="person-img-thumb"
-          />
-          <S.CardTitle>Genilson Araújo</S.CardTitle>
+          <S.CardThumb src={hero.images.lg} alt="person-img-thumb" />
+          <S.CardTitle>{hero.name}</S.CardTitle>
         </S.CardHeader>
         <S.CardDescription>
           <S.UserData>
             <S.ListItem>
-              <strong>Age: </strong> 18
+              <strong>Gender: </strong> {hero.appearance.gender}
             </S.ListItem>
             <S.ListItem>
-              <strong>EyeColor: </strong> yellow
+              <strong>Race: </strong> {hero.appearance.race}
             </S.ListItem>
             <S.ListItem>
-              <strong>Company: </strong> koepe
+              <strong>Aliases: </strong> {hero.biography.aliases}
             </S.ListItem>
           </S.UserData>
         </S.CardDescription>

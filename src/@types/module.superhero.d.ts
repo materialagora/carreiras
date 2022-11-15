@@ -11,6 +11,10 @@ declare namespace Superhero {
     image: ImageType;
   };
 
+  type GithubHeroType = Omit<HeroType, "image"> & {
+    images: ImagesType;
+  };
+
   type PowerStatsType = {
     intelligence: string;
     strength: string;
@@ -51,5 +55,12 @@ declare namespace Superhero {
 
   type ImageType = {
     url: string;
+  };
+
+  type ImagesType = {
+    lg: string;
+    md: string;
+    sm: string;
+    xs: string;
   };
 }

@@ -34,7 +34,7 @@ export const CardOverlay = styled.div`
   transform: translateY(100%);
   transition: 0.2s ease-in-out;
   ${({ theme }) => css`
-    background-color: ${theme.colors.neutral.white};
+    background-color: ${theme.colors.neutral.grey};
   `}
 `;
 
@@ -48,7 +48,7 @@ export const CardHeader = styled.div`
   transform: translateY(-100%);
   transition: 0.2s ease-in-out;
   ${({ theme }) => css`
-    background-color: ${theme.colors.neutral.white};
+    background-color: ${theme.colors.neutral.grey};
   `}
 `;
 
@@ -63,7 +63,7 @@ export const CardArc = styled.svg`
   `}
   path {
     ${({ theme }) => css`
-      fill: ${theme.colors.neutral.white};
+      fill: ${theme.colors.neutral.grey};
     `}
     d: path('M 40 80 c 22 0 40 -22 40 -40 v 40 Z');
   }
@@ -89,7 +89,7 @@ export const CardTitle = styled.h3`
   `}
 `;
 
-export const CardDescription = styled.p`
+export const CardDescription = styled.div`
   padding: 0 2em 2em;
   margin: 0;
   display: -webkit-box;

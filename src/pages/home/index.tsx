@@ -1,42 +1,45 @@
 import { FC, useEffect, useState } from "react";
 
 import Card from "../../components/card-hero";
-import api from "../../services/api";
 
 import * as S from "./styles";
+import { getAllHeros } from "./utils";
 
 const Home: FC = () => {
-  const [persons, setPersons] = useState([]);
+  const [heros, setHeros] = useState<Superhero.GithubHeroType[]>([]);
   const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    (async () => {
-      const res = await api.get("/678");
+  const handleGetAllHeros = async () => {
+    try {
+      setHeros(await getAllHeros());
+    } catch (err) {
+      console.log("Err: ", err);
+    }
+  };
 
-      console.log("Data: ", res);
-    })();
+  useEffect(() => {
+    handleGetAllHeros();
   }, []);
 
   return (
     <S.Wrapper>
-      <S.SearchTermInput>
-        <strong>MySocial</strong>
+      <S.SearchHeroInput>
+        <S.Title>
+          <strong>SUPER</strong>
+          <span>HERO</span>
+        </S.Title>
 
         <S.SearchInput
-          placeholder="search persons ..."
+          placeholder="search for some hero ..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-      </S.SearchTermInput>
+      </S.SearchHeroInput>
 
       <S.Cards>
-        {Array(10)
-          .fill({})
-          .map((_, index) => (
-            <li key={index}>
-              <Card />
-            </li>
-          ))}
+        {heros.map((hero) => (
+          <Card key={hero.id} hero={hero} />
+        ))}
       </S.Cards>
     </S.Wrapper>
   );
