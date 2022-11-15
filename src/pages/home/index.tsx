@@ -1,12 +1,21 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 import Card from "../../components/card-hero";
+import api from "../../services/api";
 
 import * as S from "./styles";
 
 const Home: FC = () => {
   const [persons, setPersons] = useState([]);
   const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    (async () => {
+      const res = await api.get("/678");
+
+      console.log("Data: ", res);
+    })();
+  }, []);
 
   return (
     <S.Wrapper>
