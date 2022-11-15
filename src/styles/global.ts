@@ -55,6 +55,7 @@ const GlobalStyles: GlobalStyleComponent<
       font-size: ${theme.font.sizes.medium};
       line-height: ${theme.font.sizes.medium};
       font-style: normal;
+      background-color: ${theme.colors.neutral.black};
     }
 
     input {
