@@ -15,7 +15,7 @@ const CardHero: React.FC<CardHeroProps> = ({ hero }) => {
           <S.CardArc xmlns="http://www.w3.org/2000/svg">
             <path />
           </S.CardArc>
-          <S.CardThumb src={hero.images.lg} alt="person-img-thumb" />
+          <S.CardThumb src={hero.images.sm} alt="person-img-thumb" />
           <S.CardTitle>{hero.name}</S.CardTitle>
         </S.CardHeader>
         <S.CardDescription>

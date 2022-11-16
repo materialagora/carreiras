@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-export const CardWrapper = styled.a`
+export const CardWrapper = styled.div`
   position: relative;
   display: block;
   height: 100%;

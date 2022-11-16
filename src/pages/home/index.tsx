@@ -1,5 +1,7 @@
 import { FC, useEffect, useState } from "react";
 
+import { Link } from "react-router-dom";
+
 import Card from "../../components/card-hero";
 
 import * as S from "./styles";
@@ -38,7 +40,9 @@ const Home: FC = () => {
 
       <S.Cards>
         {heros.map((hero) => (
-          <Card key={hero.id} hero={hero} />
+          <Link key={hero.id} to={`/hero/${hero.name}`}>
+            <Card hero={hero} />
+          </Link>
         ))}
       </S.Cards>
     </S.Wrapper>

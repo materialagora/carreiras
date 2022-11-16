@@ -5,6 +5,7 @@ export const HeroImage = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
+  margin-bottom: 20px;
 
   ${({ theme }) => css`
     padding: ${theme.spacings.large};

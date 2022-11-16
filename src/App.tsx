@@ -1,6 +1,6 @@
 import { ThemeProvider } from "styled-components";
 import Header from "./components/header";
-import Home from "./pages/home";
+import Router from "./router";
 import GlobalStyles from "./styles/global";
 import theme from "./styles/theme";
 
@@ -11,7 +11,7 @@ function App() {
 
       <Header />
 
-      <Home />
+      <Router />
     </ThemeProvider>
   );
 }

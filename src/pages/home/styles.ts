@@ -3,6 +3,14 @@ import styled, { css } from "styled-components";
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+
+  h1 {
+    margin: 4rem 5vw;
+
+    ${({ theme }) => css`
+      color: ${theme.colors.secondary.red};
+    `}
+  }
 `;
 
 export const Cards = styled.ul`
