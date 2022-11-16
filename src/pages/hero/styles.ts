@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const Wrapper = styled.div`
   margin: 4rem 5vw;
   display: flex;
-  gap: 20px;
+  gap: 100px;
 `;
 
 export const Left = styled.div`
@@ -19,7 +19,9 @@ export const Left = styled.div`
   }
 `;
 
-export const Right = styled.div``;
+export const Right = styled.div`
+  width: 100%;
+`;
 
 export const Image = styled.img`
   width: 350px;

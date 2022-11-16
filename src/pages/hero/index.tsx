@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import Tab from "../../components/tab";
 import * as S from "./styles";
-import { getHeroById } from "./utils";
+import { getHeroById, TabData } from "./utils";
 
 const Hero: React.FC = () => {
   const [hero, setHero] = useState<Superhero.HeroType>();
@@ -31,7 +32,9 @@ const Hero: React.FC = () => {
 
         <S.Image src={hero?.image.url} alt="hero-image" />
       </S.Left>
-      <S.Right></S.Right>
+      <S.Right>
+        <Tab data={TabData} />
+      </S.Right>
     </S.Wrapper>
   );
 };
