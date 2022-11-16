@@ -8,7 +8,7 @@ function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="hero/:heroName" element={<Hero />} />
+        <Route path="hero/:heroId" element={<Hero />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

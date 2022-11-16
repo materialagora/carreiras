@@ -1,9 +1,7 @@
 import { FC, useEffect, useState } from "react";
-
 import { Link } from "react-router-dom";
-
+import { toast } from "react-toastify";
 import Card from "../../components/card-hero";
-
 import * as S from "./styles";
 import { getAllHeros } from "./utils";
 
@@ -14,8 +12,8 @@ const Home: FC = () => {
   const handleGetAllHeros = async () => {
     try {
       setHeros(await getAllHeros());
-    } catch (err) {
-      console.log("Err: ", err);
+    } catch (err: any) {
+      toast.error(`Error: ${err.message}`);
     }
   };
 
@@ -40,7 +38,7 @@ const Home: FC = () => {
 
       <S.Cards>
         {heros.map((hero) => (
-          <Link key={hero.id} to={`/hero/${hero.name}`}>
+          <Link key={hero.id} to={`/hero/${hero.id}`}>
             <Card hero={hero} />
           </Link>
         ))}
