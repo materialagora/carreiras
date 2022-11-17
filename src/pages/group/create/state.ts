@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
+import { useStorage } from "hooks";
 import { IPerson, IGroup } from "interfaces";
 import { RootState } from "redux/store";
+import array from "utils/array";
 
 export const useCreateGroupState = () => {
   const [groupName, setGroupName] = useState<string>("");
   const people = useSelector((state: RootState) => state.people);
   const [groupMembers, setGroupMembers] = useState<IPerson[]>([]);
   const [group, setGroup] = useState<IGroup>();
+  const storage = useStorage();
+  const [excludedIDs, setExcludedIDs] = useState<number[]>([]);
 
   useEffect(() => {
     setGroup({
@@ -20,21 +24,32 @@ export const useCreateGroupState = () => {
   const handlerGroupName = (value: string) => setGroupName(value);
 
   const handlerGroupMember = (person: IPerson) => {
-    const members = groupMembers;
-    members.push(person);
-    setGroupMembers(members);
+    setGroupMembers([...groupMembers, person]);
+    setExcludedIDs([...excludedIDs, person.id]);
+  };
+
+  const handlerRemoveMember = (id: number) => {
+    const updatedMembers = array().excluded(groupMembers, [id]);
+    setGroupMembers(updatedMembers);
+
+    const updatedIds = excludedIDs.filter((item) => item !== id);
+    setExcludedIDs(updatedIds);
   };
 
   const handlerSaveGroup = () => {
-    console.log(JSON.stringify(group));
+    const groups = storage.get("GROUP", "JSON");
+
+    storage.add("GROUP", JSON.stringify(groups ? [...groups, group] : [group]));
   };
 
   return {
     group,
     people,
+    excludedIDs,
     groupMembers,
     handlerGroupName,
     handlerGroupMember,
     handlerSaveGroup,
+    handlerRemoveMember,
   };
 };

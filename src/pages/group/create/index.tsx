@@ -2,12 +2,20 @@ import React from "react";
 
 import { Button, Input } from "components/atoms";
 import { IoAdd, IoRemove, IoSave } from "react-icons/io5";
+import array from "utils/array";
 
 import { useCreateGroupState } from "./state";
 
 export const CreateGroup = () => {
-  const { group, people, handlerGroupMember, handlerGroupName } =
-    useCreateGroupState();
+  const {
+    group,
+    people,
+    excludedIDs,
+    handlerGroupMember,
+    handlerGroupName,
+    handlerSaveGroup,
+    handlerRemoveMember,
+  } = useCreateGroupState();
 
   return (
     <div className="flex flex-col py-[30px]">
@@ -17,27 +25,29 @@ export const CreateGroup = () => {
             Results
           </div>
           <ul className="border border-[rgba(0,0,0,.06)] dark:border-[rgba(255,255,255,.06)] p-[1rem] relative h-full list-none flex-1 overflow-y-scroll">
-            {people.data.map((item, index) => {
-              return (
-                <li
-                  onClick={() => handlerGroupMember(item)}
-                  key={index}
-                  className="py-[15px] flex flex-row items-center"
-                >
-                  <div>
-                    <img
-                      className="rounded-full h-[50px] w-[50px]"
-                      src={item.image.url}
-                      alt={item.image.name}
-                    />
-                  </div>
-                  <div className="flex-1 mx-[15px]">{item.name}</div>
-                  <Button onClick={() => handlerGroupMember(item)}>
-                    <IoAdd />
-                  </Button>
-                </li>
-              );
-            })}
+            {array()
+              .excluded(people.data, excludedIDs)
+              .map((item, index) => {
+                return (
+                  <li
+                    onClick={() => handlerGroupMember(item)}
+                    key={index}
+                    className="py-[15px] flex flex-row items-center"
+                  >
+                    <div>
+                      <img
+                        className="rounded-full h-[50px] w-[50px]"
+                        src={item.image.url}
+                        alt={item.image.name}
+                      />
+                    </div>
+                    <div className="flex-1 mx-[15px]">{item.name}</div>
+                    <Button onClick={() => handlerGroupMember(item)}>
+                      <IoAdd />
+                    </Button>
+                  </li>
+                );
+              })}
           </ul>
         </div>
         <div className="flex flex-col">
@@ -59,7 +69,7 @@ export const CreateGroup = () => {
                     />
                   </div>
                   <div className="flex-1 mx-[15px]">{item.name}</div>
-                  <Button>
+                  <Button onClick={() => handlerRemoveMember(item.id)}>
                     <IoRemove />
                   </Button>
                 </li>
@@ -76,7 +86,10 @@ export const CreateGroup = () => {
           />
         </div>
         <div>
-          <Button className="flex flex-row items-center ml-[1rem] dark:bg-primary-1 bg-primary-1">
+          <Button
+            onClick={handlerSaveGroup}
+            className="flex flex-row items-center ml-[1rem] dark:bg-primary-1 bg-primary-1"
+          >
             <span>Finalize</span>
             <span className="ml-[1rem]">
               <IoSave />
