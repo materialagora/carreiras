@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-export type StorageKey = "DELETED_PERSONS";
+export type StorageKey = "DELETED_PERSONS" | "GROUP";
 
 export const useStorage = () => {
   /**

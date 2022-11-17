@@ -5,3 +5,4 @@ export * from "./image";
 export * from "./person";
 export * from "./powerstats";
 export * from "./work";
+export * from "./group";
