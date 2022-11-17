@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: carreiras-container
+    image: carreiras-image
+    build:
+      context: .
+    ports:
+      - 8080:80
