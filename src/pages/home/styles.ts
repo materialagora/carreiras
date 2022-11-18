@@ -11,6 +11,12 @@ export const Wrapper = styled.div`
       color: ${theme.colors.secondary.red};
     `}
   }
+
+  h2 {
+    ${({ theme }) => css`
+      color: ${theme.colors.secondary.red};
+    `}
+  }
 `;
 
 export const Cards = styled.ul`

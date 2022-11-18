@@ -8,6 +8,8 @@ import * as S from "./styles";
 import { getAllHeros, getHerosByName } from "./utils";
 
 const Home: FC = () => {
+  const [loadingHeros, setLoadingHeros] = useState(false);
+  const [loadingHerosSearched, setLoadingHerosSearched] = useState(false);
   const [heros, setHeros] = useState<Superhero.GithubHeroType[]>([]);
   const [herosFound, setHerosFound] = useState<API.SearchHeroResponse>();
   const [search, setSearch] = useState("");
@@ -15,14 +17,20 @@ const Home: FC = () => {
   const debouncedSearchValue = useDebounce<string>(search, 400);
 
   const handleGetAllHeros = async () => {
+    setLoadingHeros(true);
+
     try {
       setHeros(await getAllHeros());
     } catch (err: any) {
       toast.error(`Error: ${err.message}`);
     }
+
+    setLoadingHeros(false);
   };
 
   const handleGetHeroByName = async () => {
+    setLoadingHerosSearched(true);
+
     try {
       const herosData = await getHerosByName(debouncedSearchValue);
 
@@ -30,6 +38,8 @@ const Home: FC = () => {
     } catch (err: any) {
       toast.error(`Error: ${err.message}`);
     }
+
+    setLoadingHerosSearched(false);
   };
 
   const handleGetHerosByNamePersist = useCallback(
@@ -61,15 +71,22 @@ const Home: FC = () => {
       </S.SearchHeroInput>
 
       {debouncedSearchValue ? (
-        <ModalHeroSearch heros={herosFound?.results} />
+        <ModalHeroSearch
+          heros={herosFound?.results}
+          isLoading={loadingHerosSearched}
+        />
       ) : null}
 
       <S.Cards>
-        {heros.map((hero) => (
-          <Link key={hero.id} to={`/hero/${hero.id}`}>
-            <Card hero={hero} />
-          </Link>
-        ))}
+        {loadingHeros ? (
+          <h2>Loading ...</h2>
+        ) : (
+          heros.map((hero) => (
+            <Link key={hero.id} to={`/hero/${hero.id}`}>
+              <Card hero={hero} />
+            </Link>
+          ))
+        )}
       </S.Cards>
     </S.Wrapper>
   );
