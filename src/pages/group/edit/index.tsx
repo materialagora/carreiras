@@ -81,6 +81,7 @@ export const EditGroup = () => {
       <div className="flex flex-row items-center justify-end  pt-[30px]">
         <div>
           <Input
+            defaultValue={group?.name}
             onChange={(e) => handlerGroupName(e.currentTarget.value)}
             placeholder="Name"
           />

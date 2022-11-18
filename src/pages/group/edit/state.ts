@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import { useStorage } from "hooks";
 import { IPerson, IGroup } from "interfaces";
@@ -13,6 +14,22 @@ export const useCreateGroupState = () => {
   const [group, setGroup] = useState<IGroup>();
   const storage = useStorage();
   const [excludedIDs, setExcludedIDs] = useState<number[]>([]);
+  const { id } = useParams();
+
+  const loadGroups = useCallback(() => {
+    const data: IGroup[] = storage.get("GROUP", "JSON");
+
+    const selected = data[parseInt(id as string) - 1];
+
+    setGroupName(selected.name);
+    setGroupMembers(selected.persons);
+
+    setExcludedIDs(selected.persons.map((item) => item.id));
+  }, []);
+
+  useEffect(() => {
+    loadGroups();
+  }, []);
 
   useEffect(() => {
     setGroup({
@@ -39,7 +56,9 @@ export const useCreateGroupState = () => {
   const handlerSaveGroup = () => {
     const groups = storage.get("GROUP", "JSON");
 
-    storage.add("GROUP", JSON.stringify(groups ? [...groups, group] : [group]));
+    groups[parseInt(id as string) - 1] = group;
+
+    storage.add("GROUP", JSON.stringify([...groups]));
   };
 
   return {
