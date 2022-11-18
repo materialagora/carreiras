@@ -6,6 +6,7 @@ import { useStorage } from "hooks";
 import { IPerson, IGroup } from "interfaces";
 import { RootState } from "redux/store";
 import array from "utils/array";
+import { browser } from "utils/browser";
 
 export const useCreateGroupState = () => {
   const [groupName, setGroupName] = useState<string>("");
@@ -15,6 +16,7 @@ export const useCreateGroupState = () => {
   const storage = useStorage();
   const [excludedIDs, setExcludedIDs] = useState<number[]>([]);
   const { id } = useParams();
+  const { goBack } = browser();
 
   const loadGroups = useCallback(() => {
     const data: IGroup[] = storage.get("GROUP", "JSON");
@@ -59,6 +61,7 @@ export const useCreateGroupState = () => {
     groups[parseInt(id as string) - 1] = group;
 
     storage.add("GROUP", JSON.stringify([...groups]));
+    goBack();
   };
 
   return {

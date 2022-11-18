@@ -5,6 +5,7 @@ import { useStorage } from "hooks";
 import { IPerson, IGroup } from "interfaces";
 import { RootState } from "redux/store";
 import array from "utils/array";
+import { browser } from "utils/browser";
 
 export const useCreateGroupState = () => {
   const [groupName, setGroupName] = useState<string>("");
@@ -13,6 +14,7 @@ export const useCreateGroupState = () => {
   const [group, setGroup] = useState<IGroup>();
   const storage = useStorage();
   const [excludedIDs, setExcludedIDs] = useState<number[]>([]);
+  const { goBack } = browser();
 
   useEffect(() => {
     setGroup({
@@ -40,6 +42,7 @@ export const useCreateGroupState = () => {
     const groups = storage.get("GROUP", "JSON");
 
     storage.add("GROUP", JSON.stringify(groups ? [...groups, group] : [group]));
+    goBack();
   };
 
   return {
