@@ -1,14 +1,7 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 
-import {
-  CreateGroup,
-  EditGroup,
-  Group,
-  Person,
-  Root,
-  SuperHero,
-} from "./pages";
+import { CreateGroup, EditGroup, Group, Person, Root } from "./pages";
 
 const Routers = createBrowserRouter([
   {
@@ -18,10 +11,6 @@ const Routers = createBrowserRouter([
   {
     path: ":id",
     element: <Person />,
-  },
-  {
-    path: "superhero",
-    element: <SuperHero />,
   },
   {
     path: "group",

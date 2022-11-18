@@ -11,16 +11,11 @@ export const Root = () => {
   return (
     <div className="py-[30px]">
       <div className="flex flex-row items-center justify-center py-[30px]">
-        <span className="mr-[1rem]">
-          <LinkButton to={"/superhero"}>
-            <span className="capitalize">create</span>
-            <span className="italic ml-[.5rem]">
-              <strong className="capitalize">super</strong>hero
-            </span>
-          </LinkButton>
-        </span>
         <span>
           <LinkButton to={"/group"}>
+            <span className="italic mr-[.5rem]">
+              <strong className="capitalize">super</strong>Hero
+            </span>
             <span className="capitalize">group</span>
           </LinkButton>
         </span>
