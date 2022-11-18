@@ -30,7 +30,7 @@ export const CardGroup: FC<
             </span>
           </div>
         </div>
-        <div className="flex flex-row text-white">
+        <div className="flex flex-row text-black dark:text-white">
           <span className="font-bold mr-[1rem]">Total members:</span>
           <span>{persons.length}</span>
         </div>

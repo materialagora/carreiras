@@ -7,7 +7,7 @@ export const Input: FC<HtmlHTMLAttributes<HTMLInputElement>> = ({
   return (
     <div className="relative flex">
       <input
-        className={`bg-[rgba(0,0,0,0.6)] dark:bg-secondary-3 rounded-[100px] flex-1 outline-none p-[.5rem_1rem]  ${className}`}
+        className={`bg-[rgba(0,0,0,0.06)] dark:bg-secondary-3 rounded-[100px] flex-1 outline-none p-[.5rem_1rem]  ${className}`}
         {...args}
       />
     </div>
