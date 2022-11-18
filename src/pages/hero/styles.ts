@@ -4,6 +4,12 @@ export const Wrapper = styled.div`
   margin: 4rem 5vw;
   display: flex;
   gap: 100px;
+
+  h1 {
+    ${({ theme }) => css`
+      color: ${theme.colors.secondary.red};
+    `}
+  }
 `;
 
 export const Left = styled.div`
