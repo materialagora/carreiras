@@ -14,10 +14,14 @@ export const usePersonState = () => {
   const [person, setPerson] = useState<SuperHeroResponseType<IPerson>>(
     {} as SuperHeroResponseType<IPerson>,
   );
+  const [isLoading, setIsLoading] = useState(true);
   const loadPerson = useCallback(() => {
-    void client.get(`${id}`).then(({ data }) => {
-      setPerson(data);
-    });
+    void client
+      .get(`${id}`)
+      .then(({ data }) => {
+        setPerson(data);
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
   useEffect(() => {
@@ -29,6 +33,7 @@ export const usePersonState = () => {
   }, []);
 
   return {
+    isLoading,
     id,
     person,
   };

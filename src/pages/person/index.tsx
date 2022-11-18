@@ -5,11 +5,7 @@ import { FormPerson } from "components/organisms";
 import { usePersonState } from "./state";
 
 export const Person = () => {
-  const { person } = usePersonState();
+  const { isLoading, person } = usePersonState();
 
-  return (
-    <div>
-      <FormPerson data={person} />
-    </div>
-  );
+  return !isLoading ? <FormPerson data={person} /> : <div>Loading...</div>;
 };
