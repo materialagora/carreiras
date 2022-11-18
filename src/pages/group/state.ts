@@ -12,11 +12,14 @@ export const useGroupState = () => {
     setGroups(data);
   }, []);
 
+  const handlerUpdateList = (data: IGroup[]) => setGroups(data);
+
   useEffect(() => {
     loadGroups();
   }, []);
 
   return {
     groups,
+    handlerUpdateList,
   };
 };
