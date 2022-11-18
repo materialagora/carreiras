@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Tab from "../../components/tab";
@@ -9,8 +9,6 @@ import { getHeroById, tableData } from "./utils";
 const Hero: React.FC = () => {
   const [hero, setHero] = useState<Superhero.HeroType>();
   const { heroId } = useParams();
-
-  console.log(hero);
 
   const handleGetHeroById = async () => {
     try {
@@ -24,8 +22,13 @@ const Hero: React.FC = () => {
     }
   };
 
+  const handleGetHeroByIdPersist = useCallback(
+    () => handleGetHeroById(),
+    [heroId]
+  );
+
   useEffect(() => {
-    handleGetHeroById();
+    handleGetHeroByIdPersist();
   }, []);
 
   return (
