@@ -8,7 +8,13 @@ export const Wrapper = styled.div`
   width: 500px;
   height: auto;
   border-radius: 7px;
-  margin: 4rem 5vw;
+  margin-bottom: 20px;
+
+  h2 {
+    ${({ theme }) => css`
+      color: ${theme.colors.secondary.red};
+    `}
+  }
 
   a {
     text-decoration: none;

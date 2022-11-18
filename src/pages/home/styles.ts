@@ -3,10 +3,9 @@ import styled, { css } from "styled-components";
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 3rem 5vw;
 
   h1 {
-    margin: 4rem 5vw;
-
     ${({ theme }) => css`
       color: ${theme.colors.secondary.red};
     `}
@@ -23,7 +22,7 @@ export const Cards = styled.ul`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
-  margin: 4rem 5vw;
+  /* margin: 4rem 5vw; */
   padding: 0;
   list-style-type: none;
 `;
@@ -37,8 +36,7 @@ export const Form = styled.form`
 
 export const SearchHeroInput = styled.div`
   display: flex;
-  /* align-items: center; */
-  margin: 4rem 5vw;
+  margin-bottom: 50px;
   gap: 20px;
 
   strong {
@@ -46,6 +44,10 @@ export const SearchHeroInput = styled.div`
     ${({ theme }) => css`
       color: ${theme.colors.neutral.white};
     `}
+  }
+
+  a {
+    text-decoration: none;
   }
 `;
 
@@ -79,6 +81,26 @@ export const SearchInput = styled.input`
       border: 1px solid ${theme.colors.secondary.red};
     `}
   }
+`;
+
+export const CreateHeroGroupButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 50px;
+  padding: 20px;
+  border-radius: 7px;
+  background-color: transparent;
+  transition: all 0.5s ease;
+  cursor: pointer;
+
+  ${({ theme }) => css`
+    background-color: ${theme.colors.secondary.blue};
+    border: 1px solid ${theme.colors.secondary.darkBlue};
+    color: ${theme.colors.neutral.white};
+    font-weight: bold;
+  `}
 `;
 
 export const PersonContainer = styled.div`
