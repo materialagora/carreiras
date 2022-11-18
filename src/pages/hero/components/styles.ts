@@ -15,12 +15,16 @@ export const Item = styled.div`
   strong {
     ${({ theme }) => css`
       color: ${theme.colors.neutral.lightGrey};
+      line-height: 30px;
+      text-align: justify;
     `}
   }
 
   span {
     ${({ theme }) => css`
       color: ${theme.colors.neutral.grey};
+      line-height: 30px;
+      text-align: justify;
     `}
   }
 `;

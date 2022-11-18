@@ -2,7 +2,9 @@ import { TabDataType } from "../../components/tab";
 import api from "../../services/api";
 import Appearance from "./components/appearance";
 import Biography from "./components/biography";
+import Connections from "./components/connections";
 import PowerStats from "./components/powerstats";
+import Work from "./components/work";
 
 export const getHeroById = async (
   id: string
@@ -33,10 +35,10 @@ export const tableData = (
   },
   {
     title: "work",
-    children: <h1>Work</h1>,
+    children: <Work data={data?.work} />,
   },
   {
     title: "connections",
-    children: <h1>Connections</h1>,
+    children: <Connections data={data?.connections} />,
   },
 ];
