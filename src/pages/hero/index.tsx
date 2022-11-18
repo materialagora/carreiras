@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Tab from "../../components/tab";
+import { transformObjectProps } from "../../utils/transform-object-props";
 import * as S from "./styles";
-import { getHeroById, TabData } from "./utils";
+import { getHeroById, tableData } from "./utils";
 
 const Hero: React.FC = () => {
   const [hero, setHero] = useState<Superhero.HeroType>();
@@ -15,7 +16,9 @@ const Hero: React.FC = () => {
     try {
       const id = heroId as string;
 
-      setHero(await getHeroById(id));
+      const heroData = transformObjectProps(await getHeroById(id));
+
+      setHero(heroData as Superhero.HeroType);
     } catch (err: any) {
       toast.error(`Error: ${err.message}`);
     }
@@ -29,11 +32,10 @@ const Hero: React.FC = () => {
     <S.Wrapper>
       <S.Left>
         <strong>{hero?.name}</strong>
-
         <S.Image src={hero?.image.url} alt="hero-image" />
       </S.Left>
       <S.Right>
-        <Tab data={TabData} />
+        <Tab data={tableData(hero)} />
       </S.Right>
     </S.Wrapper>
   );

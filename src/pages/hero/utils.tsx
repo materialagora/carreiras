@@ -1,28 +1,29 @@
 import { TabDataType } from "../../components/tab";
 import api from "../../services/api";
+import Appearance from "./components/appearance";
 
-export const getHeroById = async (id: string) => {
+export const getHeroById = async (
+  id: string
+): Promise<Superhero.HeroType | null> => {
   const result = await api.get(`/${id}`);
 
   if (result.data) {
     return result.data;
   }
 
-  return [];
+  return null;
 };
 
-export const TabData: TabDataType[] = [
+export const tableData = (
+  data: Superhero.HeroType | undefined
+): TabDataType[] => [
   {
     title: "appearance",
-    children: <h1>Appearance</h1>,
+    children: <Appearance data={data?.appearance} />,
   },
   {
     title: "biography",
     children: <h1>Biography</h1>,
-  },
-  {
-    title: "appearance",
-    children: <h1>Appearance</h1>,
   },
   {
     title: "powerstats",
