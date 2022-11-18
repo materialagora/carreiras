@@ -39,6 +39,7 @@ export default {
       blue: "#3498db",
     },
     neutral: {
+      mainBlack: "#000",
       black: "#111820",
       darkGrey: "#696969",
       border: "#ccc",

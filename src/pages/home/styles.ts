@@ -31,7 +31,7 @@ export const Form = styled.form`
 
 export const SearchHeroInput = styled.div`
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   margin: 4rem 5vw;
   gap: 20px;
 
