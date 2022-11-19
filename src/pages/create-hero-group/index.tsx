@@ -53,6 +53,10 @@ const CreateHeroGroup: React.FC = () => {
     setHeros((prevHeros) => [...prevHeros, hero]);
   };
 
+  const handleRemoveHeroInList = (id: string) => {
+    setHeros((prevHeros) => prevHeros.filter((hero) => hero.id !== id));
+  };
+
   useEffect(() => {
     debouncedSearchValue && handleGetHerosByNamePersist();
   }, [debouncedSearchValue]);
@@ -74,9 +78,23 @@ const CreateHeroGroup: React.FC = () => {
         />
       ) : null}
 
+      {heros.length ? (
+        <S.CreateHeroGroupWrapper>
+          <S.SearchHeroInput placeholder="type here the hero group name" />
+          <HomeStyles.CreateHeroGroupButton>
+            Create Hero Group
+          </HomeStyles.CreateHeroGroupButton>
+        </S.CreateHeroGroupWrapper>
+      ) : null}
+
       <HomeStyles.Cards>
         {heros.map((hero) => (
-          <CardHero key={hero.id} hero={hero} />
+          <S.CardWrapper key={hero.id}>
+            <S.RemoveButton onClick={() => handleRemoveHeroInList(hero.id)}>
+              Remove
+            </S.RemoveButton>
+            <CardHero hero={hero} />
+          </S.CardWrapper>
         ))}
       </HomeStyles.Cards>
     </S.Wrapper>

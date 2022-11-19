@@ -95,6 +95,15 @@ export const CreateHeroGroupButton = styled.button`
   transition: all 0.5s ease;
   cursor: pointer;
 
+  &:hover {
+    background-color: transparent;
+
+    ${({ theme }) => css`
+      border: 1px solid ${theme.colors.secondary.darkBlue};
+      color: ${theme.colors.secondary.blue};
+    `}
+  }
+
   ${({ theme }) => css`
     background-color: ${theme.colors.secondary.blue};
     border: 1px solid ${theme.colors.secondary.darkBlue};
