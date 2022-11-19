@@ -13,12 +13,12 @@ export const getAllHeros = async (): Promise<Superhero.GithubHeroType[]> => {
 
 export const getHerosByName = async (
   name: string
-): Promise<API.SearchHeroResponse | null> => {
+): Promise<Superhero.HeroType[]> => {
   const result = await api.get(`/search/${name}`);
 
   if (result.data) {
-    return result.data;
+    return result.data.results;
   }
 
-  return null;
+  return [];
 };

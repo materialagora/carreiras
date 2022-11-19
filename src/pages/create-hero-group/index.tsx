@@ -9,7 +9,7 @@ import * as S from "./styles";
 
 const CreateHeroGroup: React.FC = () => {
   const [loadingHerosSearched, setLoadingHerosSearched] = useState(false);
-  const [herosFound, setHerosFound] = useState<API.SearchHeroResponse>();
+  const [herosFound, setHerosFound] = useState<Superhero.HeroType[]>([]);
   const [heros, setHeros] = useState<Superhero.HeroType[]>([]);
   const [search, setSearch] = useState("");
 
@@ -21,7 +21,7 @@ const CreateHeroGroup: React.FC = () => {
     try {
       const herosData = await getHerosByName(debouncedSearchValue);
 
-      setHerosFound(herosData as API.SearchHeroResponse);
+      setHerosFound(herosData);
     } catch (err: any) {
       toast.error(`Error: ${err.message}`);
     }
@@ -44,11 +44,17 @@ const CreateHeroGroup: React.FC = () => {
       return;
     }
 
+    if (herosFound) {
+      setHerosFound(
+        herosFound.filter((heroFound) => heroFound.name !== hero.name)
+      );
+    }
+
     setHeros((prevHeros) => [...prevHeros, hero]);
   };
 
   useEffect(() => {
-    handleGetHerosByNamePersist();
+    debouncedSearchValue && handleGetHerosByNamePersist();
   }, [debouncedSearchValue]);
 
   return (
@@ -61,7 +67,7 @@ const CreateHeroGroup: React.FC = () => {
 
       {debouncedSearchValue ? (
         <ModalHeroSearch
-          heros={herosFound?.results}
+          heros={herosFound}
           isLoading={loadingHerosSearched}
           type="search"
           getHeroInfo={handleAddHeroInList}

@@ -11,7 +11,7 @@ const Home: FC = () => {
   const [loadingHeros, setLoadingHeros] = useState(false);
   const [loadingHerosSearched, setLoadingHerosSearched] = useState(false);
   const [heros, setHeros] = useState<Superhero.GithubHeroType[]>([]);
-  const [herosFound, setHerosFound] = useState<API.SearchHeroResponse>();
+  const [herosFound, setHerosFound] = useState<Superhero.HeroType[]>([]);
   const [search, setSearch] = useState("");
 
   const debouncedSearchValue = useDebounce<string>(search, 400);
@@ -34,7 +34,7 @@ const Home: FC = () => {
     try {
       const herosData = await getHerosByName(debouncedSearchValue);
 
-      setHerosFound(herosData as API.SearchHeroResponse);
+      setHerosFound(herosData);
     } catch (err: any) {
       toast.error(`Error: ${err.message}`);
     }
@@ -75,10 +75,7 @@ const Home: FC = () => {
       </S.SearchHeroInput>
 
       {debouncedSearchValue ? (
-        <ModalHeroSearch
-          heros={herosFound?.results}
-          isLoading={loadingHerosSearched}
-        />
+        <ModalHeroSearch heros={herosFound} isLoading={loadingHerosSearched} />
       ) : null}
 
       <S.Cards>
