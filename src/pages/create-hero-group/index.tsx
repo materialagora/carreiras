@@ -34,6 +34,19 @@ const CreateHeroGroup: React.FC = () => {
     [debouncedSearchValue]
   );
 
+  const handleAddHeroInList = (hero: Superhero.HeroType) => {
+    const heroAlreadyExists = heros.find(
+      (heroIterator) => heroIterator.name === hero.name
+    );
+
+    if (heroAlreadyExists) {
+      toast.error("Error: hero already exists");
+      return;
+    }
+
+    setHeros((prevHeros) => [...prevHeros, hero]);
+  };
+
   useEffect(() => {
     handleGetHerosByNamePersist();
   }, [debouncedSearchValue]);
@@ -51,7 +64,7 @@ const CreateHeroGroup: React.FC = () => {
           heros={herosFound?.results}
           isLoading={loadingHerosSearched}
           type="search"
-          getHeroInfo={(e) => setHeros((prevState) => [...prevState, e])}
+          getHeroInfo={handleAddHeroInList}
         />
       ) : null}
 

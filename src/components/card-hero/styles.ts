@@ -71,12 +71,9 @@ export const CardArc = styled.svg`
 
 export const CardThumb = styled.img`
   flex-shrink: 0;
-
   border-radius: 50%;
-  ${({ theme }) => css`
-    width: ${theme.spacings.large};
-    height: ${theme.spacings.large};
-  `}
+  width: 60px;
+  height: 60px;
 `;
 
 export const CardTitle = styled.h3`
