@@ -1,13 +1,16 @@
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import CardHero from "../../components/card-hero";
 import ModalHeroSearch from "../../components/modal-hero-search";
 import useDebounce from "../../hooks/use-debounce";
+import * as HomeStyles from "../home/styles";
 import { getHerosByName } from "../home/utils";
 import * as S from "./styles";
 
 const CreateHeroGroup: React.FC = () => {
   const [loadingHerosSearched, setLoadingHerosSearched] = useState(false);
   const [herosFound, setHerosFound] = useState<API.SearchHeroResponse>();
+  const [heros, setHeros] = useState<Superhero.HeroType[]>([]);
   const [search, setSearch] = useState("");
 
   const debouncedSearchValue = useDebounce<string>(search, 400);
@@ -38,7 +41,7 @@ const CreateHeroGroup: React.FC = () => {
   return (
     <S.Wrapper>
       <S.SearchHeroInput
-        placeholder="search for some hero ..."
+        placeholder="search for some hero to add ..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
@@ -48,8 +51,15 @@ const CreateHeroGroup: React.FC = () => {
           heros={herosFound?.results}
           isLoading={loadingHerosSearched}
           type="search"
+          getHeroInfo={(e) => setHeros((prevState) => [...prevState, e])}
         />
       ) : null}
+
+      <HomeStyles.Cards>
+        {heros.map((hero) => (
+          <CardHero key={hero.id} hero={hero} />
+        ))}
+      </HomeStyles.Cards>
     </S.Wrapper>
   );
 };

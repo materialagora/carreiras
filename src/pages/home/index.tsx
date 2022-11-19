@@ -1,7 +1,7 @@
 import { FC, useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import Card from "../../components/card-hero";
+import CardHero from "../../components/card-hero";
 import ModalHeroSearch from "../../components/modal-hero-search";
 import useDebounce from "../../hooks/use-debounce";
 import * as S from "./styles";
@@ -87,7 +87,7 @@ const Home: FC = () => {
         ) : (
           heros.map((hero) => (
             <Link key={hero.id} to={`/hero/${hero.id}`}>
-              <Card hero={hero} />
+              <CardHero hero={hero} />
             </Link>
           ))
         )}
