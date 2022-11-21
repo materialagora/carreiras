@@ -1,17 +1,28 @@
 import { toast } from "react-toastify";
+import { v4 as uudi } from "uuid";
 
-type CreateHeroGroupType = {
+type CreateHeroGroupProps = {
   groupName: string;
   heros: Superhero.HeroType[];
 };
 
-export const createHeroGroup = ({ groupName, heros }: CreateHeroGroupType) => {
+export type HeroGroupType = CreateHeroGroupProps & {
+  id: string;
+  total: number;
+};
+
+export const createHeroGroup = ({
+  groupName,
+  heros,
+}: CreateHeroGroupProps): "success" | "error" => {
   const heroGroups = localStorage.getItem("hero-groups");
 
   if (groupName) {
     const objectToSave = {
+      id: uudi(),
       groupName,
       heros,
+      total: heros.length,
     };
 
     if (heroGroups) {
@@ -23,13 +34,17 @@ export const createHeroGroup = ({ groupName, heros }: CreateHeroGroupType) => {
 
       toast.success("Success: group created");
 
-      return;
+      return "success";
     }
 
     localStorage.setItem("hero-groups", JSON.stringify([objectToSave]));
 
     toast.success("Success: group created");
+
+    return "success";
   } else {
     toast.error("Error: name can not be empty");
+
+    return "error";
   }
 };

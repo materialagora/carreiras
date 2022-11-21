@@ -1,14 +1,15 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import ModalHeroSearch from "../../components/modal-hero-search";
 import useHero from "../../hooks/use-hero";
-import { useAppSelector } from "../../hooks/use-redux";
+import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
+import { addHeroGroup } from "../../store/create-hero-group";
+import HerosAddedInList from "../create-hero-group/components/heros-added-in-list";
+import * as S from "../create-hero-group/styles";
 import * as HomeStyles from "../home/styles";
-import HerosAddedInList from "./components/heros-added-in-list";
-import * as S from "./styles";
-import { createHeroGroup } from "./utils";
+import { editHeroGroup, getHeroGroupInfo } from "./utils";
 
-const CreateHeroGroup: React.FC = () => {
+const EditHeroGroup: React.FC = () => {
   const {
     loadingHerosSearched,
     herosFound,
@@ -17,13 +18,26 @@ const CreateHeroGroup: React.FC = () => {
     debouncedSearchValue,
     handleAddHeroInList,
   } = useHero();
-  const [groupName, setGroupName] = useState("");
 
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { heroGroupId } = useParams();
+  const heroGroupInfo = useMemo(
+    () => getHeroGroupInfo(heroGroupId as string),
+    [heroGroupId]
+  );
+
   const { heros } = useAppSelector((state) => state.heros);
+  const [groupName, setGroupName] = useState(heroGroupInfo?.groupName || "");
+
+  useEffect(() => {
+    if (heroGroupInfo) {
+      dispatch(addHeroGroup(heroGroupInfo.heros));
+    }
+  }, []);
 
   const handleCreateHeroGroup = () => {
-    const response = createHeroGroup({ groupName, heros });
+    const response = editHeroGroup({ id: heroGroupId!, groupName, heros });
 
     if (response === "success") {
       navigate("/hero-group/list");
@@ -56,7 +70,7 @@ const CreateHeroGroup: React.FC = () => {
               onChange={(e) => setGroupName(e.target.value)}
             />
             <HomeStyles.CreateHeroGroupButton onClick={handleCreateHeroGroup}>
-              Create
+              Edit
             </HomeStyles.CreateHeroGroupButton>
           </S.CreateHeroGroupWrapper>
 
@@ -67,4 +81,4 @@ const CreateHeroGroup: React.FC = () => {
   );
 };
 
-export default CreateHeroGroup;
+export default EditHeroGroup;
