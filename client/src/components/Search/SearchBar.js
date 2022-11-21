@@ -1,23 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
  import "./SearchBar.css";
 import HeroesJson from "../../HeroesJson.json";
 import { GoSearch } from "react-icons/go";
+import axios from 'axios'
 import { IconContext } from "react-icons/lib";
 
 function SearchBar() {
   const [searchCharacter, setSearchCharacter] = useState("");
-  const [test, setTex] = useState();
    
+  const [data2, setData] = useState([]);
   
   
   function AutoCompleteInput(valorAtual) {
     
     setSearchCharacter(valorAtual.name)
-      let arrayMeu2 = valorAtual
-      setTex(arrayMeu2)
-    console.log(test)
+     
+   
   }
 
+  useEffect(() => {
+    
+      axios.get('http://localhost:7060/Heroes').then( resp =>
+      setData(resp.data))
+
+      
+      
+     
+
+ 
+  }, []);
+ 
+ 
   return (
    
     <div className="SearchBar">  
@@ -37,7 +50,10 @@ function SearchBar() {
         </IconContext.Provider>
       </div>
       <div className="dataResult">
-        {HeroesJson.data
+
+         
+
+        { data2
           .filter((value) => {
             if (searchCharacter == "") {
               return value;
