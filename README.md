@@ -45,6 +45,7 @@ docker-compose up
 - Tailwind CSS
 - Redux Tookit
 - Axios
+- Jest
 
 # A empresa
 
