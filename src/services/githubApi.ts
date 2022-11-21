@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiGithub = axios.create({
-  baseURL: "https://akabab.github.io/superhero-api/api",
+  baseURL: import.meta.env.VITE_GITHUB_API_URL,
 });
 
 export default apiGithub;
