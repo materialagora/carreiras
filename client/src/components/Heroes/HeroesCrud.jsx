@@ -50,7 +50,7 @@ export default class HeroesCrud extends Component {
         .then(resp => {
             
             const list = this.getUpdateList(resp.data)
-            this.setState({ Heroes: initialState.Heroes, list})
+            this.setState({ Heroes: initialState.hero, list})
             
         })
     }
