@@ -10,7 +10,10 @@ export const CardDinamic: FC<{ title: string; data: object }> = ({
   return (
     <div className="flex flex-col">
       <div className="border-b border-[rgba(0,0,0,.06)] dark:border-[rgba(255,255,255,.06)]">
-        <div className="text-primary-1 p-[.5rem] w-max bg-[rgba(0,0,0,.06)] dark:bg-[rgba(255,255,255,.06)] uppercase">
+        <div
+          data-testid="title"
+          className="text-primary-1 p-[.5rem] w-max bg-[rgba(0,0,0,.06)] dark:bg-[rgba(255,255,255,.06)] uppercase"
+        >
           {title}
         </div>
       </div>

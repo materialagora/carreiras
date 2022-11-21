@@ -19,9 +19,10 @@ export const useCreateGroupState = () => {
   const { goBack } = browser();
 
   const loadGroups = useCallback(() => {
+    if (!id) return;
     const data: IGroup[] = storage.get("GROUP", "JSON");
 
-    const selected = data[parseInt(id as string) - 1];
+    const selected = data[parseInt(id) - 1];
 
     setGroupName(selected.name);
     setGroupMembers(selected.persons);

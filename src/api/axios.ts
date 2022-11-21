@@ -1,6 +1,7 @@
 import axios from "axios";
+import { BASE_URL } from "utils/constants";
 
 // Set config defaults when creating the instance
 export const client = axios.create({
-  baseURL: `${process.env.REACT_APP_HERO_API_URL}/${process.env.REACT_APP_HERO_API_TOKEN}`,
+  baseURL: BASE_URL,
 });

@@ -26,7 +26,7 @@ export const Group = () => {
         </span>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 max-xl:grid-cols-8 gap-[20px] border-solid border-t border-[rgba(0,0,0,.06)] dark:border-[rgba(255,255,255,.06)] pt-[30px]">
-        {groups.map((item, index) => {
+        {groups?.map((item, index) => {
           return (
             <CardGroup
               onDelete={handlerUpdateList}

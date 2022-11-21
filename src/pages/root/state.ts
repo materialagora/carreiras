@@ -5,6 +5,7 @@ import { useMatch } from "react-router-dom";
 import { useStorage } from "hooks";
 import { addMatch } from "redux/slices";
 import { RootState } from "redux/store";
+import array from "utils/array";
 
 import { TabShowType } from "./types";
 
@@ -51,7 +52,7 @@ export const useRootState = () => {
     const data =
       filter === "All" ? people.data : filter === "Hero" ? hero : villain;
 
-    return data.filter((item) => !deletedIDs.includes(item.id));
+    return array().excluded(data, deletedIDs);
   };
 
   return {
