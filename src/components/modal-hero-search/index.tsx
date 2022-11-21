@@ -31,19 +31,19 @@ const ModalHeroSearch: React.FC<ModalHeroSearchProps> = ({
         <h2>Loading ...</h2>
       ) : (
         heros?.map((hero) => (
-          <>
+          <S.HeroWrapper key={hero.id}>
             {type === "redirect" ? (
-              <Link key={hero.id} to={`/hero/${hero.id}`}>
+              <Link to={`/hero/${hero.id}`}>
                 <S.Item>
                   <strong>{hero.name}</strong>
                 </S.Item>
               </Link>
             ) : (
-              <S.Item key={hero.id} onClick={() => handleOnItemClick(hero)}>
+              <S.Item onClick={() => handleOnItemClick(hero)}>
                 <strong>{hero.name}</strong>
               </S.Item>
             )}
-          </>
+          </S.HeroWrapper>
         )) || <strong>Hero not found</strong>
       )}
     </S.Wrapper>
