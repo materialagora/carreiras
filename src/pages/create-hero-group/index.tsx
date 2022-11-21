@@ -1,18 +1,23 @@
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import CardHero from "../../components/card-hero";
 import ModalHeroSearch from "../../components/modal-hero-search";
 import useDebounce from "../../hooks/use-debounce";
+import { useAppDispatch, useAppSelector } from "../../hooks/use-redux";
+import { addHero } from "../../store/create-hero-group";
 import * as HomeStyles from "../home/styles";
 import { getHerosByName } from "../home/utils";
+import HerosAddedInList from "./components/heros-added-in-list";
 import * as S from "./styles";
+import { createHeroGroup } from "./utils";
 
 const CreateHeroGroup: React.FC = () => {
   const [loadingHerosSearched, setLoadingHerosSearched] = useState(false);
   const [herosFound, setHerosFound] = useState<Superhero.HeroType[]>([]);
-  const [heros, setHeros] = useState<Superhero.HeroType[]>([]);
   const [search, setSearch] = useState("");
+  const [groupName, setGroupName] = useState("");
 
+  const dispatch = useAppDispatch();
+  const { heros } = useAppSelector((state) => state.heros);
   const debouncedSearchValue = useDebounce<string>(search, 400);
 
   const handleGetHeroByName = async () => {
@@ -36,7 +41,7 @@ const CreateHeroGroup: React.FC = () => {
 
   const handleAddHeroInList = (hero: Superhero.HeroType) => {
     const heroAlreadyExists = heros.find(
-      (heroIterator) => heroIterator.name === hero.name
+      (heroIterator) => heroIterator.id === hero.id
     );
 
     if (heroAlreadyExists) {
@@ -45,16 +50,14 @@ const CreateHeroGroup: React.FC = () => {
     }
 
     if (herosFound) {
-      setHerosFound(
-        herosFound.filter((heroFound) => heroFound.name !== hero.name)
-      );
+      setHerosFound(herosFound.filter((heroFound) => heroFound.id !== hero.id));
     }
 
-    setHeros((prevHeros) => [...prevHeros, hero]);
+    dispatch(addHero(hero));
   };
 
-  const handleRemoveHeroInList = (id: string) => {
-    setHeros((prevHeros) => prevHeros.filter((hero) => hero.id !== id));
+  const handleCreateHeroGroup = () => {
+    createHeroGroup({ groupName, heros });
   };
 
   useEffect(() => {
@@ -79,24 +82,21 @@ const CreateHeroGroup: React.FC = () => {
       ) : null}
 
       {heros.length ? (
-        <S.CreateHeroGroupWrapper>
-          <S.SearchHeroInput placeholder="type here the hero group name" />
-          <HomeStyles.CreateHeroGroupButton>
-            Create Hero Group
-          </HomeStyles.CreateHeroGroupButton>
-        </S.CreateHeroGroupWrapper>
-      ) : null}
+        <>
+          <S.CreateHeroGroupWrapper>
+            <S.SearchHeroInput
+              placeholder="type here the hero group name"
+              value={groupName}
+              onChange={(e) => setGroupName(e.target.value)}
+            />
+            <HomeStyles.CreateHeroGroupButton onClick={handleCreateHeroGroup}>
+              Create
+            </HomeStyles.CreateHeroGroupButton>
+          </S.CreateHeroGroupWrapper>
 
-      <HomeStyles.Cards>
-        {heros.map((hero) => (
-          <S.CardWrapper key={hero.id}>
-            <S.RemoveButton onClick={() => handleRemoveHeroInList(hero.id)}>
-              Remove
-            </S.RemoveButton>
-            <CardHero hero={hero} />
-          </S.CardWrapper>
-        ))}
-      </HomeStyles.Cards>
+          <HerosAddedInList />
+        </>
+      ) : null}
     </S.Wrapper>
   );
 };
