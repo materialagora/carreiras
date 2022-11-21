@@ -1,3 +1,52 @@
+# Projeto
+
+[<img src="src/assets/docs/dark-mode.png" width="400"/>](dark-mode.png)
+[<img src="src/assets/docs/light-mode.png" width="400"/>](light-mode.png)
+
+## Como executar
+```bash 
+git clone https://github.com/miguelbuca/carreiras.git
+```
+
+Crie o arquivo ``.env`` com as seguintes especificações
+
+```bash 
+REACT_APP_HERO_API_URL=https://www.superheroapi.com/api.php
+REACT_APP_HERO_API_TOKEN=XXXXXXXXXX
+```
+
+#### Ambiente local
+
+```bash 
+npm i
+```
+```bash 
+npm run start
+```
+
+##### Abri o link http://localhost:3000/
+
+
+#### Ambiente Docker
+
+```bash 
+docker-compose up
+```
+
+##### Abri o link http://localhost:8080/
+
+
+
+
+## Tecnológias 
+- ReactJS
+- Husky
+- Atomic Design
+- Tailwind CSS
+- Redux Tookit
+- Axios
+- Jest
+
 # A empresa
 
 A Material Agora nasceu para descomplicar o dia a dia de todos que estão realizando obras através de uma forma simples de comprar sem ter que gastar tempo com pesquisa, deslocamento e transporte.
