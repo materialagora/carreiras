@@ -4,15 +4,21 @@ import { toast } from "react-toastify";
 import CardHero from "../../components/card-hero";
 import ModalHeroSearch from "../../components/modal-hero-search";
 import useDebounce from "../../hooks/use-debounce";
+import useHero from "../../hooks/use-hero";
 import * as S from "./styles";
-import { getAllHeros, getHerosByName } from "./utils";
+import { getAllHeros } from "./utils";
 
 const Home: FC = () => {
+  const {
+    search,
+    setSearch,
+    herosFound,
+    handleGetHeroByName,
+    loadingHerosSearched,
+  } = useHero();
+
   const [loadingHeros, setLoadingHeros] = useState(false);
-  const [loadingHerosSearched, setLoadingHerosSearched] = useState(false);
   const [heros, setHeros] = useState<Superhero.GithubHeroType[]>([]);
-  const [herosFound, setHerosFound] = useState<Superhero.HeroType[]>([]);
-  const [search, setSearch] = useState("");
 
   const debouncedSearchValue = useDebounce<string>(search, 400);
 
@@ -26,20 +32,6 @@ const Home: FC = () => {
     }
 
     setLoadingHeros(false);
-  };
-
-  const handleGetHeroByName = async () => {
-    setLoadingHerosSearched(true);
-
-    try {
-      const herosData = await getHerosByName(debouncedSearchValue);
-
-      setHerosFound(herosData);
-    } catch (err: any) {
-      toast.error(`Error: ${err.message}`);
-    }
-
-    setLoadingHerosSearched(false);
   };
 
   const handleGetHerosByNamePersist = useCallback(
