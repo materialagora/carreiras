@@ -69,7 +69,7 @@ const Home: FC = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
 
-        <Link to="/create-group">
+        <Link to="/hero-group/create">
           <S.CreateHeroGroupButton>Create Hero Group</S.CreateHeroGroupButton>
         </Link>
       </S.SearchHeroInput>
