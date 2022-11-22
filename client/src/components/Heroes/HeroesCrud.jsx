@@ -11,7 +11,7 @@ const headerProps = {
 const baseUrl = 'http://localhost:7060/Heroes'
 const initialState = {
     Heroes: {
-        id : "",
+      
         name: "",
         slug: "",
         powerstats: {
@@ -19,9 +19,41 @@ const initialState = {
           strength: "",
           speed: "",
           durability: "",
-          power: "",
-         
+          power: "" ,
+          combat : ""
         },
+        appearance: {
+          gender: "",
+          race: "",
+          height: [],
+          weight: [],
+          eyeColor: "",
+          hairColor: ""
+        },
+        biography: {
+          fullName: "",
+          alterEgos: "",
+          aliases: [],
+          placeOfBirth: "",
+          firstAppearance: "",
+          publisher: "",
+          alignment: ""
+        },
+        work: {
+          occupation: "",
+          base: ""
+        },
+        connections: {
+          groupAffiliation: "",
+          relatives: ""
+        },
+        images: {
+          xs: "",
+          sm: "",
+          md: "",
+          lg: ""
+        }
+      
        
       },
     list: []
@@ -32,14 +64,16 @@ export default class HeroesCrud extends Component {
   
     componentWillMount() {
         axios(baseUrl).then(resp => {
-            console.log(resp.data)
-            this.setState({ list : resp.data})
+            
+            this.setState({ list: resp.data})
+            
         })
+        
     }
  
 
     clear() {
-        this.setState({ Heroes : initialState})
+        this.setState({ Heroes : initialState.Heroes})
     }
 
     save() {
@@ -56,23 +90,25 @@ export default class HeroesCrud extends Component {
     }
     getUpdateList(hero ,add = true) {
         const list = this.state.list.filter(u => u.id !== hero.id)
-        
         if(add) list.unshift(hero)
-         
+         console.log(list)
         return list
     }
      updateField(event) {
-        const Heroes = {...this.state.Heroes}
+        const Heroes = { ...this.state.Heroes }
          Heroes[event.target.name] = event.target.value
          Heroes.powerstats[event.target.name] = event.target.value
-         
-         
+         Heroes.appearance[event.target.name] = event.target.value
+         Heroes.biography[event.target.name] = event.target.value
+         Heroes.work[event.target.name] = event.target.value
+         Heroes.connections[event.target.name] = event.target.value
+         Heroes.images[event.target.name] = event.target.value
         this.setState({ Heroes })     }
  
 load(hero) {
   
     this.setState({ hero })
-    console.log(hero)
+ 
 }
 
 remove(hero) {
@@ -87,9 +123,10 @@ renderTable() {
         <table className="table mt-4">
             <thead>
                 <tr>
+                    <th>id</th>
                     <th>Nome</th>
                     <th>slug</th>
-                    <th> intelligence</th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -103,17 +140,18 @@ renderRows() {
     return this.state.list.map( hero => {
         return (
             <tr key={hero.id}>
+               <td>{hero.id}</td>
                 <td>{hero.name}</td>
                 <td>{hero.slug}</td>
-                <td>{hero.intelligence}</td>
+                
 
                 <td>
                     <button className=" btn btn-warning"
-                    onClick={(hero) => this.load(hero)}>
+                    onClick={() => this.load(hero)}>
                         <i className="fa fa-pencil"></i>
                     </button>
                     <button className=" btn btn-danger ml-2"
-                    onClick={(hero) => this.remove(hero)}>
+                    onClick={() => this.remove(hero)}>
                         <i className="fa fa-trash"></i>
                     </button>
                 </td>
@@ -124,29 +162,20 @@ renderRows() {
 
  
     render() {
-        console.log(this.state.list + '' + 'ddd')
+         
         return (
             <Main {...headerProps}>
                 Cadastre Seu Super Héroi
                 <div className="form">
             <div className="row">
+                
                 <div className="col-12 col-md-6">
                     <div className="form-group">
-                        <label>id</label> 
-                        <input type="text" className="form-control"
-                        name="id"
-                        value={this.state.Heroes.id}
-                        onChange={ event => this.updateField(event)}
-                        placeholder="Digite seu id ..." />
-                    </div>
-                </div>
-                <div className="col-12 col-md-6">
-                    <div className="form-group">
-                        <label>Nome</label>
+                        <label>Name</label>
                         <input type="text" className="form-control"
                         name="name"
                         value={this.state.Heroes.name}
-                        onChange={ event => this.updateField(event)}
+                        onChange={e => this.updateField(e)}
                         placeholder="Digite seu Noe ..." />
                     </div>
                 </div>
@@ -158,7 +187,7 @@ renderRows() {
                         <input type="text" className="form-control"
                         name="slug"
                         value={this.state.Heroes.slug}
-                        onChange={ event => this.updateField(event)}
+                        onChange={e => this.updateField(e)}
                         placeholder="Digite seu Slug ..." />
                     </div>
                 </div>
@@ -168,7 +197,7 @@ renderRows() {
                         <input type="text" className="form-control"
                         name="intelligence"
                         value={this.state.Heroes.powerstats.intelligence}
-                        onChange={ event => this.updateField(event)}
+                        onChange={e => this.updateField(e)}
                         placeholder="Digite seu intelligence ..." />
                     </div>
                 </div>
@@ -180,7 +209,7 @@ renderRows() {
                         <input type="text" className="form-control"
                         name="strength"
                         value={this.state.Heroes.powerstats.strength}
-                        onChange={ event => this.updateField(event)}
+                        onChange={e => this.updateField(e)}
                         placeholder="Digite seu Strength ..." />
                     </div>
                 </div>
@@ -190,7 +219,7 @@ renderRows() {
                         <input type="text" className="form-control"
                         name="speed"
                         value={this.state.Heroes.powerstats.speed}
-                        onChange={ event => this.updateField(event)}
+                        onChange={e => this.updateField(e)}
                         placeholder="Digite seu Speed ..." />
                     </div>
                 </div>
@@ -202,7 +231,7 @@ renderRows() {
                         <input type="text" className="form-control"
                         name="durability"
                         value={this.state.Heroes.powerstats.durability}
-                        onChange={ event => this.updateField(event)}
+                        onChange={e => this.updateField(e)}
                         placeholder="Digite seu Durability ..." />
                     </div>
                 </div>
@@ -212,10 +241,8 @@ renderRows() {
                         <input type="text" className="form-control"
                         name="power"
                         value={this.state.Heroes.powerstats.power}
-                        onChange={ event => this.updateField(event)}
-                        
-                        
-                        placeholder="Digite seu Power ..." />
+                        onChange={e => this.updateField(e)}
+                         placeholder="Digite seu Power ..." />
                     </div>
                 </div>
             </div>
