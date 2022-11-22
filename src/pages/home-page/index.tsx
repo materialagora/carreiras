@@ -64,6 +64,10 @@ const HomePage: FC = () => {
         <Link to="/hero-group/create">
           <S.CreateHeroGroupButton>Create Hero Group</S.CreateHeroGroupButton>
         </Link>
+
+        <Link to="/hero-group/list">
+          <S.CreateHeroGroupButton>View Hero Groups</S.CreateHeroGroupButton>
+        </Link>
       </S.SearchHeroInput>
 
       {debouncedSearchValue ? (
