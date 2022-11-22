@@ -1,11 +1,14 @@
-import CardHero from "../../../../components/card-hero";
-import { useAppDispatch, useAppSelector } from "../../../../hooks/use-redux";
-import { removeHero } from "../../../../store/create-hero-group";
-import * as HomeStyles from "../../../home/styles";
+import { useAppDispatch } from "../../hooks/use-redux";
+import * as HomeStyles from "../../pages/home-page/styles";
+import { removeHero } from "../../store/create-hero-group";
+import CardHero from "../card-hero";
 import * as S from "./styles";
 
-const HerosAddedInList: React.FC = () => {
-  const { heros } = useAppSelector((state) => state.heros);
+type HerosAddedInListProps = {
+  heros: Superhero.HeroType[];
+};
+
+const HerosAddedInList: React.FC<HerosAddedInListProps> = ({ heros }) => {
   const dispatch = useAppDispatch();
 
   const handleRemoveHeroInList = (id: string) => {

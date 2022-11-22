@@ -8,7 +8,7 @@ import useHero from "../../hooks/use-hero";
 import * as S from "./styles";
 import { getAllHeros } from "./utils";
 
-const Home: FC = () => {
+const HomePage: FC = () => {
   const {
     search,
     setSearch,
@@ -85,4 +85,4 @@ const Home: FC = () => {
   );
 };
 
-export default Home;
+export default HomePage;

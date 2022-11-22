@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { getHerosByName } from "../pages/home/utils";
+import { getHerosByName } from "../pages/home-page/utils";
 import { addHero } from "../store/create-hero-group";
 import useDebounce from "./use-debounce";
 import { useAppDispatch, useAppSelector } from "./use-redux";

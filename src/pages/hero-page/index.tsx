@@ -6,7 +6,7 @@ import { transformObjectProps } from "../../utils/transform-object-props";
 import * as S from "./styles";
 import { getHeroById, tableData } from "./utils";
 
-const Hero: React.FC = () => {
+const HeroPage: React.FC = () => {
   const [loadingHero, setLoadingHero] = useState(false);
   const [hero, setHero] = useState<Superhero.HeroType>();
   const { heroId } = useParams();
@@ -55,4 +55,4 @@ const Hero: React.FC = () => {
   );
 };
 
-export default Hero;
+export default HeroPage;

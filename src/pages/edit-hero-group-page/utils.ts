@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { HeroGroupType } from "../create-hero-group/utils";
+import { HeroGroupType } from "../create-hero-group-page/utils";
 
 type EditHeroGroupProps = {
   id: string;
