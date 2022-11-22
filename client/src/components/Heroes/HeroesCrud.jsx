@@ -30,7 +30,7 @@ const initialState = {
 export default class HeroesCrud extends Component {
     state = {...initialState}
   
-    componentWillUnmount() {
+    componentWillMount() {
         axios(baseUrl).then(resp => {
             console.log(resp.data)
             this.setState({ list : resp.data})
