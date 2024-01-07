@@ -9,7 +9,6 @@
     "@mui/material": "^5.10.11",
     "@szhsin/react-menu": "^3.2.1",
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/material-ui": "^0.21.12",
@@ -49,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/react": "^14.1.2",
     "jest": "^27.5.1"
   }
 }
